@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -11,7 +12,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -24,11 +25,22 @@ kotlin {
     }
 
     sourceSets {
+        androidMain.dependencies {
+            implementation(libs.bundles.ktor.android)
+        }
+
         commonMain.dependencies {
             //put your multiplatform dependencies here
+            implementation(libs.bundles.ktor.common)
+            implementation(libs.kotlinx.coroutines.core)
         }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.bundles.ktor.ios)
         }
     }
 }
