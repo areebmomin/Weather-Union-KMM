@@ -1,17 +1,18 @@
 package com.areeb.weatherunion.data.api.lat_lon_weather_data.model
 
+import com.areeb.weatherunion.core.network.BaseResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class LatLonWeatherDataApiResponse(
-    val status: String,
-    val message: String,
+    override val status: String,
+    override val message: String,
     @SerialName("device_type")
-    val deviceType: String,
+    val deviceType: Int? = null,
     @SerialName("locality_weather_data")
-    val localityWeatherData: LatLonLocalityWeatherData,
-)
+    val localityWeatherData: LatLonLocalityWeatherData? = null,
+) : BaseResponse
 
 @Serializable
 data class LatLonLocalityWeatherData(
