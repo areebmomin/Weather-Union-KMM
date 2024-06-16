@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -41,6 +42,14 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.bundles.ktor.ios)
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("WeatherUnion") {
+            packageName.set("com.areeb.weatherunion")
         }
     }
 }

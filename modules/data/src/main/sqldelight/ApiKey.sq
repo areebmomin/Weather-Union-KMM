@@ -1,0 +1,20 @@
+CREATE TABLE ApiKey (
+     id INTEGER PRIMARY KEY NOT NULL,
+     api_key TEXT NOT NULL
+);
+
+-- API Key ids
+--- Weather Union API Key id: 0
+--- Map API Key id: 1
+
+insertWeatherUnionApiKey:
+INSERT INTO ApiKey (id, api_key) VALUES (0, :apiKey);
+
+getWratherUnionApiKey:
+SELECT * FROM ApiKey WHERE id = 0;
+
+insertMapApiKey:
+INSERT INTO ApiKey(id, api_key) VALUES (1, :apiKey);
+
+getMapApiKey:
+SELECT * FROM ApiKey WHERE id = 1;
