@@ -1,5 +1,8 @@
 package com.areeb.weatherunion.data.api.lat_lon_weather_data
 
+import com.areeb.weatherunion.core.network.ApiResponse
+import com.areeb.weatherunion.data.api.lat_lon_weather_data.model.LatLonWeatherDataApiResponse
+
 interface LatLonWeatherDataApi {
-    fun getWeatherData(lat: Float, lon: Float): String
+    suspend fun getWeatherData(lat: Float, lon: Float): ApiResponse<LatLonWeatherDataApiResponse>
 }
