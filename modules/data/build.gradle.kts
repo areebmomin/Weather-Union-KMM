@@ -28,6 +28,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.bundles.ktor.android)
+            implementation(libs.sqldelight.android)
         }
 
         commonMain.dependencies {
@@ -42,15 +43,18 @@ kotlin {
 
         iosMain.dependencies {
             implementation(libs.bundles.ktor.ios)
+            implementation(libs.sqldelight.native)
         }
     }
 }
 
 sqldelight {
     databases {
-        create("WeatherUnion") {
-            packageName.set("com.areeb.weatherunion")
+        create("WeatherUnionDatabase") {
+            packageName.set("com.areeb.weatherunion.data")
+            srcDirs("src/sqldelight")
         }
+        linkSqlite = true
     }
 }
 
