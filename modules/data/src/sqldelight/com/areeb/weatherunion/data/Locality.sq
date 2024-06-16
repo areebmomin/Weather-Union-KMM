@@ -7,5 +7,9 @@ CREATE TABLE Locality (
     device_type INTEGER NOT NULL
 );
 
+insertLocality:
+INSERT INTO Locality (locality_id, city_name, locality_name, latitude, longitude, device_type)
+VALUES (:locality_id, :city_name, :locality_name, :latitude, :longitude, :device_type);
+
 getAllLocalities:
 SELECT * FROM Locality;
