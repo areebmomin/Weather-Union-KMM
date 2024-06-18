@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -33,6 +34,7 @@ kotlin {
             //put your multiplatform dependencies here
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlin.inject.runtime)
         }
 
         commonTest.dependencies {
@@ -43,6 +45,12 @@ kotlin {
             implementation(libs.bundles.ktor.ios)
         }
     }
+}
+
+dependencies {
+    add("kspIosX64", libs.kotlin.inject.ksp)
+    add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
 }
 
 android {
