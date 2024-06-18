@@ -31,3 +31,5 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":modules:core")
 include(":modules:data")
+include(":modules:shared")
+include(":modules:logic")
