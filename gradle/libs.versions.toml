@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.4.1"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -16,7 +16,7 @@ kotlin = "2.0.0"
 ktor = "2.3.11"
 coroutines = "1.8.0"
 sqlDelight = "2.0.1"
-ksp = "1.9.0-1.0.13"
+ksp = "2.0.0-1.0.22"
 kotlin-inject = "0.7.1"
 
 [libraries]
