@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package com.areeb.weatherunion.data;
+
+message PreferenceData {
+  string lastSelectedLocalityId = 1;
+}

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.wire)
 }
 
 kotlin {
@@ -35,6 +36,7 @@ kotlin {
             //put your multiplatform dependencies here
             implementation(projects.modules.core)
             implementation(libs.bundles.ktor.common)
+            implementation(libs.datastore)
         }
 
         commonTest.dependencies {
@@ -55,6 +57,13 @@ sqldelight {
             srcDirs("src/sqldelight")
         }
         linkSqlite = true
+    }
+}
+
+wire {
+    kotlin {}
+    sourcePath {
+        srcDir("src/commonMain/proto")
     }
 }
 

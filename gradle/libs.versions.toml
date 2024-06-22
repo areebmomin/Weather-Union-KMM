@@ -18,6 +18,8 @@ coroutines = "1.8.0"
 sqlDelight = "2.0.1"
 ksp = "2.0.0-1.0.22"
 kotlin-inject = "0.7.1"
+datastore = "1.1.1"
+wire = "5.0.0-alpha03"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,6 +44,7 @@ sqldelight_android = { module = "app.cash.sqldelight:android-driver", version.re
 sqldelight_native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 kotlin_inject_ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
 kotlin_inject_runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlin-inject" }
+datastore = { module = "androidx.datastore:datastore-core-okio", version.ref = "datastore" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]
@@ -57,3 +60,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+wire = { id = "com.squareup.wire", version.ref = "wire" }
