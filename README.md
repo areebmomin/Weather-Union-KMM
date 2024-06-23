@@ -13,3 +13,27 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+Weather Union KMM Module Graph
+
+```mermaid
+%%{
+  init: {
+    'theme': 'forest'
+  }
+}%%
+
+graph LR
+  subgraph :modules
+    :modules:shared["shared"]
+    :modules:core["core"]
+    :modules:data["data"]
+    :modules:logic["logic"]
+  end
+  :composeApp --> :modules:shared
+  :modules:shared --> :modules:core
+  :modules:shared --> :modules:data
+  :modules:shared --> :modules:logic
+  :modules:logic --> :modules:data
+  :modules:data --> :modules:core
+```

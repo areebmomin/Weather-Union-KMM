@@ -20,6 +20,7 @@ ksp = "2.0.0-1.0.22"
 kotlin-inject = "0.7.1"
 datastore = "1.1.1"
 wire = "5.0.0-alpha03"
+module-graph = "0.10.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -61,3 +62,4 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 wire = { id = "com.squareup.wire", version.ref = "wire" }
+module-graph = { id = "dev.iurysouza.modulegraph", version.ref = "module-graph" }
