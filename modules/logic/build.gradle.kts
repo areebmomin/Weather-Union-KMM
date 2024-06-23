@@ -36,6 +36,11 @@ kotlin {
     }
 }
 
+ksp {
+    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+    arg("me.tatarka.inject.dumpGraph", "true")
+}
+
 android {
     namespace = "com.areeb.weatherunion.logic"
     compileSdk = 34

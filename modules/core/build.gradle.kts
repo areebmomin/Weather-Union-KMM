@@ -53,6 +53,11 @@ dependencies {
     add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
 }
 
+ksp {
+    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+    arg("me.tatarka.inject.dumpGraph", "true")
+}
+
 android {
     namespace = "com.areeb.weatherunion.core"
     compileSdk = 34
