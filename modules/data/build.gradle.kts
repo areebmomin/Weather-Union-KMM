@@ -38,6 +38,7 @@ kotlin {
             implementation(projects.modules.core)
             implementation(libs.bundles.ktor.common)
             implementation(libs.datastore)
+            implementation(libs.kotlin.inject.runtime)
         }
 
         commonTest.dependencies {

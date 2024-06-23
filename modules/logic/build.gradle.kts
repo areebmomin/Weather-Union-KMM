@@ -28,6 +28,7 @@ kotlin {
         commonMain.dependencies {
             //put your multiplatform dependencies here
             implementation(projects.modules.data)
+            implementation(libs.kotlin.inject.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
