@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.wire)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
