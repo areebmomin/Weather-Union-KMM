@@ -44,7 +44,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 sqldelight_android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight_native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 kotlin_inject_ksp = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlin-inject" }
-kotlin_inject_runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlin-inject" }
+kotlin_inject_runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp", version.ref = "kotlin-inject" }
 datastore = { module = "androidx.datastore:datastore-core-okio", version.ref = "datastore" }
 
 [bundles]
