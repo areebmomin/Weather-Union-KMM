@@ -3,7 +3,9 @@ package com.areeb.weatherunion.data.local_data
 import com.areeb.weatherunion.data.WeatherUnionDatabase
 import com.areeb.weatherunion.data.local_data.model.LocalityData
 import kotlinx.serialization.json.Json
+import me.tatarka.inject.annotations.Inject
 
+@Inject
 class InjectLocalData(private val database: WeatherUnionDatabase) {
 
     private fun getLocalityListFromJson(): List<LocalityData> {
