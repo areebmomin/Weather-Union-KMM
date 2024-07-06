@@ -1,7 +1,6 @@
 import UIKit
 import SwiftUI
 import ComposeApp
-import shared
 
 struct ComposeView: UIViewControllerRepresentable {
     private let applicationComponent = ApplicationComponent.companion.create()
