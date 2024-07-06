@@ -30,11 +30,25 @@ kotlin {
             api(projects.modules.core)
             api(projects.modules.data)
             api(projects.modules.logic)
+
+            implementation(libs.kotlin.inject.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
     }
+}
+
+dependencies {
+    add("kspAndroid", libs.kotlin.inject.ksp)
+    add("kspIosX64", libs.kotlin.inject.ksp)
+    add("kspIosArm64", libs.kotlin.inject.ksp)
+    add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
+}
+
+ksp {
+    arg("me.tatarka.inject.generateCompanionExtensions", "true")
+    arg("me.tatarka.inject.dumpGraph", "true")
 }
 
 android {
