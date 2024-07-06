@@ -8,6 +8,6 @@ import com.areeb.weatherunion.shared.create
 class WeatherUnionApplication : Application(), ApplicationComponentProvider {
 
     override val applicationComponent by lazy {
-        ApplicationComponent.create()
+        ApplicationComponent.create(applicationContext)
     }
 }
