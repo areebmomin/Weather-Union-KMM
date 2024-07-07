@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlin.inject.runtime)
+            implementation(libs.kermit)
         }
 
         commonTest.dependencies {

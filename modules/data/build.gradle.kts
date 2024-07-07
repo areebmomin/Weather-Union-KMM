@@ -39,6 +39,7 @@ kotlin {
             implementation(libs.bundles.ktor.common)
             implementation(libs.datastore)
             implementation(libs.kotlin.inject.runtime)
+            implementation(libs.kermit)
         }
 
         commonTest.dependencies {
