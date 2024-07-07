@@ -10,7 +10,7 @@ CREATE TABLE ApiKey (
 insertWeatherUnionApiKey:
 INSERT INTO ApiKey (id, api_key) VALUES (0, :apiKey);
 
-getWratherUnionApiKey:
+getWeatherUnionApiKey:
 SELECT * FROM ApiKey WHERE id = 0;
 
 insertMapApiKey:

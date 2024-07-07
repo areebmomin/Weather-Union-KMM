@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.data.local_data
+package com.areeb.weatherunion.data.locality_data
 
 internal var localityListJson = """
  {
