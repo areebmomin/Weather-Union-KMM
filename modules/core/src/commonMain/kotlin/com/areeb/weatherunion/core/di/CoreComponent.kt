@@ -16,8 +16,6 @@ annotation class ApplicationScope
 
 interface CoreComponent {
 
-    val applicationCoroutineScope: ApplicationCoroutineScope
-
     @ApplicationScope
     @Provides
     fun applicationCoroutineScope(): ApplicationCoroutineScope =

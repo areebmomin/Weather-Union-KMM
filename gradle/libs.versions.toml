@@ -22,6 +22,7 @@ datastore = "1.1.1"
 wire = "5.0.0-alpha03"
 module-graph = "0.10.0"
 kermit = "2.0.4"
+viewmodel = "2.8.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -49,6 +50,7 @@ kotlin_inject_runtime = { module = "me.tatarka.inject:kotlin-inject-runtime-kmp"
 datastore = { module = "androidx.datastore:datastore-core-okio", version.ref = "datastore" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-test = { module = "co.touchlab:kermit-test", version.ref = "kermit" }
+viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]

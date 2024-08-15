@@ -9,6 +9,8 @@ plugins {
 }
 
 kotlin {
+    tasks.create("testClasses")
+
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {

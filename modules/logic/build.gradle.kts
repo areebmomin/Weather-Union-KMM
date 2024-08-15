@@ -5,6 +5,8 @@ plugins {
 }
 
 kotlin {
+    tasks.create("testClasses")
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -30,6 +32,7 @@ kotlin {
             implementation(projects.modules.data)
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.kermit)
+            implementation(libs.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
