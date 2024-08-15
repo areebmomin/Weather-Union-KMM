@@ -29,6 +29,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             //put your multiplatform dependencies here
+            implementation(projects.modules.core)
             implementation(projects.modules.data)
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.kermit)

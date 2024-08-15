@@ -1,7 +1,13 @@
 package com.areeb.weatherunion.logic.location_data_screen
 
-import androidx.lifecycle.ViewModel
+import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 
-class LocationDataScreenViewModel : ViewModel() {
+class LocationDataScreenViewModel :
+    BaseViewModel<LocationDataScreenState, LocationDataScreenEvent, LocationDataScreenAction>(
+        initialState = LocationDataScreenState,
+    ) {
 
+    override fun dispatch(action: LocationDataScreenAction) {
+
+    }
 }
