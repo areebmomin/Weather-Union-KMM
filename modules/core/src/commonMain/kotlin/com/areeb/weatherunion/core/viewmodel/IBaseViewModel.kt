@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
  *  [Action] :- Action taken by user or external factor in UI
  */
 interface IBaseViewModel<State : Any, Event : Any, Action : Any> {
+    val TAG: String
+
     val state: Flow<State>
     val latestState: State
     val event: Flow<Event>
