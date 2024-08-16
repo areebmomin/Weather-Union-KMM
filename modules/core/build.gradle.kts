@@ -38,7 +38,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.kermit)
-            implementation(libs.viewmodel)
+            api(libs.viewmodel)
         }
 
         commonTest.dependencies {
