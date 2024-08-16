@@ -8,27 +8,29 @@ import me.tatarka.inject.annotations.IntoMap
 import me.tatarka.inject.annotations.Provides
 import kotlin.reflect.KClass
 
+typealias ViewModelFactory = ViewModelProvider.Factory
+
 interface LogicComponent {
 
-    val viewModelFactories: Map<KClass<*>, ViewModelProvider.Factory>
+    val viewModelFactories: Map<KClass<*>, ViewModelFactory>
 
     @IntoMap
     @Provides
     fun apiCredentialScreenViewModelFactory(
         factory: ApiCredentialScreenViewModel.Companion.Factory,
-    ): Pair<KClass<*>, ViewModelProvider.Factory> =
+    ): Pair<KClass<*>, ViewModelFactory> =
         Pair(ApiCredentialScreenViewModel::class, factory)
 
     @IntoMap
     @Provides
     fun homeScreenViewModelFactory(
         factory: HomeScreenViewModel.Companion.Factory,
-    ): Pair<KClass<*>, ViewModelProvider.Factory> = Pair(HomeScreenViewModel::class, factory)
+    ): Pair<KClass<*>, ViewModelFactory> = Pair(HomeScreenViewModel::class, factory)
 
     @IntoMap
     @Provides
     fun locationDataScreenViewModelFactory(
         factory: LocationDataScreenViewModel.Companion.Factory,
-    ): Pair<KClass<*>, ViewModelProvider.Factory> =
+    ): Pair<KClass<*>, ViewModelFactory> =
         Pair(LocationDataScreenViewModel::class, factory)
 }
