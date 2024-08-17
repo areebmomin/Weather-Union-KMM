@@ -1,9 +1,10 @@
 package com.areeb.weatherunion.data.repository
 
+import com.areeb.weatherunion.core.util.DEFAULT_LOCALITY_ID
 import com.areeb.weatherunion.data.database.dao.LocalityDao
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.preference.WeatherUnionPreferences
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import me.tatarka.inject.annotations.Inject
 
 @Inject
@@ -19,11 +20,11 @@ class LocalitiesDataRepositoryImpl(
         return localityDao.getLocalityList()
     }
 
-    override suspend fun setLastSelectedLocality(localityData: LocalityData) {
-        weatherUnionPreferences.updateLastSelectedLocalityId(localityId = localityData.localityId)
+    override suspend fun setLastSelectedLocalityId(localityId: String) {
+        weatherUnionPreferences.updateLastSelectedLocalityId(localityId = localityId)
     }
 
-    override fun getLastSelectedLocality(): Flow<String?> {
-        return weatherUnionPreferences.getLastSelectedLocalityId()
+    override suspend fun getLastSelectedLocalityId(): String {
+        return weatherUnionPreferences.getLastSelectedLocalityId().first() ?: DEFAULT_LOCALITY_ID
     }
 }

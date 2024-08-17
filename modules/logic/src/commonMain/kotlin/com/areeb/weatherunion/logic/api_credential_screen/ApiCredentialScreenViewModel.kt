@@ -7,6 +7,8 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.areeb.weatherunion.core.logger.Logger
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.ApiCredentialRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 import kotlin.reflect.KClass
@@ -23,7 +25,7 @@ class ApiCredentialScreenViewModel(
         get() = this::class.simpleName.toString()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(context = Dispatchers.IO) {
             val weatherUnionApiKey = apiCredentialRepository.getWeatherUnionApiKey()
             val mapApiKey = apiCredentialRepository.getMapApiKey()
             updateState(

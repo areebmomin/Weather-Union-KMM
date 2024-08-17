@@ -21,3 +21,12 @@ sealed class ApiResponse<out Response> {
         ) : Error()
     }
 }
+
+fun <Response, Model> ApiResponse<Response>.mapSuccess(
+    transform: (Response) -> Model,
+): ApiResponse<Model> {
+    return when (this) {
+        is ApiResponse.Success -> ApiResponse.Success(transform(body))
+        is ApiResponse.Error -> this
+    }
+}
