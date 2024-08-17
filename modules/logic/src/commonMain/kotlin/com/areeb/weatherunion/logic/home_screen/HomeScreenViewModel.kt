@@ -35,19 +35,19 @@ class HomeScreenViewModel(
     override fun dispatch(action: HomeScreenAction) {
         logger.debug(TAG, "dispatch $action")
         when (action) {
-            OnCitySelected -> {
-
+            is OnCitySelected -> {
+                updateLastSelectedLocalityIdAndFetchWeatherData(localityId = action.localityId)
             }
 
-            OnLocalitySelected -> {
-
+            is OnLocalitySelected -> {
+                updateLastSelectedLocalityIdAndFetchWeatherData(localityId = action.localityId)
             }
         }
     }
 
     private fun loadLocalityData() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            triggerEvent(Loading(isLoading = true)) // TODO: Resolve loader inconsistency issue
+            triggerEvent(LocalityDataLoading(isLoading = true))
             var localities = localitiesDataRepository.getLocalityList()
 
             if (localities.isEmpty()) {
@@ -56,34 +56,54 @@ class HomeScreenViewModel(
             }
 
             updateState(latestState.copy(localities = localities))
-            triggerEvent(Loading(isLoading = false))
+            triggerEvent(LocalityDataLoading(isLoading = false))
         }
     }
 
     private fun getLastSelectedIdWeatherData() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            triggerEvent(Loading(isLoading = true))
             val lastSelectedLocalityId = localitiesDataRepository.getLastSelectedLocalityId()
+            updateState(latestState.copy(selectedLocalityId = lastSelectedLocalityId))
+
+            fetchWeatherData(localityId = lastSelectedLocalityId)
+        }
+    }
+
+    private fun updateLastSelectedLocalityIdAndFetchWeatherData(localityId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateState(latestState.copy(selectedLocalityId = localityId))
+            localitiesDataRepository.setLastSelectedLocalityId(
+                localityId = localityId,
+            )
+
+            fetchWeatherData(localityId = localityId)
+        }
+    }
+
+    private fun fetchWeatherData(localityId: String) {
+        viewModelScope.launch(context = Dispatchers.IO) {
+            triggerEvent(Loading(isLoading = true))
             val response = weatherDataRepository.getWeatherData(
-                locationId = lastSelectedLocalityId,
+                locationId = localityId,
             )
             when (response) {
                 is ApiResponse.Success -> {
-
+                    updateState(latestState.copy(weatherData = response.body))
                 }
 
                 is ApiResponse.Error.HttpError -> {
-
+                    triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.SerializationError -> {
-
+                    triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.GenericError -> {
-
+                    triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
             }
+            triggerEvent(Loading(isLoading = false))
         }
     }
 

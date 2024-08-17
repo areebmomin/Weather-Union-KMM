@@ -2,6 +2,6 @@ package com.areeb.weatherunion.logic.home_screen
 
 sealed interface HomeScreenAction
 
-data object OnCitySelected : HomeScreenAction
+data class OnCitySelected(val localityId: String) : HomeScreenAction
 
-data object OnLocalitySelected : HomeScreenAction
+data class OnLocalitySelected(val localityId: String) : HomeScreenAction
