@@ -14,6 +14,8 @@ abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
     private val logger: Logger,
 ) : WeatherUnionViewModel<State, Event, Action>, ViewModel() {
 
+    protected abstract val TAG: String
+
     private val _state = MutableStateFlow(initialState)
     override val state: Flow<State>
         get() = _state
@@ -25,7 +27,7 @@ abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
     override val event: Flow<Event>
         get() = _event.filterNotNull()
 
-    override fun updateState(state: State) {
+    protected fun updateState(state: State) {
         _state.update {
             state
         }
@@ -33,7 +35,7 @@ abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
         logger.debug(TAG, "State updated: $state")
     }
 
-    override suspend fun triggerEvent(event: Event) {
+    protected suspend fun triggerEvent(event: Event) {
         _event.emit(event)
 
         logger.debug(TAG, "Event triggered: $event")

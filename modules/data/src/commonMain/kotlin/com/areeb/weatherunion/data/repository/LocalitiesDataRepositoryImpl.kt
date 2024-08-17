@@ -4,7 +4,7 @@ import com.areeb.weatherunion.core.util.DEFAULT_LOCALITY_ID
 import com.areeb.weatherunion.data.database.dao.LocalityDao
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.preference.WeatherUnionPreferences
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import me.tatarka.inject.annotations.Inject
 
 @Inject
@@ -25,6 +25,9 @@ class LocalitiesDataRepositoryImpl(
     }
 
     override suspend fun getLastSelectedLocalityId(): String {
-        return weatherUnionPreferences.getLastSelectedLocalityId().first() ?: DEFAULT_LOCALITY_ID
+        val lastSelectedLocalityId =
+            weatherUnionPreferences.getLastSelectedLocalityId().firstOrNull()
+        return if (lastSelectedLocalityId.isNullOrBlank()) DEFAULT_LOCALITY_ID
+        else lastSelectedLocalityId
     }
 }

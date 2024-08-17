@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
-import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
-import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import com.areeb.weatherunion.logic.di.LogicComponent
+import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
+import com.areeb.weatherunion.logic.home_screen.OnCitySelected
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import weatherunionkmm.composeapp.generated.resources.Res
@@ -29,18 +29,19 @@ fun App(
 ) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
-        val viewModel: ApiCredentialScreenViewModel = remember {
+        val viewModel: HomeScreenViewModel = remember {
             ViewModelProvider.create(
                 ViewModelStore(),
-                logicComponent.apiCredentialScreenViewModelFactory
-            )[ApiCredentialScreenViewModel::class]
+                logicComponent.homeScreenViewModelFactory
+            )[HomeScreenViewModel::class]
         }
 
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                viewModel.dispatch(UpdateWeatherUnionApiKey(apiKey = "My_api_key"))
-                val apiKey = viewModel.latestState.weatherUnionApiKey
-                Text("Click me!  $apiKey")
+            Button(onClick = {
+                showContent = !showContent
+                viewModel.dispatch(OnCitySelected(localityId = "ZWL002059"))
+            }) {
+                Text("Click me!")
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }

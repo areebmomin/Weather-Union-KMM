@@ -16,7 +16,7 @@ class LocalityWeatherDataApiImpl(
         return httpClient.apiRequest<LocalityWeatherDataApiResponse> {
             url {
                 method = HttpMethod.Get
-                path("/get_locality_weather_data")
+                path("get_locality_weather_data")
                 parameter("locality_id", localityId)
             }
         }

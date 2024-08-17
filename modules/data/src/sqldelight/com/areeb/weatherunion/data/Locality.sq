@@ -2,8 +2,8 @@ CREATE TABLE Locality (
     locality_id TEXT NOT NULL PRIMARY KEY,
     city_name TEXT NOT NULL,
     locality_name TEXT NOT NULL,
-    latitude TEXT NOT NULL,
-    longitude TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
     device_type INTEGER NOT NULL
 );
 

@@ -6,6 +6,6 @@ data class WeatherData(
     val humidity: Double?,
     val windSpeed: Double?,
     val windDirection: Double?,
-    val rainIntensity: Double?,
+    val rainIntensity: Int?,
     val rainAccumulation: Double?,
 )

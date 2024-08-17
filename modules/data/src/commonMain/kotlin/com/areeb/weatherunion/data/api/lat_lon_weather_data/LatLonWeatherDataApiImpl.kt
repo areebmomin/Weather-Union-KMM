@@ -19,7 +19,7 @@ class LatLonWeatherDataApiImpl(
         return httpClient.apiRequest<LatLonWeatherDataApiResponse> {
             url {
                 method = HttpMethod.Get
-                path("/get_weather_data")
+                path("get_weather_data")
                 parameters.append("latitude", lat.toString())
                 parameters.append("longitude", lon.toString())
             }

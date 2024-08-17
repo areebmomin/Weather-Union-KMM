@@ -6,7 +6,6 @@ import io.ktor.client.engine.okhttp.OkHttp
 import java.util.concurrent.TimeUnit
 
 actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(OkHttp) {
-    config(this)
 
     engine {
         config {
@@ -14,4 +13,6 @@ actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(OkHtt
             connectTimeout(0, TimeUnit.SECONDS)
         }
     }
+
+    config(this)
 }

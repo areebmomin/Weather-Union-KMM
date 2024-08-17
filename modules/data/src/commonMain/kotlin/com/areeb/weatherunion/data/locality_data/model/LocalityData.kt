@@ -13,9 +13,9 @@ data class LocalityData(
     @SerialName("locality_name")
     val localityName: String,
     @SerialName("latitude")
-    val latitude: String,
+    val latitude: Double,
     @SerialName("longitude")
-    val longitude: String,
+    val longitude: Double,
     @SerialName("device_type")
     val deviceType: Int,
 ) {
