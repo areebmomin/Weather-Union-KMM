@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.areeb.weatherunion.core.logger.Logger
+import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.LocalitiesDataRepository
@@ -16,12 +16,12 @@ import me.tatarka.inject.annotations.Inject
 import kotlin.reflect.KClass
 
 class HomeScreenViewModel(
-    private val logger: Logger,
+    private val coreLogger: CoreLogger,
     private val localitiesDataRepository: LocalitiesDataRepository,
     private val weatherDataRepository: WeatherDataRepository,
 ) : BaseViewModel<HomeScreenState, HomeScreenEvent, HomeScreenAction>(
     initialState = HomeScreenState(),
-    logger = logger,
+    coreLogger = coreLogger,
 ) {
 
     init {
@@ -33,7 +33,7 @@ class HomeScreenViewModel(
         get() = this::class.simpleName.toString()
 
     override fun dispatch(action: HomeScreenAction) {
-        logger.debug(TAG, "dispatch $action")
+        coreLogger.debug(TAG, "dispatch $action")
         when (action) {
             is OnCitySelected -> {
                 updateLastSelectedLocalityIdAndFetchWeatherData(localityId = action.localityId)
@@ -109,14 +109,14 @@ class HomeScreenViewModel(
 
     companion object {
         class Factory @Inject constructor(
-            private val logger: Logger,
+            private val coreLogger: CoreLogger,
             private val localitiesDataRepository: LocalitiesDataRepository,
             private val weatherDataRepository: WeatherDataRepository,
         ) : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
                 return HomeScreenViewModel(
-                    logger = logger,
+                    coreLogger = coreLogger,
                     localitiesDataRepository = localitiesDataRepository,
                     weatherDataRepository = weatherDataRepository,
                 ) as T

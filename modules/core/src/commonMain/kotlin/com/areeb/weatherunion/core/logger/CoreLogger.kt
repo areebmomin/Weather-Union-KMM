@@ -1,6 +1,6 @@
 package com.areeb.weatherunion.core.logger
 
-interface Logger {
+interface CoreLogger {
     fun debug(tag: String, message: String, throwable: Throwable? = null)
     fun assert(tag: String, message: String, throwable: Throwable? = null)
     fun info(tag: String, message: String, throwable: Throwable? = null)

@@ -4,8 +4,10 @@ import co.touchlab.kermit.DefaultFormatter
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import co.touchlab.kermit.platformLogWriter
-import com.areeb.weatherunion.core.logger.Logger as CoreLogger
+import me.tatarka.inject.annotations.Inject
+import com.areeb.weatherunion.core.logger.CoreLogger as CoreLogger
 
+@Inject
 class KermitLogger : CoreLogger {
 
     private val logger = Logger(

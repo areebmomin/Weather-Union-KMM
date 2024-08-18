@@ -1,11 +1,12 @@
 package com.areeb.weatherunion.core.network
 
+import com.areeb.weatherunion.core.logger.CoreLogger
 import io.ktor.client.plugins.logging.Logger
+import me.tatarka.inject.annotations.Inject
 
-class CustomKtorLogger : Logger {
+@Inject
+class CustomKtorLogger(private val coreLogger: CoreLogger) : Logger {
     override fun log(message: String) {
-        // Implement your custom logging logic here
-        // For example, print to console or send to a remote logging service
-        println("Ktor: $message")
+        coreLogger.debug(tag = "Ktor", message = message)
     }
 }

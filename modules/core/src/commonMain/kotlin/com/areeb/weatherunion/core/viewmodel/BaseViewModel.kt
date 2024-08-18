@@ -1,7 +1,7 @@
 package com.areeb.weatherunion.core.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.areeb.weatherunion.core.logger.Logger
+import com.areeb.weatherunion.core.logger.CoreLogger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +11,7 @@ import com.areeb.weatherunion.core.viewmodel.IBaseViewModel as WeatherUnionViewM
 
 abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
     initialState: State,
-    private val logger: Logger,
+    private val coreLogger: CoreLogger,
 ) : WeatherUnionViewModel<State, Event, Action>, ViewModel() {
 
     protected abstract val TAG: String
@@ -32,12 +32,12 @@ abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
             state
         }
 
-        logger.debug(TAG, "State updated: $state")
+        coreLogger.debug(TAG, "State updated: $state")
     }
 
     protected suspend fun triggerEvent(event: Event) {
         _event.emit(event)
 
-        logger.debug(TAG, "Event triggered: $event")
+        coreLogger.debug(TAG, "Event triggered: $event")
     }
 }

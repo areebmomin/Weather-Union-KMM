@@ -9,8 +9,8 @@ import me.tatarka.inject.annotations.Provides
 interface ApiComponent {
 
     @Provides
-    fun latLonWeatherDataApi(): LatLonWeatherDataApi = LatLonWeatherDataApiImpl()
+    fun latLonWeatherDataApi(impl: LatLonWeatherDataApiImpl): LatLonWeatherDataApi = impl
 
     @Provides
-    fun localityWeatherDataApi(): LocalityWeatherDataApi = LocalityWeatherDataApiImpl()
+    fun localityWeatherDataApi(impl: LocalityWeatherDataApiImpl): LocalityWeatherDataApi = impl
 }
