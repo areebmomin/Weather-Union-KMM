@@ -33,7 +33,6 @@ class WeatherUnionHttpClientFactory(
             defaultRequest {
                 contentType(ContentType.Application.Json)
                 url("https://www.weatherunion.com/gw/weather/external/v0/")
-                header("x-zomato-api-key", "d93b2012f8590030786666d0596f3674")
             }
 
             install(ContentNegotiation) {

@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
+import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
+import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import com.areeb.weatherunion.logic.di.LogicComponent
 import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
 import com.areeb.weatherunion.logic.home_screen.OnCitySelected
@@ -36,9 +38,17 @@ fun App(
             )[HomeScreenViewModel::class]
         }
 
+        val apiCredentialScreenViewModel: ApiCredentialScreenViewModel = remember {
+            ViewModelProvider.create(
+                ViewModelStore(),
+                logicComponent.apiCredentialScreenViewModelFactory
+            )[ApiCredentialScreenViewModel::class]
+        }
+
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = {
                 showContent = !showContent
+                apiCredentialScreenViewModel.dispatch(UpdateWeatherUnionApiKey("123456"))
                 viewModel.dispatch(OnCitySelected(localityId = "ZWL002059"))
             }) {
                 Text("Click me!")
