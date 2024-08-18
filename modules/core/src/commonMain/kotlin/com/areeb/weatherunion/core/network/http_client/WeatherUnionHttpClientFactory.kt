@@ -1,5 +1,6 @@
 package com.areeb.weatherunion.core.network.http_client
 
+import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.HttpException
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -8,6 +9,7 @@ import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
 import io.ktor.client.statement.bodyAsText
@@ -20,7 +22,7 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 class WeatherUnionHttpClientFactory(
-    // private val ktorLogger: Logger,
+    private val coreLogger: CoreLogger,
 ) : HttpClientFactory {
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -48,7 +50,11 @@ class WeatherUnionHttpClientFactory(
             }
 
             install(Logging) {
-                // logger = ktorLogger
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        coreLogger.debug(tag = "Ktor", message = message)
+                    }
+                }
                 level = LogLevel.ALL
             }
 
