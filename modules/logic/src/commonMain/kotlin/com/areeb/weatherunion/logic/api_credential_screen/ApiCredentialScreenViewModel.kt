@@ -25,16 +25,7 @@ class ApiCredentialScreenViewModel(
         get() = this::class.simpleName.toString()
 
     init {
-        viewModelScope.launch(context = Dispatchers.IO) {
-            val weatherUnionApiKey = apiCredentialRepository.getWeatherUnionApiKey()
-            val mapApiKey = apiCredentialRepository.getMapApiKey()
-            updateState(
-                latestState.copy(
-                    weatherUnionApiKey = weatherUnionApiKey,
-                    mapApiKey = mapApiKey,
-                )
-            )
-        }
+        getApiKeys()
     }
 
     override fun dispatch(action: ApiCredentialScreenAction) {
@@ -47,6 +38,19 @@ class ApiCredentialScreenViewModel(
             is UpdateMapApiKey -> {
                 apiCredentialRepository.updateMapApiKey(apiKey = action.apiKey)
             }
+        }
+    }
+
+    private fun getApiKeys() {
+        viewModelScope.launch(context = Dispatchers.IO) {
+            val weatherUnionApiKey = apiCredentialRepository.getWeatherUnionApiKey()
+            val mapApiKey = apiCredentialRepository.getMapApiKey()
+            updateState(
+                latestState.copy(
+                    weatherUnionApiKey = weatherUnionApiKey,
+                    mapApiKey = mapApiKey,
+                )
+            )
         }
     }
 
