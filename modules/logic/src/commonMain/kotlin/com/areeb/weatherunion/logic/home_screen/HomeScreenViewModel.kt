@@ -7,8 +7,8 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
-import com.areeb.weatherunion.data.repository.LocalitiesDataRepository
-import com.areeb.weatherunion.data.repository.WeatherDataRepository
+import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
+import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch

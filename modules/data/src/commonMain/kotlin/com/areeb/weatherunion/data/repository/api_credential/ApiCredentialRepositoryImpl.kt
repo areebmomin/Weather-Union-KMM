@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.data.repository
+package com.areeb.weatherunion.data.repository.api_credential
 
 import com.areeb.weatherunion.data.database.dao.ApiKeyDao
 import me.tatarka.inject.annotations.Inject

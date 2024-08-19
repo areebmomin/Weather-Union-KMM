@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.data.repository
+package com.areeb.weatherunion.data.repository.weather_data
 
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.network.mapSuccess

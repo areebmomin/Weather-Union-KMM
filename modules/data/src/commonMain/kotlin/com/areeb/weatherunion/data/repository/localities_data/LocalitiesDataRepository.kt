@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.data.repository
+package com.areeb.weatherunion.data.repository.localities_data
 
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 

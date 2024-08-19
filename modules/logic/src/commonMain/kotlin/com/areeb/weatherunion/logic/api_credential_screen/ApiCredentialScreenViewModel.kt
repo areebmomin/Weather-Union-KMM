@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
-import com.areeb.weatherunion.data.repository.ApiCredentialRepository
+import com.areeb.weatherunion.data.repository.api_credential.ApiCredentialRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
