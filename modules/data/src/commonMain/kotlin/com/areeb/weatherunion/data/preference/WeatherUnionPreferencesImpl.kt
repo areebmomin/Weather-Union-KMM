@@ -1,20 +1,20 @@
 package com.areeb.weatherunion.data.preference
 
-import androidx.datastore.core.DataStore
-import com.areeb.weatherunion.data.PreferenceData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import me.tatarka.inject.annotations.Inject
 
-class WeatherUnionPreferenceImpl(private val dataStore: DataStore<PreferenceData> = getDataStore()) :
+@Inject
+class WeatherUnionPreferenceImpl(private val dataStoreFactory: ProtoDataStoreFactory) :
     WeatherUnionPreferences {
     override suspend fun updateLastSelectedLocalityId(localityId: String) {
-        dataStore.updateData { data ->
+        dataStoreFactory.dataStore.updateData { data ->
             data.copy(lastSelectedLocalityId = localityId)
         }
     }
 
     override fun getLastSelectedLocalityId(): Flow<String?> {
-        return dataStore.data.map { data ->
+        return dataStoreFactory.dataStore.data.map { data ->
             data.lastSelectedLocalityId
         }
     }
