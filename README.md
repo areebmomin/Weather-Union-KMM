@@ -34,6 +34,7 @@ graph LR
   :modules:shared --> :modules:core
   :modules:shared --> :modules:data
   :modules:shared --> :modules:logic
+  :modules:logic --> :modules:core
   :modules:logic --> :modules:data
   :modules:data --> :modules:core
 ```
