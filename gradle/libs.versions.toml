@@ -23,6 +23,7 @@ wire = "5.0.0-alpha03"
 module-graph = "0.10.0"
 kermit = "2.0.4"
 viewmodel = "2.8.0"
+compose-navigation = "2.7.0-alpha07"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -51,6 +52,7 @@ datastore = { module = "androidx.datastore:datastore-core-okio", version.ref = "
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermit-test = { module = "co.touchlab:kermit-test", version.ref = "kermit" }
 viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]

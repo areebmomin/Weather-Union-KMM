@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather Union KMM</string>
+    <string name="home_screen_nav_name">home_screen</string>
+    <string name="location_data_screen_nav_name">location_data_screen</string>
+    <string name="enter_api_key_screen_nav_name">enter_api_key_screen</string>
+    <string name="info_screen_nav_name">info_screen</string>
+</resources>
