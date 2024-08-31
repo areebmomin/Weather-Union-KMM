@@ -5,4 +5,15 @@
     <string name="enter_api_key_screen_nav_name">enter_api_key_screen</string>
     <string name="info_screen_nav_name">info_screen</string>
     <string name="navigate_to_home_page">Navigate to Home Page</string>
+    <string name="menu">Menu</string>
+    <string name="location_data">Location Data</string>
+    <string name="enter_api_key">Enter API Key</string>
+    <string name="info">Info</string>
+    <string name="background_image">Background Image</string>
+    <string name="project_name_colon">Project Name: </string>
+    <string name="version_colon">Version: </string>
+    <string name="version_string">1.0</string>
+    <string name="weather_union_icon">Weather Union Icon</string>
+    <string name="github_icon">GitHub Icon</string>
+    <string name="linkedin_icon">LinkedIn Icon</string>
 </resources>

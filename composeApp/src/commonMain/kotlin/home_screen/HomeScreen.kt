@@ -10,7 +10,9 @@ import androidx.compose.ui.layout.ContentScale
 import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
 import home_screen.components.HomeScreenAppBar
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
+import weatherunionkmm.composeapp.generated.resources.background_image
 import weatherunionkmm.composeapp.generated.resources.ic_home_screen_background
 
 @Composable
@@ -26,7 +28,7 @@ fun HomeScreen(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painterResource(Res.drawable.ic_home_screen_background),
-                contentDescription = "Background Image",
+                contentDescription = stringResource(Res.string.background_image),
                 contentScale = ContentScale.FillBounds
             )
             HomeScreenAppBar(

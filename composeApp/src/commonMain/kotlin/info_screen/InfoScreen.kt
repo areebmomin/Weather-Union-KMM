@@ -32,10 +32,18 @@ import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
+import weatherunionkmm.composeapp.generated.resources.app_name
+import weatherunionkmm.composeapp.generated.resources.github_icon
 import weatherunionkmm.composeapp.generated.resources.ic_github
 import weatherunionkmm.composeapp.generated.resources.ic_linkedin
 import weatherunionkmm.composeapp.generated.resources.ic_weather_union
+import weatherunionkmm.composeapp.generated.resources.info
+import weatherunionkmm.composeapp.generated.resources.linkedin_icon
 import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
+import weatherunionkmm.composeapp.generated.resources.project_name_colon
+import weatherunionkmm.composeapp.generated.resources.version_colon
+import weatherunionkmm.composeapp.generated.resources.version_string
+import weatherunionkmm.composeapp.generated.resources.weather_union_icon
 
 @Composable
 fun InfoScreen(
@@ -58,7 +66,7 @@ fun InfoScreen(
                         )
                     }
                     Text(
-                        "Info",
+                        stringResource(Res.string.info),
                         color = Color.White,
                         fontSize = 22.sp,
                         modifier = modifier.padding(start = 20.dp),
@@ -87,11 +95,11 @@ fun InfoScreen(
                     modifier = modifier.padding(vertical = 8.dp),
                 ) {
                     Text(
-                        "Project Name: ",
+                        stringResource(Res.string.project_name_colon),
                         color = Color(0x99EBEBF5),
                     )
                     Text(
-                        "Weather Union KMM",
+                        stringResource(Res.string.app_name),
                         color = Color(0xE6FFFFFF),
                     )
                 }
@@ -99,11 +107,11 @@ fun InfoScreen(
                     modifier = modifier.padding(vertical = 8.dp),
                 ) {
                     Text(
-                        "Version: ",
+                        stringResource(Res.string.version_colon),
                         color = Color(0x99EBEBF5),
                     )
                     Text(
-                        "1.0",
+                        stringResource(Res.string.version_string),
                         color = Color(0xE6FFFFFF),
                     )
                 }
@@ -118,7 +126,7 @@ fun InfoScreen(
                                 uriHandler.openUri("https://www.weatherunion.com")
                             },
                         painter = painterResource(Res.drawable.ic_weather_union),
-                        contentDescription = "Weather Union Icon",
+                        contentDescription = stringResource(Res.string.weather_union_icon),
                         contentScale = ContentScale.FillBounds
                     )
                     Image(
@@ -128,7 +136,7 @@ fun InfoScreen(
                                 uriHandler.openUri("https://github.com/areebmomin/Weather-Union-KMM")
                             },
                         painter = painterResource(Res.drawable.ic_github),
-                        contentDescription = "GitHub Icon",
+                        contentDescription = stringResource(Res.string.github_icon),
                         contentScale = ContentScale.FillBounds
                     )
                     Image(
@@ -138,7 +146,7 @@ fun InfoScreen(
                                 uriHandler.openUri("https://www.linkedin.com/in/areeb-momin")
                             },
                         painter = painterResource(Res.drawable.ic_linkedin),
-                        contentDescription = "LinkedIn Icon",
+                        contentDescription = stringResource(Res.string.linkedin_icon),
                         contentScale = ContentScale.FillBounds
                     )
                 }

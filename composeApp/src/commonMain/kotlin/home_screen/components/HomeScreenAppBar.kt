@@ -18,8 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
+import weatherunionkmm.composeapp.generated.resources.enter_api_key
 import weatherunionkmm.composeapp.generated.resources.ic_menu_option
+import weatherunionkmm.composeapp.generated.resources.info
+import weatherunionkmm.composeapp.generated.resources.location_data
+import weatherunionkmm.composeapp.generated.resources.menu
 
 @Composable
 fun HomeScreenAppBar(
@@ -41,7 +46,7 @@ fun HomeScreenAppBar(
             ) {
                 Icon(
                     painter = painterResource(resource = Res.drawable.ic_menu_option),
-                    contentDescription = "Menu",
+                    contentDescription = stringResource(Res.string.menu),
                     tint = Color.White,
                 )
             }
@@ -56,7 +61,7 @@ fun HomeScreenAppBar(
                         onLocationDataMenuClicked()
                     },
                 ) {
-                    Text("Location Data")
+                    Text(stringResource(Res.string.location_data))
                 }
                 DropdownMenuItem(
                     onClick = {
@@ -64,7 +69,7 @@ fun HomeScreenAppBar(
                         onEnterApiKeyMenuClicked()
                     },
                 ) {
-                    Text("Enter API Key")
+                    Text(stringResource(Res.string.enter_api_key))
                 }
                 DropdownMenuItem(
                     onClick = {
@@ -72,7 +77,7 @@ fun HomeScreenAppBar(
                         onInfoMenuClicked()
                     },
                 ) {
-                    Text("Info")
+                    Text(stringResource(Res.string.info))
                 }
             }
         }
