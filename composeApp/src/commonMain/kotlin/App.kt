@@ -107,6 +107,9 @@ fun App(
 
                 EnterApiKeyScreen(
                     viewModel = viewModel,
+                    onBackPressed = {
+                        navController.popBackStack()
+                    }
                 )
             }
             composable(

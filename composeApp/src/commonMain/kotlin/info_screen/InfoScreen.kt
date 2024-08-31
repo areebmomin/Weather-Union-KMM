@@ -11,15 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -28,7 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import info_screen.components.InfoScreenTopApoBar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
@@ -37,9 +31,7 @@ import weatherunionkmm.composeapp.generated.resources.github_icon
 import weatherunionkmm.composeapp.generated.resources.ic_github
 import weatherunionkmm.composeapp.generated.resources.ic_linkedin
 import weatherunionkmm.composeapp.generated.resources.ic_weather_union
-import weatherunionkmm.composeapp.generated.resources.info
 import weatherunionkmm.composeapp.generated.resources.linkedin_icon
-import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
 import weatherunionkmm.composeapp.generated.resources.project_name_colon
 import weatherunionkmm.composeapp.generated.resources.version_colon
 import weatherunionkmm.composeapp.generated.resources.version_string
@@ -52,28 +44,7 @@ fun InfoScreen(
     uriHandler: UriHandler = LocalUriHandler.current,
 ) {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                backgroundColor = Color(0xFF2E335A),
-                elevation = 16.dp,
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = onBackPressed) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.navigate_to_home_page),
-                            tint = Color.White,
-                        )
-                    }
-                    Text(
-                        stringResource(Res.string.info),
-                        color = Color.White,
-                        fontSize = 22.sp,
-                        modifier = modifier.padding(start = 20.dp),
-                    )
-                }
-            }
-        }
+        topBar = { InfoScreenTopApoBar(onBackPressed = onBackPressed) }
     ) {
         Box(
             modifier = Modifier
