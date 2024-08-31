@@ -1,3 +1,7 @@
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -25,8 +29,18 @@ fun App(
         NavHost(
             navController = navController,
             startDestination = Screen.Home.name,
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None },
         ) {
-            composable(route = Screen.Home.name) {
+            composable(
+                route = Screen.Home.name,
+                enterTransition = {
+                    slideInHorizontally()
+                },
+                exitTransition = {
+                    slideOutHorizontally()
+                },
+            ) {
                 val viewModel: HomeScreenViewModel = remember {
                     ViewModelProvider.create(
                         ViewModelStore(),
@@ -47,7 +61,19 @@ fun App(
                     },
                 )
             }
-            composable(route = Screen.LocationData.name) {
+            composable(
+                route = Screen.LocationData.name,
+                enterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { it },
+                    )
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { 0 }
+                    )
+                },
+            ) {
                 val viewModel: LocationDataScreenViewModel = remember {
                     ViewModelProvider.create(
                         ViewModelStore(),
@@ -59,7 +85,19 @@ fun App(
                     viewModel = viewModel,
                 )
             }
-            composable(route = Screen.EnterApiKey.name) {
+            composable(
+                route = Screen.EnterApiKey.name,
+                enterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { it },
+                    )
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { 0 }
+                    )
+                },
+            ) {
                 val viewModel: ApiCredentialScreenViewModel = remember {
                     ViewModelProvider.create(
                         ViewModelStore(),
@@ -71,8 +109,24 @@ fun App(
                     viewModel = viewModel,
                 )
             }
-            composable(route = Screen.Info.name) {
-                InfoScreen()
+            composable(
+                route = Screen.Info.name,
+                enterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { it },
+                    )
+                },
+                exitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { 0 }
+                    )
+                },
+            ) {
+                InfoScreen(
+                    onBackPressed = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }

@@ -26,7 +26,7 @@ fun HomeScreen(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painterResource(Res.drawable.ic_home_screen_background),
-                contentDescription = "background_image",
+                contentDescription = "Background Image",
                 contentScale = ContentScale.FillBounds
             )
             HomeScreenAppBar(
