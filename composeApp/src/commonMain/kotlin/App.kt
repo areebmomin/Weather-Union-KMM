@@ -36,9 +36,15 @@ fun App(
 
                 HomeScreen(
                     viewModel = viewModel,
-                    onNavigateToLocationDataScreen = {
+                    onLocationDataMenuClicked = {
                         navController.navigate(Screen.LocationData.name)
-                    }
+                    },
+                    onEnterApiKeyMenuClicked = {
+                        navController.navigate(Screen.EnterApiKey.name)
+                    },
+                    onInfoMenuClicked = {
+                        navController.navigate(Screen.Info.name)
+                    },
                 )
             }
             composable(route = Screen.LocationData.name) {

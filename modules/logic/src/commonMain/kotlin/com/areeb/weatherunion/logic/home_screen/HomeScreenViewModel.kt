@@ -25,8 +25,8 @@ class HomeScreenViewModel(
 ) {
 
     init {
-        loadLocalityData()
-        getLastSelectedIdWeatherData()
+        // loadLocalityData()
+        // getLastSelectedIdWeatherData()
     }
 
     override val TAG: String
