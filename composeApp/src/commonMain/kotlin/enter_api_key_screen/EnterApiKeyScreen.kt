@@ -8,11 +8,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,20 +27,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
 import com.areeb.weatherunion.logic.api_credential_screen.SaveMapApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.SaveWeatherUnionApiKey
+import com.areeb.weatherunion.logic.api_credential_screen.ShowSnackBar
 import com.areeb.weatherunion.logic.api_credential_screen.UpdateMapApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import enter_api_key_screen.components.EnterApiKeyScreenTopAppBar
 import enter_api_key_screen.components.EnterApiKeyTextField
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.enter_map_api_key
 import weatherunionkmm.composeapp.generated.resources.enter_weather_union_api_key
 import weatherunionkmm.composeapp.generated.resources.map_api_key
+import weatherunionkmm.composeapp.generated.resources.press_keyboard_done_button_to_save_api_key
 import weatherunionkmm.composeapp.generated.resources.weather_union_api_key
 
 @Composable
@@ -45,10 +54,24 @@ fun EnterApiKeyScreen(
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit,
 ) {
+    val coroutineScope = rememberCoroutineScope()
+    val snackBarHostState = remember { SnackbarHostState() }
+
     val state by viewModel.state.collectAsStateWithLifecycle(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
         context = Dispatchers.Main.immediate,
     )
+    LaunchedEffect(viewModel.event) {
+        viewModel.event.collectLatest {
+            when(it) {
+                is ShowSnackBar -> {
+                    coroutineScope.launch {
+                        snackBarHostState.showSnackbar(it.message)
+                    }
+                }
+            }
+        }
+    }
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -57,7 +80,10 @@ fun EnterApiKeyScreen(
     var mapApiKeyVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = { EnterApiKeyScreenTopAppBar(onBackPressed = onBackPressed) }
+        topBar = { EnterApiKeyScreenTopAppBar(onBackPressed = onBackPressed) },
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState)
+        },
     ) {
         Box(
             modifier = Modifier
@@ -120,6 +146,12 @@ fun EnterApiKeyScreen(
                         focusManager.clearFocus()
                         viewModel.dispatch(SaveMapApiKey)
                     },
+                )
+                Text(
+                    stringResource(Res.string.press_keyboard_done_button_to_save_api_key),
+                    modifier = Modifier.padding(top = 16.dp),
+                    fontSize = 12.sp,
+                    color = Color.Gray,
                 )
             }
         }

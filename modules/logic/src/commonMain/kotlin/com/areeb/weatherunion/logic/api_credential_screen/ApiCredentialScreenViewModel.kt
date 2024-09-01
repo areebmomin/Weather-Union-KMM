@@ -40,13 +40,19 @@ class ApiCredentialScreenViewModel(
             }
 
             SaveWeatherUnionApiKey -> {
-                apiCredentialRepository.updateWeatherUnionApiKey(
-                    apiKey = latestState.weatherUnionApiKey,
-                )
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    apiCredentialRepository.updateWeatherUnionApiKey(
+                        apiKey = latestState.weatherUnionApiKey,
+                    )
+                    triggerEvent(ShowSnackBar(message = "Weather Union API Key saved successfully"))
+                }
             }
 
             SaveMapApiKey -> {
-                apiCredentialRepository.updateMapApiKey(apiKey = latestState.mapApiKey)
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    apiCredentialRepository.updateMapApiKey(apiKey = latestState.mapApiKey)
+                    triggerEvent(ShowSnackBar(message = "Map API Key saved successfully"))
+                }
             }
         }
     }
