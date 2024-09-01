@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.logic.home_screen
+package com.areeb.weatherunion.logic.home_screen.viewmodel
 
 sealed interface HomeScreenAction
 

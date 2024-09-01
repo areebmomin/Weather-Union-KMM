@@ -1,6 +1,6 @@
 package com.areeb.weatherunion.data.api.locality_weather_data.model
 
-import com.areeb.weatherunion.data.weather_data.WeatherData
+import com.areeb.weatherunion.data.models.WeatherUnionWeatherData
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,8 +13,8 @@ data class LocalityWeatherDataApiResponse(
     @SerialName("locality_weather_data")
     val localityWeatherData: LocalityLocalityWeatherData? = null,
 ) {
-    fun toWeatherData(): WeatherData {
-        return WeatherData(
+    fun toWeatherData(): WeatherUnionWeatherData {
+        return WeatherUnionWeatherData(
             deviceType = deviceType,
             temperature = localityWeatherData?.temperature,
             humidity = localityWeatherData?.humidity,

@@ -1,6 +1,6 @@
-package com.areeb.weatherunion.data.weather_data
+package com.areeb.weatherunion.data.models
 
-data class WeatherData(
+data class WeatherUnionWeatherData(
     val deviceType: Int?,
     val temperature: Double?,
     val humidity: Double?,

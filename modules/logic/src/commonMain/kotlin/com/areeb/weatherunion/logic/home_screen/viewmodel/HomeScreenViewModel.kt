@@ -1,4 +1,4 @@
-package com.areeb.weatherunion.logic.home_screen
+package com.areeb.weatherunion.logic.home_screen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -88,7 +88,7 @@ class HomeScreenViewModel(
             )
             when (response) {
                 is ApiResponse.Success -> {
-                    updateState(latestState.copy(weatherData = response.body))
+                    updateState(latestState.copy(weatherUnionWeatherData = response.body))
                 }
 
                 is ApiResponse.Error.HttpError -> {

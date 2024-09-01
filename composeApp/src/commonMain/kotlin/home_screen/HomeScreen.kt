@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
+import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import home_screen.components.HomeScreenAppBar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource

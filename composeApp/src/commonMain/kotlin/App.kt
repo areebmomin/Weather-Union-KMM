@@ -13,7 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
 import com.areeb.weatherunion.logic.di.LogicComponent
-import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
+import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import com.areeb.weatherunion.logic.location_data_screen.LocationDataScreenViewModel
 import enter_api_key_screen.EnterApiKeyScreen
 import home_screen.HomeScreen
