@@ -1,6 +1,7 @@
 package enter_api_key_screen.components
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -38,7 +39,9 @@ fun EnterApiKeyTextField(
         value = value,
         onValueChange = onValueChange,
         label = label,
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .padding(16.dp)
+            .width(TextFieldDefaults.MinWidth),
         placeholder = placeholder,
         singleLine = true,
         keyboardOptions = KeyboardOptions(
