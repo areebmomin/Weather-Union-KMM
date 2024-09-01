@@ -23,9 +23,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
+import com.areeb.weatherunion.logic.api_credential_screen.SaveMapApiKey
+import com.areeb.weatherunion.logic.api_credential_screen.SaveWeatherUnionApiKey
+import com.areeb.weatherunion.logic.api_credential_screen.UpdateMapApiKey
+import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import enter_api_key_screen.components.EnterApiKeyScreenTopAppBar
 import enter_api_key_screen.components.EnterApiKeyTextField
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.enter_map_api_key
@@ -39,12 +45,15 @@ fun EnterApiKeyScreen(
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit,
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle(
+        lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
+        context = Dispatchers.Main.immediate,
+    )
+
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
-    var weatherUnionApiKey by remember { mutableStateOf("") }
     var weatherUnionApiKeyVisibility by remember { mutableStateOf(false) }
-    var mapApiKey by remember { mutableStateOf("") }
     var mapApiKeyVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -77,8 +86,10 @@ fun EnterApiKeyScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 EnterApiKeyTextField(
-                    value = weatherUnionApiKey,
-                    onValueChange = { weatherUnionApiKey = it },
+                    value = state.weatherUnionApiKey,
+                    onValueChange = {
+                        viewModel.dispatch(UpdateWeatherUnionApiKey(apiKey = it))
+                    },
                     label = { Text(stringResource(Res.string.weather_union_api_key)) },
                     placeholder = {
                         Text(stringResource(Res.string.enter_weather_union_api_key))
@@ -89,11 +100,14 @@ fun EnterApiKeyScreen(
                     },
                     onDone = {
                         focusManager.clearFocus()
+                        viewModel.dispatch(SaveWeatherUnionApiKey)
                     },
                 )
                 EnterApiKeyTextField(
-                    value = mapApiKey,
-                    onValueChange = { mapApiKey = it },
+                    value = state.mapApiKey,
+                    onValueChange = {
+                        viewModel.dispatch(UpdateMapApiKey(apiKey = it))
+                    },
                     label = { Text(stringResource(Res.string.map_api_key)) },
                     placeholder = {
                         Text(stringResource(Res.string.enter_map_api_key))
@@ -104,6 +118,7 @@ fun EnterApiKeyScreen(
                     },
                     onDone = {
                         focusManager.clearFocus()
+                        viewModel.dispatch(SaveMapApiKey)
                     },
                 )
             }

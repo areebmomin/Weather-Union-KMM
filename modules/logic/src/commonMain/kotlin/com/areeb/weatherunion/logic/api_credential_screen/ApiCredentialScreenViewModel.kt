@@ -32,11 +32,21 @@ class ApiCredentialScreenViewModel(
         coreLogger.debug(TAG, "dispatch: $action")
         when (action) {
             is UpdateWeatherUnionApiKey -> {
-                apiCredentialRepository.updateWeatherUnionApiKey(apiKey = action.apiKey)
+                updateState(latestState.copy(weatherUnionApiKey = action.apiKey))
             }
 
             is UpdateMapApiKey -> {
-                apiCredentialRepository.updateMapApiKey(apiKey = action.apiKey)
+                updateState(latestState.copy(mapApiKey = action.apiKey))
+            }
+
+            SaveWeatherUnionApiKey -> {
+                apiCredentialRepository.updateWeatherUnionApiKey(
+                    apiKey = latestState.weatherUnionApiKey,
+                )
+            }
+
+            SaveMapApiKey -> {
+                apiCredentialRepository.updateMapApiKey(apiKey = latestState.mapApiKey)
             }
         }
     }
@@ -47,8 +57,8 @@ class ApiCredentialScreenViewModel(
             val mapApiKey = apiCredentialRepository.getMapApiKey()
             updateState(
                 latestState.copy(
-                    weatherUnionApiKey = weatherUnionApiKey,
-                    mapApiKey = mapApiKey,
+                    weatherUnionApiKey = weatherUnionApiKey ?: "",
+                    mapApiKey = mapApiKey ?: "",
                 )
             )
         }

@@ -45,6 +45,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.viewmodel)
+            implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.compose.navigation)
             api(projects.modules.shared)
         }
