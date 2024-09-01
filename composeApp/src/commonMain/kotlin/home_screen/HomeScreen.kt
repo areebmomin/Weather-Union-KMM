@@ -2,9 +2,11 @@ package home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import com.areeb.weatherunion.logic.home_screen.HomeScreenViewModel
@@ -24,18 +26,24 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     Scaffold {
-        Box {
+        Box(
+            contentAlignment = Alignment.Center,
+        ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painterResource(Res.drawable.ic_home_screen_background),
                 contentDescription = stringResource(Res.string.background_image),
                 contentScale = ContentScale.FillBounds
             )
-            HomeScreenAppBar(
-                onLocationDataMenuClicked = onLocationDataMenuClicked,
-                onEnterApiKeyMenuClicked = onEnterApiKeyMenuClicked,
-                onInfoMenuClicked = onInfoMenuClicked,
-            )
+            Column(
+                modifier = modifier.fillMaxSize(),
+            ) {
+                HomeScreenAppBar(
+                    onLocationDataMenuClicked = onLocationDataMenuClicked,
+                    onEnterApiKeyMenuClicked = onEnterApiKeyMenuClicked,
+                    onInfoMenuClicked = onInfoMenuClicked,
+                )
+            }
         }
     }
 }
