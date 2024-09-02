@@ -49,7 +49,7 @@ class HomeScreenViewModel(
 
     private fun loadLocalityData() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            triggerEvent(LocalityDataLoading(isLoading = true))
+            updateState(latestState.copy(isLocalityDataLoading = true))
             var localities = localitiesDataRepository.getLocalityList()
 
             if (localities.isEmpty()) {
@@ -57,8 +57,7 @@ class HomeScreenViewModel(
                 localities = localitiesDataRepository.getLocalityList()
             }
 
-            updateState(latestState.copy(localities = localities))
-            triggerEvent(LocalityDataLoading(isLoading = false))
+            updateState(latestState.copy(localities = localities, isLocalityDataLoading = false))
         }
     }
 
@@ -84,7 +83,7 @@ class HomeScreenViewModel(
 
     private fun fetchWeatherData(localityId: String) {
         viewModelScope.launch(context = Dispatchers.IO) {
-            triggerEvent(Loading(isLoading = true))
+            updateState(latestState.copy(isLoading = true))
             val response = weatherDataRepository.getWeatherData(
                 locationId = localityId,
             )
@@ -106,7 +105,7 @@ class HomeScreenViewModel(
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
             }
-            triggerEvent(Loading(isLoading = false))
+            updateState(latestState.copy(isLoading = false))
         }
     }
 
