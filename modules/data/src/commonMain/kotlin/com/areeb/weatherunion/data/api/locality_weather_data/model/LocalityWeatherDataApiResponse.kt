@@ -35,7 +35,7 @@ data class LocalityLocalityWeatherData(
     @SerialName("wind_direction")
     val windDirection: Double? = null,
     @SerialName("rain_intensity")
-    val rainIntensity: Int? = null,
+    val rainIntensity: Double? = null,
     @SerialName("rain_accumulation")
     val rainAccumulation: Double? = null,
 )

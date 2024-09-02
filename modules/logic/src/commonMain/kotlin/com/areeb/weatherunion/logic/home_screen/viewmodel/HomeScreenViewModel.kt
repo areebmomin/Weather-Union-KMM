@@ -9,6 +9,7 @@ import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
+import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
@@ -19,6 +20,7 @@ class HomeScreenViewModel(
     private val coreLogger: CoreLogger,
     private val localitiesDataRepository: LocalitiesDataRepository,
     private val weatherDataRepository: WeatherDataRepository,
+    private val weatherDataConverterUseCase: WeatherDataConverterUseCase,
 ) : BaseViewModel<HomeScreenState, HomeScreenEvent, HomeScreenAction>(
     initialState = HomeScreenState(),
     coreLogger = coreLogger,
@@ -88,7 +90,8 @@ class HomeScreenViewModel(
             )
             when (response) {
                 is ApiResponse.Success -> {
-                    updateState(latestState.copy(weatherUnionWeatherData = response.body))
+                    val weatherData = weatherDataConverterUseCase.invoke(response.body)
+                    updateState(latestState.copy(weatherData = weatherData))
                 }
 
                 is ApiResponse.Error.HttpError -> {
@@ -112,6 +115,7 @@ class HomeScreenViewModel(
             private val coreLogger: CoreLogger,
             private val localitiesDataRepository: LocalitiesDataRepository,
             private val weatherDataRepository: WeatherDataRepository,
+            private val weatherDataConverterUseCase: WeatherDataConverterUseCase,
         ) : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
@@ -119,6 +123,7 @@ class HomeScreenViewModel(
                     coreLogger = coreLogger,
                     localitiesDataRepository = localitiesDataRepository,
                     weatherDataRepository = weatherDataRepository,
+                    weatherDataConverterUseCase = weatherDataConverterUseCase,
                 ) as T
             }
         }

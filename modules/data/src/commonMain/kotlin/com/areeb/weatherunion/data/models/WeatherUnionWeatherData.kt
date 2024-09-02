@@ -6,6 +6,6 @@ data class WeatherUnionWeatherData(
     val humidity: Double?,
     val windSpeed: Double?,
     val windDirection: Double?,
-    val rainIntensity: Int?,
+    val rainIntensity: Double?,
     val rainAccumulation: Double?,
 )

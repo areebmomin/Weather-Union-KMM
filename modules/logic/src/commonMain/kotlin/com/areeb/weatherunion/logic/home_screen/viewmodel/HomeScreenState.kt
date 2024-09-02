@@ -2,10 +2,10 @@ package com.areeb.weatherunion.logic.home_screen.viewmodel
 
 import com.areeb.weatherunion.core.util.DEFAULT_LOCALITY_ID
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
-import com.areeb.weatherunion.data.models.WeatherUnionWeatherData
+import com.areeb.weatherunion.logic.models.WeatherData
 
 data class HomeScreenState(
     val selectedLocalityId: String = DEFAULT_LOCALITY_ID,
-    val weatherUnionWeatherData: WeatherUnionWeatherData? = null,
+    val weatherData: WeatherData = WeatherData(),
     val localities: List<LocalityData> = emptyList(),
 )
