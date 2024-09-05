@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import home_screen.components.HomeScreenAppBar
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
@@ -25,6 +28,11 @@ fun HomeScreen(
     onInfoMenuClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle(
+        lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
+        context = Dispatchers.Main.immediate,
+    )
+
     Scaffold {
         Box(
             contentAlignment = Alignment.Center,

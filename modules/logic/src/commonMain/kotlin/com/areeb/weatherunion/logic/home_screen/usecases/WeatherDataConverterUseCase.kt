@@ -39,7 +39,7 @@ class WeatherDataConverterUseCase {
     private fun getFormattedTemperature(temperature: Double?): String {
         if (temperature == null) return "NA"
 
-        return "${temperature.roundToInt()} U+2103"
+        return "${temperature.roundToInt()} \u2103"
     }
 
     private fun getFormattedHumidity(humidity: Double?): String {
