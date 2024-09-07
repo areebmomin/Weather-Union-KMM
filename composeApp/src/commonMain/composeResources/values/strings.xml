@@ -23,4 +23,5 @@
     <string name="enter_weather_union_api_key">Enter Weather Union API Key</string>
     <string name="enter_map_api_key">Enter Map API Key</string>
     <string name="press_keyboard_done_button_to_save_api_key">*Press keyboard done button to save API key</string>
+    <string name="humidity">Humidity</string>
 </resources>
