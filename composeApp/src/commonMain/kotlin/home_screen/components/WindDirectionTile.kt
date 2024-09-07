@@ -15,6 +15,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -25,6 +26,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.ic_wind_direction
+import weatherunionkmm.composeapp.generated.resources.ic_wind_direction_arrow
 import weatherunionkmm.composeapp.generated.resources.wind_direction
 
 @Composable
@@ -67,12 +69,24 @@ fun WindDirectionTile(modifier: Modifier = Modifier, windDirectionData: WeatherD
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
+                    windDirectionData.windDirectionDegree?.let {
+                        Image(
+                            painter = painterResource(resource = Res.drawable.ic_wind_direction_arrow),
+                            contentDescription = stringResource(Res.string.wind_direction),
+                            modifier = Modifier
+                                .padding(end = 8.dp, bottom = 4.dp)
+                                .size(22.dp)
+                                .rotate(it),
+                            alignment = Alignment.CenterStart,
+                        )
+                    }
                     Text(
                         windDirectionData.windDirection,
                         modifier = Modifier.alignByBaseline(),
                         fontSize = 28.sp,
-                        lineHeight = 28.sp,
+                        lineHeight = 30.sp,
                         color = Color.White,
                         textAlign = TextAlign.Center,
                         maxLines = 1,
@@ -81,7 +95,7 @@ fun WindDirectionTile(modifier: Modifier = Modifier, windDirectionData: WeatherD
                         windDirectionData.error,
                         modifier = Modifier.alignByBaseline(),
                         fontSize = 13.sp,
-                        lineHeight = 28.sp,
+                        lineHeight = 30.sp,
                         color = Color.White,
                         textAlign = TextAlign.Center,
                         maxLines = 1,

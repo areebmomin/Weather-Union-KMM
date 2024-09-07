@@ -93,6 +93,7 @@ class WeatherDataConverterUseCase {
 
         return WeatherDataWindDirection(
             windDirection = convertDegreeToDirection(windDirection),
+            windDirectionDegree = windDirection.toFloat(),
             error = "",
         )
     }

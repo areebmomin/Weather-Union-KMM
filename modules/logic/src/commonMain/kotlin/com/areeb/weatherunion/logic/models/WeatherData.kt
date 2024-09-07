@@ -27,6 +27,7 @@ data class WeatherDataWindSpeed(
 
 data class WeatherDataWindDirection(
     val windDirection: String = "",
+    val windDirectionDegree: Float? = null,
     val error: String = "NA",
 )
 

@@ -18,7 +18,7 @@ class FakeLocalityWeatherDataApiImpl : LocalityWeatherDataApi {
                     temperature = 21.3,
                     humidity = 12.4,
                     windSpeed = 1.5,
-                    windDirection = 34.0,
+                    windDirection = 212.9,
                     rainIntensity = 12.4,
                     rainAccumulation = 5.5,
                 ),
