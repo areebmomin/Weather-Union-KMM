@@ -36,8 +36,7 @@ fun HomeScreenAppBar(
     var showMenu: Boolean by remember { mutableStateOf(false) }
 
     Row(
-        modifier = modifier
-            .padding(end = 16.dp, top = 16.dp, bottom = 16.dp)
+        modifier = modifier.padding(end = 16.dp, top = 16.dp)
     ) {
         Spacer(modifier = modifier.weight(1f))
         Box {
@@ -47,7 +46,7 @@ fun HomeScreenAppBar(
                 Icon(
                     painter = painterResource(resource = Res.drawable.ic_menu_option),
                     contentDescription = stringResource(Res.string.menu),
-                    tint = Color.White,
+                    tint = Color(0xFFEBEBF5),
                 )
             }
 
