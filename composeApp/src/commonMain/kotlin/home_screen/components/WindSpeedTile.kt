@@ -1,12 +1,14 @@
 package home_screen.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -19,6 +21,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.areeb.weatherunion.logic.models.WeatherDataWindSpeed
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import weatherunionkmm.composeapp.generated.resources.Res
+import weatherunionkmm.composeapp.generated.resources.ic_wind_speed
+import weatherunionkmm.composeapp.generated.resources.wind_speed
 
 @Composable
 fun WindSpeedTile(modifier: Modifier = Modifier, windSpeedData: WeatherDataWindSpeed) {
@@ -37,15 +44,26 @@ fun WindSpeedTile(modifier: Modifier = Modifier, windSpeedData: WeatherDataWindS
             shape = RoundedCornerShape(16.dp),
         ) {
             Column(
-                modifier = modifier.padding(12.dp).fillMaxWidth(),
+                modifier = Modifier.padding(12.dp).fillMaxWidth(),
             ) {
-                Text(
-                    "Wind Speed",
-                    fontSize = 13.sp,
-                    color = Color(0x99EBEBF5),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
+                Row(
+                    horizontalArrangement = Arrangement.Start,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(resource = Res.drawable.ic_wind_speed),
+                        contentDescription = stringResource(Res.string.wind_speed),
+                        modifier = Modifier.padding(end = 8.dp).size(16.dp),
+                        alignment = Alignment.CenterStart,
+                    )
+                    Text(
+                        stringResource(Res.string.wind_speed),
+                        fontSize = 13.sp,
+                        color = Color(0x99EBEBF5),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
                 Row(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.Center,
