@@ -25,4 +25,5 @@
     <string name="press_keyboard_done_button_to_save_api_key">*Press keyboard done button to save API key</string>
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind Speed</string>
+    <string name="wind_direction">Wind Direction</string>
 </resources>
