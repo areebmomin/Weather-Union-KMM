@@ -27,4 +27,5 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="wind_direction">Wind Direction</string>
     <string name="rain_intensity">Rain Intensity</string>
+    <string name="rain_accumulation">Rain Accumulation</string>
 </resources>
