@@ -14,6 +14,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,16 +37,18 @@ fun showLocalitiesBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = sheetState,
         modifier = Modifier.heightIn(max = maxHeight.dp),
-        tonalElevation = 4.dp,
+        tonalElevation = 16.dp,
+        containerColor = Color(0xFF1F1D47),
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             Text(
                 title,
-                modifier = Modifier.padding(start = 16.dp, bottom = 8.dp, top = 8.dp),
+                modifier = Modifier.padding(start = 16.dp, bottom = 12.dp, top = 8.dp),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
+                color = Color.White,
             )
             LazyColumn(
                 modifier = Modifier
@@ -66,6 +69,7 @@ fun showLocalitiesBottomSheet(
                             },
                         fontWeight = FontWeight.Normal,
                         fontSize = 17.sp,
+                        color = Color(0xB3EBEBF5),
                     )
                 }
             }
