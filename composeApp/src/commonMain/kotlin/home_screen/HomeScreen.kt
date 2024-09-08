@@ -12,8 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -29,13 +35,18 @@ import home_screen.components.RainIntensityTile
 import home_screen.components.TemperatureText
 import home_screen.components.WindDirectionTile
 import home_screen.components.WindSpeedTile
+import home_screen.components.showLocalitiesBottomSheet
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.background_image
 import weatherunionkmm.composeapp.generated.resources.ic_home_screen_background
+import weatherunionkmm.composeapp.generated.resources.select_area
+import weatherunionkmm.composeapp.generated.resources.select_city
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel,
@@ -48,6 +59,13 @@ fun HomeScreen(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
         context = Dispatchers.Main.immediate,
     )
+
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+    )
+    val scope = rememberCoroutineScope()
+    var showCityBottomSheet by remember { mutableStateOf(false) }
+    var showAreaBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold {
         Box(
@@ -105,8 +123,58 @@ fun HomeScreen(
                 }
                 DeviceDescriptionText(deviceDescription = state.weatherData.deviceDescription)
                 Spacer(modifier = modifier.weight(1f))
-                LocalityDropdownSection(localityList = state.localities)
+                LocalityDropdownSection(
+                    localityList = state.localities,
+                    onCityTextFieldClicked = {
+                        showCityBottomSheet = true
+                    },
+                    onAreaTextFieldClicked = {
+                        showAreaBottomSheet = true
+                    },
+                )
             }
+        }
+
+        if (showCityBottomSheet) {
+            showLocalitiesBottomSheet(
+                title = stringResource(Res.string.select_city),
+                sheetState = sheetState,
+                localityList = state.localities,
+                onDismissRequest = {
+                    showCityBottomSheet = false
+                },
+                itemDisplayName = {
+                    cityName
+                },
+                onItemClicked = {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            showCityBottomSheet = false
+                        }
+                    }
+                },
+            )
+        }
+
+        if (showAreaBottomSheet) {
+            showLocalitiesBottomSheet(
+                title = stringResource(Res.string.select_area),
+                sheetState = sheetState,
+                localityList = state.localities,
+                onDismissRequest = {
+                    showAreaBottomSheet = false
+                },
+                itemDisplayName = {
+                    localityName
+                },
+                onItemClicked = {
+                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            showAreaBottomSheet = false
+                        }
+                    }
+                },
+            )
         }
     }
 }

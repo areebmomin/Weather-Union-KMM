@@ -1,5 +1,7 @@
 package home_screen.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,22 +24,32 @@ import weatherunionkmm.composeapp.generated.resources.area
 import weatherunionkmm.composeapp.generated.resources.city
 
 @Composable
-fun LocalityDropdownSection(modifier: Modifier = Modifier, localityList: List<LocalityData>) {
+fun LocalityDropdownSection(
+    modifier: Modifier = Modifier,
+    localityList: List<LocalityData>,
+    onCityTextFieldClicked: () -> Unit,
+    onAreaTextFieldClicked: () -> Unit,
+) {
     Row {
         Box(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 16.dp, end = 8.dp, top = 40.dp, bottom = 40.dp)
+                .background(Color.Transparent)
+                .clickable {
+                    onCityTextFieldClicked()
+                }
         ) {
             OutlinedTextField(
                 label = {
                     Text(
                         stringResource(Res.string.city),
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Medium,
                     )
                 },
                 value = localityList.firstOrNull()?.cityName ?: "",
-                enabled = true,
-                modifier = Modifier.fillMaxWidth()
-                    .padding(start = 16.dp, end = 8.dp, top = 40.dp, bottom = 40.dp),
+                enabled = false,
+                modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
                     Icon(
                         Icons.Filled.ArrowDropDown,
@@ -48,30 +60,33 @@ fun LocalityDropdownSection(modifier: Modifier = Modifier, localityList: List<Lo
                 onValueChange = { },
                 readOnly = true,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color(0xFFFFFFFF),
+                    disabledTextColor = Color(0xFFFFFFFF),
                     backgroundColor = Color(0x66000000),
-                    focusedBorderColor = Color(0x4DEBEBF5),
-                    unfocusedBorderColor = Color(0x4DEBEBF5),
-                    focusedLabelColor = Color(0xCCFFFFFF),
-                    unfocusedLabelColor = Color(0xCCFFFFFF),
+                    disabledBorderColor = Color(0x4DEBEBF5),
+                    disabledLabelColor = Color(0xCCFFFFFF),
                 ),
                 maxLines = 1,
             )
         }
         Box(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 16.dp, end = 8.dp, top = 40.dp, bottom = 40.dp)
+                .background(Color.Transparent)
+                .clickable {
+                    onAreaTextFieldClicked()
+                }
         ) {
             OutlinedTextField(
                 label = {
                     Text(
                         stringResource(Res.string.area),
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.Medium,
                     )
                 },
                 value = localityList.firstOrNull()?.localityName ?: "",
-                enabled = true,
-                modifier = Modifier.fillMaxWidth()
-                    .padding(start = 8.dp, end = 16.dp, top = 40.dp, bottom = 40.dp),
+                enabled = false,
+                modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
                     Icon(
                         Icons.Filled.ArrowDropDown,
@@ -82,12 +97,10 @@ fun LocalityDropdownSection(modifier: Modifier = Modifier, localityList: List<Lo
                 onValueChange = { },
                 readOnly = true,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color(0xFFFFFFFF),
+                    disabledTextColor = Color(0xFFFFFFFF),
                     backgroundColor = Color(0x66000000),
-                    focusedBorderColor = Color(0x4DEBEBF5),
-                    unfocusedBorderColor = Color(0x4DEBEBF5),
-                    focusedLabelColor = Color(0xCCFFFFFF),
-                    unfocusedLabelColor = Color(0xCCFFFFFF),
+                    disabledBorderColor = Color(0x4DEBEBF5),
+                    disabledLabelColor = Color(0xCCFFFFFF),
                 ),
                 maxLines = 1,
             )

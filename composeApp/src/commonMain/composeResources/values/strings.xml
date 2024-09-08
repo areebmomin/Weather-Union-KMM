@@ -30,4 +30,6 @@
     <string name="total_rainfall">Total Rainfall</string>
     <string name="city">City</string>
     <string name="area">Area</string>
+    <string name="select_city">Select City</string>
+    <string name="select_area">Select Area</string>
 </resources>
