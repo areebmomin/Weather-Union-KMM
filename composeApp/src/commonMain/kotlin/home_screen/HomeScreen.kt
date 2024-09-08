@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -58,7 +60,7 @@ fun HomeScreen(
                 contentScale = ContentScale.FillBounds
             )
             Column(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
             ) {
                 HomeScreenAppBar(
                     onLocationDataMenuClicked = onLocationDataMenuClicked,
@@ -102,6 +104,7 @@ fun HomeScreen(
                     )
                 }
                 DeviceDescriptionText(deviceDescription = state.weatherData.deviceDescription)
+                Spacer(modifier = modifier.weight(1f))
                 LocalityDropdownSection(localityList = state.localities)
             }
         }
