@@ -25,7 +25,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.ic_rain_accumulation
-import weatherunionkmm.composeapp.generated.resources.rain_accumulation
+import weatherunionkmm.composeapp.generated.resources.total_rainfall
 
 @Composable
 fun RainAccumulationTile(
@@ -55,12 +55,12 @@ fun RainAccumulationTile(
                 ) {
                     Image(
                         painter = painterResource(resource = Res.drawable.ic_rain_accumulation),
-                        contentDescription = stringResource(Res.string.rain_accumulation),
+                        contentDescription = stringResource(Res.string.total_rainfall),
                         modifier = Modifier.padding(end = 8.dp).size(16.dp),
                         alignment = Alignment.CenterStart,
                     )
                     Text(
-                        stringResource(Res.string.rain_accumulation),
+                        stringResource(Res.string.total_rainfall),
                         fontSize = 13.sp,
                         color = Color(0x99EBEBF5),
                         maxLines = 1,
