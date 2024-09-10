@@ -9,7 +9,7 @@ import me.tatarka.inject.annotations.Inject
 
 interface LocalityDao {
     fun insertLocalities()
-    fun getLocalityList(): List<LocalityData>
+    fun getLocalitiesMap(): Map<LocalityData, List<LocalityData>>
 }
 
 @Inject
@@ -36,7 +36,17 @@ class LocalityDaoImpl(private val localityQueries: LocalityQueries) : LocalityDa
         }
     }
 
-    override fun getLocalityList(): List<LocalityData> {
-        return localityQueries.getAllLocalities().executeAsList().map { it.toLocalityData() }
+    override fun getLocalitiesMap(): Map<LocalityData, List<LocalityData>> {
+        val localities = localityQueries.getAllLocalities()
+            .executeAsList()
+            .map { it.toLocalityData() }
+
+        return localities
+            .groupBy { it.cityName }
+            .map { entry ->
+                val representative = entry.value.first()
+                representative to entry.value
+            }
+            .toMap()
     }
 }

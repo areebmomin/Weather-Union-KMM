@@ -50,14 +50,14 @@ class HomeScreenViewModel(
     private fun loadLocalityData() {
         viewModelScope.launch(context = Dispatchers.IO) {
             updateState(latestState.copy(isLocalityDataLoading = true))
-            var localities = localitiesDataRepository.getLocalityList()
+            var localitiesMap = localitiesDataRepository.getLocalitiesMap()
 
-            if (localities.isEmpty()) {
+            if (localitiesMap.isEmpty()) {
                 localitiesDataRepository.insertLocalityDataInDB()
-                localities = localitiesDataRepository.getLocalityList()
+                localitiesMap = localitiesDataRepository.getLocalitiesMap()
             }
 
-            updateState(latestState.copy(localities = localities, isLocalityDataLoading = false))
+            updateState(latestState.copy(localitiesMap = localitiesMap, isLocalityDataLoading = false))
         }
     }
 

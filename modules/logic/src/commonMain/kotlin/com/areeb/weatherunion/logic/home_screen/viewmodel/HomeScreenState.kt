@@ -9,5 +9,5 @@ data class HomeScreenState(
     val isLocalityDataLoading: Boolean = false,
     val selectedLocalityId: String = DEFAULT_LOCALITY_ID,
     val weatherData: WeatherData = WeatherData(),
-    val localities: List<LocalityData> = emptyList(),
+    val localitiesMap: Map<LocalityData, List<LocalityData>> = emptyMap(),
 )

@@ -124,7 +124,7 @@ fun HomeScreen(
                 DeviceDescriptionText(deviceDescription = state.weatherData.deviceDescription)
                 Spacer(modifier = modifier.weight(1f))
                 LocalityDropdownSection(
-                    localityList = state.localities,
+                    localityList = state.localitiesMap.keys.toList(),
                     onCityTextFieldClicked = {
                         showCityBottomSheet = true
                     },
@@ -139,7 +139,7 @@ fun HomeScreen(
             showLocalitiesBottomSheet(
                 title = stringResource(Res.string.select_city),
                 sheetState = sheetState,
-                localityList = state.localities,
+                localityList = state.localitiesMap.keys.toList(),
                 onDismissRequest = {
                     showCityBottomSheet = false
                 },
@@ -160,7 +160,7 @@ fun HomeScreen(
             showLocalitiesBottomSheet(
                 title = stringResource(Res.string.select_area),
                 sheetState = sheetState,
-                localityList = state.localities,
+                localityList = state.localitiesMap.keys.toList(),
                 onDismissRequest = {
                     showAreaBottomSheet = false
                 },

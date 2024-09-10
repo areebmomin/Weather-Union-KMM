@@ -16,8 +16,8 @@ class LocalitiesDataRepositoryImpl(
         localityDao.insertLocalities()
     }
 
-    override suspend fun getLocalityList(): List<LocalityData> {
-        return localityDao.getLocalityList()
+    override suspend fun getLocalitiesMap(): Map<LocalityData, List<LocalityData>> {
+        return localityDao.getLocalitiesMap()
     }
 
     override suspend fun setLastSelectedLocalityId(localityId: String) {
