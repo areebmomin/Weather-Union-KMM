@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
+import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
 import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
@@ -37,12 +38,8 @@ class HomeScreenViewModel(
     override fun dispatch(action: HomeScreenAction) {
         coreLogger.debug(TAG, "dispatch $action")
         when (action) {
-            is OnCitySelected -> {
-                updateLastSelectedLocalityIdAndFetchWeatherData(localityId = action.localityId)
-            }
-
             is OnLocalitySelected -> {
-                updateLastSelectedLocalityIdAndFetchWeatherData(localityId = action.localityId)
+                updateLastSelectedLocalityAndFetchWeatherData(locality = action.locality)
             }
         }
     }
@@ -57,27 +54,37 @@ class HomeScreenViewModel(
                 localitiesMap = localitiesDataRepository.getLocalitiesMap()
             }
 
-            updateState(latestState.copy(localitiesMap = localitiesMap, isLocalityDataLoading = false))
+            val uniqueCitiesFirstLocalityList = localitiesMap.values.mapNotNull { list ->
+                list.firstOrNull()
+            }
+
+            updateState(
+                latestState.copy(
+                    localitiesMap = localitiesMap,
+                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
+                    isLocalityDataLoading = false
+                )
+            )
         }
     }
 
     private fun getLastSelectedIdWeatherData() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            val lastSelectedLocalityId = localitiesDataRepository.getLastSelectedLocalityId()
-            updateState(latestState.copy(selectedLocalityId = lastSelectedLocalityId))
+            val lastSelectedLocality = localitiesDataRepository.getLastSelectedLocality()
+            if (lastSelectedLocality.localityId.isNotEmpty()) {
+                updateState(latestState.copy(selectedLocality = lastSelectedLocality))
+            }
 
-            fetchWeatherData(localityId = lastSelectedLocalityId)
+            fetchWeatherData(localityId = latestState.selectedLocality.localityId)
         }
     }
 
-    private fun updateLastSelectedLocalityIdAndFetchWeatherData(localityId: String) {
+    private fun updateLastSelectedLocalityAndFetchWeatherData(locality: LocalityData) {
         viewModelScope.launch(Dispatchers.IO) {
-            updateState(latestState.copy(selectedLocalityId = localityId))
-            localitiesDataRepository.setLastSelectedLocalityId(
-                localityId = localityId,
-            )
+            updateState(latestState.copy(selectedLocality = locality))
+            localitiesDataRepository.setLastSelectedLocality(locality = locality)
 
-            fetchWeatherData(localityId = localityId)
+            fetchWeatherData(localityId = locality.localityId)
         }
     }
 

@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
+import com.areeb.weatherunion.logic.home_screen.viewmodel.OnLocalitySelected
 import home_screen.components.DeviceDescriptionText
 import home_screen.components.HomeScreenAppBar
 import home_screen.components.HumidityTile
@@ -124,7 +125,7 @@ fun HomeScreen(
                 DeviceDescriptionText(deviceDescription = state.weatherData.deviceDescription)
                 Spacer(modifier = modifier.weight(1f))
                 LocalityDropdownSection(
-                    localityList = state.localitiesMap.keys.toList(),
+                    locality = state.selectedLocality,
                     onCityTextFieldClicked = {
                         showCityBottomSheet = true
                     },
@@ -139,7 +140,7 @@ fun HomeScreen(
             showLocalitiesBottomSheet(
                 title = stringResource(Res.string.select_city),
                 sheetState = sheetState,
-                localityList = state.localitiesMap.keys.toList(),
+                localityList = state.uniqueCitiesFirstLocalityList,
                 onDismissRequest = {
                     showCityBottomSheet = false
                 },
@@ -147,6 +148,7 @@ fun HomeScreen(
                     cityName
                 },
                 onItemClicked = {
+                    viewModel.dispatch(OnLocalitySelected(locality = it))
                     scope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
                             showCityBottomSheet = false
@@ -160,7 +162,7 @@ fun HomeScreen(
             showLocalitiesBottomSheet(
                 title = stringResource(Res.string.select_area),
                 sheetState = sheetState,
-                localityList = state.localitiesMap.keys.toList(),
+                localityList = state.localitiesMap[state.selectedLocality.cityName] ?: emptyList(),
                 onDismissRequest = {
                     showAreaBottomSheet = false
                 },
@@ -168,6 +170,7 @@ fun HomeScreen(
                     localityName
                 },
                 onItemClicked = {
+                    viewModel.dispatch(OnLocalitySelected(locality = it))
                     scope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
                             showAreaBottomSheet = false

@@ -1,9 +1,9 @@
 package com.areeb.weatherunion.data.repository.localities_data
 
-import com.areeb.weatherunion.core.util.DEFAULT_LOCALITY_ID
 import com.areeb.weatherunion.data.database.dao.LocalityDao
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.preference.WeatherUnionPreferences
+import com.areeb.weatherunion.data.utils.DEFAULT_LOCALITY
 import kotlinx.coroutines.flow.firstOrNull
 import me.tatarka.inject.annotations.Inject
 
@@ -16,18 +16,17 @@ class LocalitiesDataRepositoryImpl(
         localityDao.insertLocalities()
     }
 
-    override suspend fun getLocalitiesMap(): Map<LocalityData, List<LocalityData>> {
+    override suspend fun getLocalitiesMap(): Map<String, List<LocalityData>> {
         return localityDao.getLocalitiesMap()
     }
 
-    override suspend fun setLastSelectedLocalityId(localityId: String) {
-        weatherUnionPreferences.updateLastSelectedLocalityId(localityId = localityId)
+    override suspend fun setLastSelectedLocality(locality: LocalityData) {
+        weatherUnionPreferences.updateLastSelectedLocality(locality = locality)
     }
 
-    override suspend fun getLastSelectedLocalityId(): String {
-        val lastSelectedLocalityId =
-            weatherUnionPreferences.getLastSelectedLocalityId().firstOrNull()
-        return if (lastSelectedLocalityId.isNullOrBlank()) DEFAULT_LOCALITY_ID
-        else lastSelectedLocalityId
+    override suspend fun getLastSelectedLocality(): LocalityData {
+        val lastSelectedLocality =
+            weatherUnionPreferences.getLastSelectedLocality().firstOrNull()
+        return lastSelectedLocality ?: DEFAULT_LOCALITY
     }
 }

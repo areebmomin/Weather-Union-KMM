@@ -13,6 +13,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -26,11 +27,13 @@ import weatherunionkmm.composeapp.generated.resources.city
 @Composable
 fun LocalityDropdownSection(
     modifier: Modifier = Modifier,
-    localityList: List<LocalityData>,
+    locality: LocalityData,
     onCityTextFieldClicked: () -> Unit,
     onAreaTextFieldClicked: () -> Unit,
 ) {
-    Row {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         Box(
             modifier = Modifier
                 .weight(1f)
@@ -47,7 +50,7 @@ fun LocalityDropdownSection(
                         fontWeight = FontWeight.Medium,
                     )
                 },
-                value = localityList.firstOrNull()?.cityName ?: "",
+                value = locality.cityName,
                 enabled = false,
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
@@ -65,7 +68,7 @@ fun LocalityDropdownSection(
                     disabledBorderColor = Color(0x4DEBEBF5),
                     disabledLabelColor = Color(0xCCFFFFFF),
                 ),
-                maxLines = 1,
+                singleLine = true,
             )
         }
         Box(
@@ -84,7 +87,7 @@ fun LocalityDropdownSection(
                         fontWeight = FontWeight.Medium,
                     )
                 },
-                value = localityList.firstOrNull()?.localityName ?: "",
+                value = locality.localityName,
                 enabled = false,
                 modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
@@ -102,7 +105,7 @@ fun LocalityDropdownSection(
                     disabledBorderColor = Color(0x4DEBEBF5),
                     disabledLabelColor = Color(0xCCFFFFFF),
                 ),
-                maxLines = 1,
+                singleLine = true,
             )
         }
     }

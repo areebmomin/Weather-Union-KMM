@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package com.areeb.weatherunion.data;
 
-message PreferenceData {
-  string lastSelectedLocalityId = 1;
+message LastSelectedLocality {
+  string localityId = 1;
+  string cityName = 2;
+  string localityName = 3;
+  double latitude = 4;
+  double longitude = 5;
+  int32 deviceType = 6;
 }
