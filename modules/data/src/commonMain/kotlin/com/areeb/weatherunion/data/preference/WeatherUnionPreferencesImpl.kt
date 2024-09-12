@@ -23,7 +23,6 @@ class WeatherUnionPreferenceImpl(private val dataStoreFactory: ProtoDataStoreFac
 
     override fun getLastSelectedLocality(): Flow<LocalityData?> {
         return dataStoreFactory.dataStore.data.map { data ->
-            data.lastSelectedLocalityId
             LocalityData(
                 localityId = data.localityId,
                 cityName = data.cityName,
