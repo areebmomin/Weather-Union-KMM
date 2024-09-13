@@ -3,12 +3,17 @@ package home_screen.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
@@ -27,6 +32,7 @@ fun showLocalitiesBottomSheet(
     title: String,
     sheetState: SheetState,
     localityList: List<LocalityData>,
+    selectedItemDisplayName: String,
     onDismissRequest: () -> Unit,
     itemDisplayName: LocalityData.() -> String,
     onItemClicked: (LocalityData) -> Unit,
@@ -55,22 +61,33 @@ fun showLocalitiesBottomSheet(
                     .fillMaxWidth()
                     .padding(bottom = 32.dp)
                     .weight(1f),
-                contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 40.dp),
+                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 40.dp),
             ) {
                 items(localityList.size) { index ->
                     val locality = localityList[index]
-                    Text(
-                        text = locality.itemDisplayName(),
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp)
                             .clickable {
                                 onItemClicked(locality)
-                            },
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 17.sp,
-                        color = Color(0xB3EBEBF5),
-                    )
+                            }
+                            .padding(vertical = 8.dp, horizontal = 8.dp),
+                    ) {
+                        Text(
+                            text = locality.itemDisplayName(),
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 17.sp,
+                            color = Color(0xB3EBEBF5),
+                        )
+                        Spacer(modifier = Modifier.weight(1F))
+                        if (locality.itemDisplayName() == selectedItemDisplayName) {
+                            Icon(
+                                imageVector = Icons.Filled.Done,
+                                contentDescription = null,
+                                tint = Color(0x66FFFFFF),
+                            )
+                        }
+                    }
                 }
             }
         }

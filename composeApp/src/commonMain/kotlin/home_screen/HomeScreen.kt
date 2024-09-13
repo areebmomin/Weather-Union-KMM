@@ -141,6 +141,7 @@ fun HomeScreen(
                 title = stringResource(Res.string.select_city),
                 sheetState = sheetState,
                 localityList = state.uniqueCitiesFirstLocalityList,
+                selectedItemDisplayName = state.selectedLocality.cityName,
                 onDismissRequest = {
                     showCityBottomSheet = false
                 },
@@ -163,6 +164,7 @@ fun HomeScreen(
                 title = stringResource(Res.string.select_area),
                 sheetState = sheetState,
                 localityList = state.localitiesMap[state.selectedLocality.cityName] ?: emptyList(),
+                selectedItemDisplayName = state.selectedLocality.localityName,
                 onDismissRequest = {
                     showAreaBottomSheet = false
                 },
