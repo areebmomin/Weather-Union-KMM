@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import com.areeb.weatherunion.logic.home_screen.viewmodel.OnLocalitySelected
+import com.areeb.weatherunion.logic.home_screen.viewmodel.RefreshWeatherData
 import home_screen.components.DeviceDescriptionText
 import home_screen.components.HomeScreenAppBar
 import home_screen.components.HumidityTile
@@ -82,6 +83,9 @@ fun HomeScreen(
                 modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
             ) {
                 HomeScreenAppBar(
+                    onRefreshClicked = {
+                        viewModel.dispatch(RefreshWeatherData)
+                    },
                     onLocationDataMenuClicked = onLocationDataMenuClicked,
                     onEnterApiKeyMenuClicked = onEnterApiKeyMenuClicked,
                     onInfoMenuClicked = onInfoMenuClicked,

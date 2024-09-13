@@ -41,6 +41,10 @@ class HomeScreenViewModel(
             is OnLocalitySelected -> {
                 updateLastSelectedLocalityAndFetchWeatherData(locality = action.locality)
             }
+
+            RefreshWeatherData -> {
+                fetchWeatherData(localityId = latestState.selectedLocality.localityId)
+            }
         }
     }
 

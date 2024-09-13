@@ -25,9 +25,11 @@ import weatherunionkmm.composeapp.generated.resources.ic_menu_option
 import weatherunionkmm.composeapp.generated.resources.info
 import weatherunionkmm.composeapp.generated.resources.location_data
 import weatherunionkmm.composeapp.generated.resources.menu
+import weatherunionkmm.composeapp.generated.resources.refresh
 
 @Composable
 fun HomeScreenAppBar(
+    onRefreshClicked: () -> Unit,
     onLocationDataMenuClicked: () -> Unit,
     onEnterApiKeyMenuClicked: () -> Unit,
     onInfoMenuClicked: () -> Unit,
@@ -54,6 +56,14 @@ fun HomeScreenAppBar(
                 expanded = showMenu,
                 onDismissRequest = { showMenu = false }
             ) {
+                DropdownMenuItem(
+                    onClick = {
+                        showMenu = false
+                        onRefreshClicked()
+                    },
+                ) {
+                    Text(stringResource(Res.string.refresh))
+                }
                 DropdownMenuItem(
                     onClick = {
                         showMenu = false
