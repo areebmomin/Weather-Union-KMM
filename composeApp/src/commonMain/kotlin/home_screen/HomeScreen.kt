@@ -15,6 +15,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -162,6 +163,12 @@ fun HomeScreen(
                     onAreaTextFieldClicked = {
                         showAreaBottomSheet = true
                     },
+                )
+            }
+
+            if (state.isLoading || state.isLocalityDataLoading) {
+                CircularProgressIndicator(
+                    modifier = modifier.align(Alignment.Center),
                 )
             }
         }
