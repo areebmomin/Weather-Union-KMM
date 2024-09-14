@@ -25,6 +25,8 @@ fun App(
     logicComponent: LogicComponent,
     navController: NavHostController = rememberNavController(),
 ) {
+    val viewModelStore = remember { ViewModelStore() }
+
     MaterialTheme {
         NavHost(
             navController = navController,
@@ -43,7 +45,7 @@ fun App(
             ) {
                 val viewModel: HomeScreenViewModel = remember {
                     ViewModelProvider.create(
-                        ViewModelStore(),
+                        viewModelStore,
                         logicComponent.homeScreenViewModelFactory
                     )[HomeScreenViewModel::class]
                 }
@@ -76,7 +78,7 @@ fun App(
             ) {
                 val viewModel: LocationDataScreenViewModel = remember {
                     ViewModelProvider.create(
-                        ViewModelStore(),
+                        viewModelStore,
                         logicComponent.locationDataScreenViewModelFactory
                     )[LocationDataScreenViewModel::class]
                 }
@@ -100,7 +102,7 @@ fun App(
             ) {
                 val viewModel: ApiCredentialScreenViewModel = remember {
                     ViewModelProvider.create(
-                        ViewModelStore(),
+                        viewModelStore,
                         logicComponent.apiCredentialScreenViewModelFactory
                     )[ApiCredentialScreenViewModel::class]
                 }
