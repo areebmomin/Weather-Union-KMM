@@ -12,9 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.areeb.weatherunion.logic.home_screen.viewmodel.Error
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import com.areeb.weatherunion.logic.home_screen.viewmodel.OnLocalitySelected
 import com.areeb.weatherunion.logic.home_screen.viewmodel.RefreshWeatherData
@@ -39,6 +44,7 @@ import home_screen.components.WindDirectionTile
 import home_screen.components.WindSpeedTile
 import home_screen.components.showLocalitiesBottomSheet
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -62,14 +68,34 @@ fun HomeScreen(
         context = Dispatchers.Main.immediate,
     )
 
+    val snackBarHostState = remember { SnackbarHostState() }
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
     )
-    val scope = rememberCoroutineScope()
+    val coroutineScope = rememberCoroutineScope()
     var showCityBottomSheet by remember { mutableStateOf(false) }
     var showAreaBottomSheet by remember { mutableStateOf(false) }
 
-    Scaffold {
+    LaunchedEffect(viewModel.event) {
+        viewModel.event.collectLatest {
+            when (it) {
+                is Error -> {
+                    coroutineScope.launch {
+                        snackBarHostState.showSnackbar(
+                            message = it.message,
+                            duration = SnackbarDuration.Long,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState)
+        },
+    ) {
         Box(
             contentAlignment = Alignment.Center,
         ) {
@@ -154,7 +180,7 @@ fun HomeScreen(
                 },
                 onItemClicked = {
                     viewModel.dispatch(OnLocalitySelected(locality = it))
-                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                    coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
                             showCityBottomSheet = false
                         }
@@ -177,7 +203,7 @@ fun HomeScreen(
                 },
                 onItemClicked = {
                     viewModel.dispatch(OnLocalitySelected(locality = it))
-                    scope.launch { sheetState.hide() }.invokeOnCompletion {
+                    coroutineScope.launch { sheetState.hide() }.invokeOnCompletion {
                         if (!sheetState.isVisible) {
                             showAreaBottomSheet = false
                         }
