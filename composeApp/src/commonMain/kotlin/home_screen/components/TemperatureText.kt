@@ -1,5 +1,10 @@
 package home_screen.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,15 +23,22 @@ fun TemperatureText(modifier: Modifier = Modifier, temperatureData: WeatherDataT
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
-        Text(
-            temperatureData.temperature,
-            textAlign = TextAlign.Center,
-            fontSize = 96.sp,
-            lineHeight = 96.sp,
-            color = Color.White,
-            modifier = modifier.alignByBaseline(),
-            fontWeight = FontWeight.W200,
-        )
+        AnimatedContent(
+            targetState = temperatureData.temperature,
+            transitionSpec = {
+                fadeIn() togetherWith fadeOut() using SizeTransform()
+            }
+        ) {
+            Text(
+                it,
+                textAlign = TextAlign.Center,
+                fontSize = 96.sp,
+                lineHeight = 96.sp,
+                color = Color.White,
+                modifier = modifier.alignByBaseline(),
+                fontWeight = FontWeight.W200,
+            )
+        }
         Text(
             temperatureData.unit,
             textAlign = TextAlign.Center,
