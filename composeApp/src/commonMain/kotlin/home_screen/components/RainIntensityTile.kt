@@ -1,5 +1,10 @@
 package home_screen.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -64,28 +69,35 @@ fun RainIntensityTile(modifier: Modifier = Modifier, rainIntensityData: WeatherD
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.Center,
+                AnimatedContent(
+                    targetState = rainIntensityData,
+                    transitionSpec = {
+                        fadeIn() togetherWith fadeOut() using SizeTransform()
+                    }
                 ) {
-                    Text(
-                        rainIntensityData.rainIntensity,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 28.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
-                    Text(
-                        rainIntensityData.unit,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 13.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text(
+                            it.rainIntensity,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 28.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                        )
+                        Text(
+                            it.unit,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 13.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                        )
+                    }
                 }
             }
         }

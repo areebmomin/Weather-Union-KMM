@@ -1,5 +1,10 @@
 package home_screen.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -66,40 +71,47 @@ fun WindDirectionTile(modifier: Modifier = Modifier, windDirectionData: WeatherD
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
+                AnimatedContent(
+                    targetState = windDirectionData,
+                    transitionSpec = {
+                        fadeIn() togetherWith fadeOut() using SizeTransform()
+                    }
                 ) {
-                    windDirectionData.windDirectionDegree?.let {
-                        Image(
-                            painter = painterResource(resource = Res.drawable.ic_wind_direction_arrow),
-                            contentDescription = stringResource(Res.string.wind_direction),
-                            modifier = Modifier
-                                .padding(end = 8.dp, bottom = 4.dp)
-                                .size(22.dp)
-                                .rotate(it),
-                            alignment = Alignment.CenterStart,
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        it.windDirectionDegree?.let { degree ->
+                            Image(
+                                painter = painterResource(resource = Res.drawable.ic_wind_direction_arrow),
+                                contentDescription = stringResource(Res.string.wind_direction),
+                                modifier = Modifier
+                                    .padding(end = 8.dp, bottom = 4.dp)
+                                    .size(22.dp)
+                                    .rotate(degree),
+                                alignment = Alignment.CenterStart,
+                            )
+                        }
+                        Text(
+                            it.windDirection,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 28.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                        )
+                        Text(
+                            it.error,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 13.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
                         )
                     }
-                    Text(
-                        windDirectionData.windDirection,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 28.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
-                    Text(
-                        windDirectionData.error,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 13.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
                 }
             }
         }

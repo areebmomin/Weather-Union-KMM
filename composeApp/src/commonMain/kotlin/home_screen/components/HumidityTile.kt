@@ -1,5 +1,10 @@
 package home_screen.components
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -64,28 +69,35 @@ fun HumidityTile(modifier: Modifier = Modifier, humidityData: WeatherDataHumidit
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.Center,
+                AnimatedContent(
+                    targetState = humidityData,
+                    transitionSpec = {
+                        fadeIn() togetherWith fadeOut() using SizeTransform()
+                    }
                 ) {
-                    Text(
-                        humidityData.humidity,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 28.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
-                    Text(
-                        humidityData.unit,
-                        modifier = Modifier.alignByBaseline(),
-                        fontSize = 13.sp,
-                        lineHeight = 30.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
+                        Text(
+                            it.humidity,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 28.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                        )
+                        Text(
+                            it.unit,
+                            modifier = Modifier.alignByBaseline(),
+                            fontSize = 13.sp,
+                            lineHeight = 30.sp,
+                            color = Color.White,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                        )
+                    }
                 }
             }
         }

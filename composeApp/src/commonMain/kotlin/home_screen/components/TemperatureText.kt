@@ -19,18 +19,18 @@ import com.areeb.weatherunion.logic.models.WeatherDataTemperature
 
 @Composable
 fun TemperatureText(modifier: Modifier = Modifier, temperatureData: WeatherDataTemperature) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
+    AnimatedContent(
+        targetState = temperatureData,
+        transitionSpec = {
+            fadeIn() togetherWith fadeOut() using SizeTransform()
+        }
     ) {
-        AnimatedContent(
-            targetState = temperatureData.temperature,
-            transitionSpec = {
-                fadeIn() togetherWith fadeOut() using SizeTransform()
-            }
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                it,
+                it.temperature,
                 textAlign = TextAlign.Center,
                 fontSize = 96.sp,
                 lineHeight = 96.sp,
@@ -38,15 +38,15 @@ fun TemperatureText(modifier: Modifier = Modifier, temperatureData: WeatherDataT
                 modifier = modifier.alignByBaseline(),
                 fontWeight = FontWeight.W200,
             )
+            Text(
+                it.unit,
+                textAlign = TextAlign.Center,
+                fontSize = 28.sp,
+                lineHeight = 96.sp,
+                color = Color.White,
+                modifier = modifier.alignByBaseline(),
+                fontWeight = FontWeight.W200,
+            )
         }
-        Text(
-            temperatureData.unit,
-            textAlign = TextAlign.Center,
-            fontSize = 28.sp,
-            lineHeight = 96.sp,
-            color = Color.White,
-            modifier = modifier.alignByBaseline(),
-            fontWeight = FontWeight.W200,
-        )
     }
 }
