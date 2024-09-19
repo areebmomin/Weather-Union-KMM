@@ -91,3 +91,6 @@ android {
     }
 }
 
+dependencies {
+    implementation(libs.reburger)
+}
