@@ -15,6 +15,7 @@ junit = "4.13.2"
 kotlin = "2.0.0"
 ktor = "2.3.11"
 coroutines = "1.8.1"
+secretsGradlePlugin = "2.0.1"
 sqlDelight = "2.0.1"
 ksp = "2.0.10-1.0.24"
 kotlin-inject = "0.7.1"
@@ -25,6 +26,7 @@ kermit = "2.0.4"
 viewmodel = "2.8.0"
 compose-navigation = "2.7.0-alpha07"
 reburger = "1.0.0-rc03"
+androidx-google-maps = "6.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -56,6 +58,8 @@ viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-com
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "viewmodel" }
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 reburger = { module = "io.github.theapache64:rebugger", version.ref = "reburger" }
+androidx-google-maps = { module = "com.google.maps.android:maps-compose", version.ref = "androidx-google-maps" }
+maps-secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]

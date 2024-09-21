@@ -15,6 +15,12 @@ plugins {
     id(libs.plugins.module.graph.get().pluginId) version libs.versions.module.graph
 }
 
+buildscript {
+    dependencies {
+        classpath(libs.maps.secrets.gradle.plugin)
+    }
+}
+
 moduleGraphConfig {
     readmePath.set("./README.md")
     heading = "Weather Union KMM Module Graph"
