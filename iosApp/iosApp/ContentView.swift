@@ -6,7 +6,12 @@ struct ComposeView: UIViewControllerRepresentable {
     private let applicationComponent = ApplicationComponent.companion.create()
     
     func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController(logicComponent: applicationComponent)
+        MainViewControllerKt.MainViewController(logicComponent: applicationComponent, mapUIViewController: { () -> UIViewController in
+            let swiftUIView = VStack {
+                Text("SwiftUI in Compose Multiplatform")
+            }
+            return UIHostingController(rootView: swiftUIView)
+        })
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
