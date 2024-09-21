@@ -18,6 +18,6 @@ actual fun MapComponent() {
     val percent70Height = getScreenHeight().value * 0.7
     UIKitViewController(
         factory = mapViewController,
-        modifier = Modifier.size(width = getScreenWidth(), height = percent70Height.dp).border(2.dp, Color.Blue),
+        modifier = Modifier.size(width = getScreenWidth(), height = percent70Height.dp),
     )
 }
