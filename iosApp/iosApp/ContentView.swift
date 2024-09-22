@@ -6,7 +6,7 @@ import GoogleMaps
 struct GoogleMapView: UIViewRepresentable {
     func makeUIView(context: Context) -> GMSMapView {
         let options = GMSMapViewOptions()
-        options.camera = GMSCameraPosition.camera(withLatitude: 12.952636, longitude: 77.653059, zoom: 6.0)
+        options.camera = GMSCameraPosition.camera(withLatitude: 12.952636, longitude: 77.653059, zoom: 10.0)
 
         let mapView = GMSMapView(options: options)
 

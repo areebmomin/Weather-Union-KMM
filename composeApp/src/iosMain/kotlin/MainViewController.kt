@@ -4,7 +4,7 @@ import platform.UIKit.UIViewController
 
 fun MainViewController(
     logicComponent: LogicComponent,
-    mapUIViewController: () -> UIViewController
+    mapUIViewController: () -> UIViewController,
 ) = ComposeUIViewController {
     mapViewController = mapUIViewController
     App(logicComponent = logicComponent)
