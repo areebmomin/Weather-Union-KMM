@@ -7,5 +7,5 @@ data class LocationDataScreenState(
     val isLoading: Boolean = false,
     val isLocalityDataLoading: Boolean = false,
     val weatherData: WeatherData = WeatherData(),
-    val localitiesMap: Map<String, List<LocalityData>> = emptyMap(),
+    val localityList: List<LocalityData> = emptyList(),
 )

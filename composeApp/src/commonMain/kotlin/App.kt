@@ -85,6 +85,9 @@ fun App(
 
                 LocationDataScreen(
                     viewModel = viewModel,
+                    onBackPressed = {
+                        navController.popBackStack()
+                    },
                 )
             }
             composable(

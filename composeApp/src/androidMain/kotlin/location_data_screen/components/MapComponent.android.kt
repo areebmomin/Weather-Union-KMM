@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
@@ -16,7 +17,7 @@ import com.google.maps.android.compose.rememberMarkerState
 import utils.getScreenHeight
 
 @Composable
-actual fun MapComponent() {
+actual fun MapComponent(localityList: List<LocalityData>, onItemClicked: (LocalityData) -> Unit) {
     val percent70Height = getScreenHeight().value * 0.7
     Box(
         modifier = Modifier

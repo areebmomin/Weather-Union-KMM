@@ -50,16 +50,16 @@ class LocationDataScreenViewModel @Inject constructor(
     private fun loadLocalityData() {
         viewModelScope.launch(context = Dispatchers.IO) {
             updateState(latestState.copy(isLocalityDataLoading = true))
-            var localitiesMap = localitiesDataRepository.getLocalitiesMap()
+            var localityList = localitiesDataRepository.getLocalityList()
 
-            if (localitiesMap.isEmpty()) {
+            if (localityList.isEmpty()) {
                 localitiesDataRepository.insertLocalityDataInDB()
-                localitiesMap = localitiesDataRepository.getLocalitiesMap()
+                localityList = localitiesDataRepository.getLocalityList()
             }
 
             updateState(
                 latestState.copy(
-                    localitiesMap = localitiesMap,
+                    localityList = localityList,
                     isLocalityDataLoading = false,
                 )
             )

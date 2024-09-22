@@ -16,6 +16,10 @@ class LocalitiesDataRepositoryImpl(
         localityDao.insertLocalities()
     }
 
+    override suspend fun getLocalityList(): List<LocalityData> {
+        return localityDao.getLocalityList()
+    }
+
     override suspend fun getLocalitiesMap(): Map<String, List<LocalityData>> {
         return localityDao.getLocalitiesMap()
     }
