@@ -13,12 +13,13 @@ class WeatherDataRepositoryImpl(
     private val localityWeatherDataApi: LocalityWeatherDataApi,
 ) : WeatherDataRepository {
     override suspend fun getWeatherData(
-        lat: Float,
-        lon: Float
+        latitude: Float,
+        longitude: Float
     ): ApiResponse<WeatherUnionWeatherData> {
-        return latLonWeatherDataApi.getWeatherData(lat = lat, lon = lon).mapSuccess {
-            it.toWeatherData()
-        }
+        return latLonWeatherDataApi.getWeatherData(latitude = latitude, longitude = longitude)
+            .mapSuccess {
+                it.toWeatherData()
+            }
     }
 
     override suspend fun getWeatherData(locationId: String): ApiResponse<WeatherUnionWeatherData> {

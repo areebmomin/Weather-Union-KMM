@@ -17,16 +17,16 @@ class LatLonWeatherDataApiImpl(
 ) : LatLonWeatherDataApi {
 
     override suspend fun getWeatherData(
-        lat: Float,
-        lon: Float
+        latitude: Float,
+        longitude: Float
     ): ApiResponse<LatLonWeatherDataApiResponse> {
         return httpClientFactory.client.apiRequest<LatLonWeatherDataApiResponse> {
             url {
                 method = HttpMethod.Get
                 path("get_weather_data")
                 header("x-zomato-api-key", apiKeyDao.getWeatherUnionApiKey())
-                parameters.append("latitude", lat.toString())
-                parameters.append("longitude", lon.toString())
+                parameters.append("latitude", latitude.toString())
+                parameters.append("longitude", longitude.toString())
             }
         }
     }
