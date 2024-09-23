@@ -39,6 +39,7 @@ class LocationDataScreenViewModel @Inject constructor(
         coreLogger.debug(TAG, "dispatch $action")
         when (action) {
             is OnLocalitySelected -> {
+                updateState(latestState.copy(selectedLocality = action.locality))
                 fetchWeatherData(
                     latitude = action.locality.latitude.toFloat(),
                     longitude = action.locality.longitude.toFloat(),
@@ -68,12 +69,14 @@ class LocationDataScreenViewModel @Inject constructor(
 
     private fun getLastSelectedIdWeatherData() {
         viewModelScope.launch(context = Dispatchers.IO) {
-            var lastSelectedLocality = localitiesDataRepository.getLastSelectedLocality()
-            if (lastSelectedLocality.localityId.isEmpty()) lastSelectedLocality = DEFAULT_LOCALITY
+            val lastSelectedLocality = localitiesDataRepository.getLastSelectedLocality()
+            if (lastSelectedLocality.localityId.isNotEmpty()) {
+                updateState(latestState.copy(selectedLocality = lastSelectedLocality))
+            }
 
             fetchWeatherData(
-                latitude = lastSelectedLocality.latitude.toFloat(),
-                longitude = lastSelectedLocality.longitude.toFloat(),
+                latitude = latestState.selectedLocality.latitude.toFloat(),
+                longitude = latestState.selectedLocality.longitude.toFloat(),
             )
         }
     }

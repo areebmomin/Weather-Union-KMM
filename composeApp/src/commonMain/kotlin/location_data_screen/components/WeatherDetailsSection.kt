@@ -6,13 +6,19 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.logic.models.WeatherData
 
 @Composable
-fun WeatherDetailsSection(modifier: Modifier = Modifier, weatherData: WeatherData) {
+fun WeatherDetailsSection(
+    modifier: Modifier = Modifier,
+    weatherData: WeatherData,
+    locality: LocalityData,
+) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
+        Text("Locality Name: ${locality.localityName}")
         Text("Temperature: ${weatherData.temperature.temperature}${weatherData.temperature.unit}")
         Text("Humidity: ${weatherData.humidity.humidity}${weatherData.humidity.unit}")
         Text("Wind Speed: ${weatherData.windSpeed.windSpeed}${weatherData.windSpeed.unit}")

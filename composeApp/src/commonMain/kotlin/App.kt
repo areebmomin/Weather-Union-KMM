@@ -78,7 +78,7 @@ fun App(
             ) {
                 val viewModel: LocationDataScreenViewModel = remember {
                     ViewModelProvider.create(
-                        viewModelStore,
+                        ViewModelStore(),
                         logicComponent.locationDataScreenViewModelFactory
                     )[LocationDataScreenViewModel::class]
                 }
@@ -105,7 +105,7 @@ fun App(
             ) {
                 val viewModel: ApiCredentialScreenViewModel = remember {
                     ViewModelProvider.create(
-                        viewModelStore,
+                        ViewModelStore(),
                         logicComponent.apiCredentialScreenViewModelFactory
                     )[ApiCredentialScreenViewModel::class]
                 }
