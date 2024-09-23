@@ -19,6 +19,7 @@ import com.areeb.weatherunion.logic.location_data_screen.LocationDataScreenViewM
 import com.areeb.weatherunion.logic.location_data_screen.OnLocalitySelected
 import kotlinx.coroutines.Dispatchers
 import location_data_screen.components.MapComponent
+import location_data_screen.components.WeatherDetailsSection
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
@@ -44,6 +45,10 @@ fun LocationDataScreen(
                     onItemClicked = {
                         viewModel.dispatch(OnLocalitySelected(locality = it))
                     },
+                )
+                WeatherDetailsSection(
+                    modifier = Modifier.weight(1f),
+                    weatherData = state.weatherData,
                 )
             }
             IconButton(
