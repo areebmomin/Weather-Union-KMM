@@ -13,6 +13,7 @@ import com.areeb.weatherunion.logic.models.WeatherData
 fun WeatherDetailsSection(
     modifier: Modifier = Modifier,
     weatherData: WeatherData,
+    isLoading: Boolean,
     locality: LocalityData,
 ) {
     Column(

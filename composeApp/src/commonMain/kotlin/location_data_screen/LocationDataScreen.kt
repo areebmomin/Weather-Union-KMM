@@ -49,6 +49,7 @@ fun LocationDataScreen(
                 WeatherDetailsSection(
                     modifier = Modifier.weight(1f),
                     weatherData = state.weatherData,
+                    isLoading = state.isLoading,
                     locality = state.selectedLocality,
                 )
             }

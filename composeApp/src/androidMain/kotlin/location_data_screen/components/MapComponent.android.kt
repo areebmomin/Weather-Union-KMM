@@ -36,7 +36,11 @@ actual fun MapComponent(localityList: List<LocalityData>, onItemClicked: (Locali
             Marker(
                 state = bandraMarkerState,
                 title = "Bandra West",
-                snippet = "Marker in Bandra"
+                snippet = "Marker in Bandra",
+                onClick = {
+                    onItemClicked(localityList[0])
+                    true
+                }
             )
         }
     }
