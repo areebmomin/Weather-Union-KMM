@@ -30,10 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
-import com.areeb.weatherunion.logic.api_credential_screen.SaveMapApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.SaveWeatherUnionApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.ShowSnackBar
-import com.areeb.weatherunion.logic.api_credential_screen.UpdateMapApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import enter_api_key_screen.components.EnterApiKeyScreenTopAppBar
 import enter_api_key_screen.components.EnterApiKeyTextField
@@ -42,9 +40,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
-import weatherunionkmm.composeapp.generated.resources.enter_map_api_key
 import weatherunionkmm.composeapp.generated.resources.enter_weather_union_api_key
-import weatherunionkmm.composeapp.generated.resources.map_api_key
 import weatherunionkmm.composeapp.generated.resources.press_keyboard_done_button_to_save_api_key
 import weatherunionkmm.composeapp.generated.resources.weather_union_api_key
 
@@ -77,7 +73,6 @@ fun EnterApiKeyScreen(
     val focusManager = LocalFocusManager.current
 
     var weatherUnionApiKeyVisibility by remember { mutableStateOf(false) }
-    var mapApiKeyVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = { EnterApiKeyScreenTopAppBar(onBackPressed = onBackPressed) },
@@ -127,24 +122,6 @@ fun EnterApiKeyScreen(
                     onDone = {
                         focusManager.clearFocus()
                         viewModel.dispatch(SaveWeatherUnionApiKey)
-                    },
-                )
-                EnterApiKeyTextField(
-                    value = state.mapApiKey,
-                    onValueChange = {
-                        viewModel.dispatch(UpdateMapApiKey(apiKey = it))
-                    },
-                    label = { Text(stringResource(Res.string.map_api_key)) },
-                    placeholder = {
-                        Text(stringResource(Res.string.enter_map_api_key))
-                    },
-                    isContentVisible = mapApiKeyVisibility,
-                    onVisibilityIconClicked = {
-                        mapApiKeyVisibility = !mapApiKeyVisibility
-                    },
-                    onDone = {
-                        focusManager.clearFocus()
-                        viewModel.dispatch(SaveMapApiKey)
                     },
                 )
                 Text(

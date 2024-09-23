@@ -4,8 +4,4 @@ sealed interface ApiCredentialScreenAction
 
 data class UpdateWeatherUnionApiKey(val apiKey: String) : ApiCredentialScreenAction
 
-data class UpdateMapApiKey(val apiKey: String) : ApiCredentialScreenAction
-
 data object SaveWeatherUnionApiKey : ApiCredentialScreenAction
-
-data object SaveMapApiKey : ApiCredentialScreenAction

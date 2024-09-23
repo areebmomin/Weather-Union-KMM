@@ -35,10 +35,6 @@ class ApiCredentialScreenViewModel(
                 updateState(latestState.copy(weatherUnionApiKey = action.apiKey))
             }
 
-            is UpdateMapApiKey -> {
-                updateState(latestState.copy(mapApiKey = action.apiKey))
-            }
-
             SaveWeatherUnionApiKey -> {
                 viewModelScope.launch(context = Dispatchers.IO) {
                     apiCredentialRepository.updateWeatherUnionApiKey(
@@ -47,24 +43,15 @@ class ApiCredentialScreenViewModel(
                     triggerEvent(ShowSnackBar(message = "Weather Union API Key saved successfully"))
                 }
             }
-
-            SaveMapApiKey -> {
-                viewModelScope.launch(context = Dispatchers.IO) {
-                    apiCredentialRepository.updateMapApiKey(apiKey = latestState.mapApiKey)
-                    triggerEvent(ShowSnackBar(message = "Map API Key saved successfully"))
-                }
-            }
         }
     }
 
     private fun getApiKeys() {
         viewModelScope.launch(context = Dispatchers.IO) {
             val weatherUnionApiKey = apiCredentialRepository.getWeatherUnionApiKey()
-            val mapApiKey = apiCredentialRepository.getMapApiKey()
             updateState(
                 latestState.copy(
                     weatherUnionApiKey = weatherUnionApiKey ?: "",
-                    mapApiKey = mapApiKey ?: "",
                 )
             )
         }

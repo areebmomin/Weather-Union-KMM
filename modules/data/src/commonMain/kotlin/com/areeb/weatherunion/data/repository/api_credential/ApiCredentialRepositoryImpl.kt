@@ -12,12 +12,4 @@ class ApiCredentialRepositoryImpl(private val apiKeyDao: ApiKeyDao) : ApiCredent
     override fun getWeatherUnionApiKey(): String? {
         return apiKeyDao.getWeatherUnionApiKey()
     }
-
-    override fun updateMapApiKey(apiKey: String) {
-        apiKeyDao.updateMapApiKey(apiKey = apiKey)
-    }
-
-    override fun getMapApiKey(): String? {
-        return apiKeyDao.getMapApiKey()
-    }
 }

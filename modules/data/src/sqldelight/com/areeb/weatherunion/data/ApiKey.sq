@@ -5,16 +5,9 @@ CREATE TABLE ApiKey (
 
 -- API Key ids
 --- Weather Union API Key id: 0
---- Map API Key id: 1
 
 insertWeatherUnionApiKey:
 INSERT OR REPLACE INTO ApiKey (id, api_key) VALUES (0, :apiKey);
 
 getWeatherUnionApiKey:
 SELECT * FROM ApiKey WHERE id = 0;
-
-insertMapApiKey:
-INSERT OR REPLACE INTO ApiKey(id, api_key) VALUES (1, :apiKey);
-
-getMapApiKey:
-SELECT * FROM ApiKey WHERE id = 1;
