@@ -1,9 +1,12 @@
 package location_data_screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -56,7 +59,10 @@ fun LocationDataScreen(
             }
             IconButton(
                 onClick = onBackPressed,
-                modifier = Modifier.padding(start = 4.dp, top = 8.dp),
+                modifier = Modifier
+                    .padding(start = 12.dp, top = 12.dp)
+                    .background(Color(0xE6FFFFFF), CircleShape)
+                    .size(40.dp),
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
