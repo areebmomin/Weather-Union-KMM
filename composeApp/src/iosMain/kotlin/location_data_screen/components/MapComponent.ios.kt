@@ -13,7 +13,11 @@ import utils.getScreenWidth
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-actual fun MapComponent(localityList: List<LocalityData>, onItemClicked: (LocalityData) -> Unit) {
+actual fun MapComponent(
+    localityList: List<LocalityData>,
+    selectedLocality: LocalityData,
+    onItemClicked: (LocalityData) -> Unit,
+) {
     val percent70Height = getScreenHeight().value * 0.7
     UIKitViewController(
         factory = mapViewController,

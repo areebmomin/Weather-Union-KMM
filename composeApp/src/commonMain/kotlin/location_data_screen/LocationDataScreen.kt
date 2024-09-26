@@ -42,6 +42,7 @@ fun LocationDataScreen(
             ) {
                 MapComponent(
                     localityList = state.localityList,
+                    selectedLocality = state.selectedLocality,
                     onItemClicked = {
                         viewModel.dispatch(OnLocalitySelected(locality = it))
                     },

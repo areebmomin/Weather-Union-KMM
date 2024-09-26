@@ -4,4 +4,8 @@ import androidx.compose.runtime.Composable
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 
 @Composable
-expect fun MapComponent(localityList: List<LocalityData>, onItemClicked: (LocalityData) -> Unit)
+expect fun MapComponent(
+    localityList: List<LocalityData>,
+    selectedLocality: LocalityData,
+    onItemClicked: (LocalityData) -> Unit,
+)
