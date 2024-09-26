@@ -18,9 +18,12 @@ actual fun MapComponent(
     selectedLocality: LocalityData,
     onItemClicked: (LocalityData) -> Unit,
 ) {
-    val percent70Height = getScreenHeight().value * 0.7
-    UIKitViewController(
-        factory = mapViewController,
-        modifier = Modifier.size(width = getScreenWidth(), height = percent70Height.dp),
-    )
+    val percent70Height = getScreenHeight().value * 0.65
+
+    if (localityList.isNotEmpty()) {
+        UIKitViewController(
+            factory = mapViewController.invoke(selectedLocality, localityList, onItemClicked),
+            modifier = Modifier.size(width = getScreenWidth(), height = percent70Height.dp),
+        )
+    }
 }
