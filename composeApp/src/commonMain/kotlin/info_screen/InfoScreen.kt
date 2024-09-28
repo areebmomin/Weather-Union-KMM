@@ -29,6 +29,8 @@ import info_screen.components.InfoScreenTopApoBar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import weatherunionkmm.composeapp.generated.resources.Res
+import weatherunionkmm.composeapp.generated.resources.about_colon
+import weatherunionkmm.composeapp.generated.resources.about_value
 import weatherunionkmm.composeapp.generated.resources.app_name
 import weatherunionkmm.composeapp.generated.resources.github_icon
 import weatherunionkmm.composeapp.generated.resources.ic_github
@@ -90,6 +92,18 @@ fun InfoScreen(
                     )
                     Text(
                         stringResource(Res.string.version_string),
+                        color = Color(0xE6FFFFFF),
+                    )
+                }
+                Row(
+                    modifier = modifier.padding(vertical = 8.dp),
+                ) {
+                    Text(
+                        stringResource(Res.string.about_colon),
+                        color = Color(0x99EBEBF5),
+                    )
+                    Text(
+                        stringResource(Res.string.about_value),
                         color = Color(0xE6FFFFFF),
                     )
                 }

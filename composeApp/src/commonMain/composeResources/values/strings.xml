@@ -31,4 +31,6 @@
     <string name="select_city">Select City</string>
     <string name="select_area">Select Area</string>
     <string name="refresh">Refresh</string>
+    <string name="about_colon">About: </string>
+    <string name="about_value">This project is build with Kotlin Multiplatform (KMP) and Compose Multiplatform. The Weather Data is fetched from Weather Union API.</string>
 </resources>
