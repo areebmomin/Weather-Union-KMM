@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
+import utils.Colors
 import utils.getScreenHeight
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +45,7 @@ fun showLocalitiesBottomSheet(
         sheetState = sheetState,
         modifier = Modifier.heightIn(max = maxHeight.dp),
         tonalElevation = 16.dp,
-        containerColor = Color(0xFF1F1D47),
+        containerColor = Colors.BASE_SCREEN_BACKGROUND,
     ) {
         Column(
             modifier = Modifier.fillMaxSize()

@@ -42,6 +42,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.enter_weather_union_api_key
 import weatherunionkmm.composeapp.generated.resources.press_keyboard_done_button_to_save_api_key
@@ -80,7 +81,7 @@ fun EnterApiKeyScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1D47))
+            .background(Colors.BASE_SCREEN_BACKGROUND)
             .windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = { EnterApiKeyScreenTopAppBar(onBackPressed = onBackPressed) },
         snackbarHost = {

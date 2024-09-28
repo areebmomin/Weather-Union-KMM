@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import info_screen.components.InfoScreenTopApoBar
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.about_colon
 import weatherunionkmm.composeapp.generated.resources.about_value
@@ -51,7 +52,7 @@ fun InfoScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1D47))
+            .background(Colors.BASE_SCREEN_BACKGROUND)
             .windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = { InfoScreenTopApoBar(onBackPressed = onBackPressed) }
     ) {

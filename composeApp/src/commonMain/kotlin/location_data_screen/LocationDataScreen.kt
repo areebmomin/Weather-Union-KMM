@@ -38,6 +38,7 @@ import kotlinx.coroutines.launch
 import location_data_screen.components.MapComponent
 import location_data_screen.components.WeatherDetailsSection
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
 
@@ -86,7 +87,7 @@ fun LocationDataScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1D47))
+            .background(Colors.BASE_SCREEN_BACKGROUND)
             .windowInsetsPadding(WindowInsets.safeDrawing),
         snackbarHost = {
             SnackbarHost(hostState = snackBarHostState)

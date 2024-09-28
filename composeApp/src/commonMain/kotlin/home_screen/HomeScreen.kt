@@ -56,6 +56,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.background_image
 import weatherunionkmm.composeapp.generated.resources.ic_home_screen_background
@@ -115,7 +116,7 @@ fun HomeScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1F1D47))
+            .background(Colors.BASE_SCREEN_BACKGROUND)
             .windowInsetsPadding(WindowInsets.safeDrawing),
         snackbarHost = {
             SnackbarHost(hostState = snackBarHostState)
