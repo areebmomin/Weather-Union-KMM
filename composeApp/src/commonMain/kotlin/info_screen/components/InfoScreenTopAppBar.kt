@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.info
 import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
@@ -22,7 +23,7 @@ import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
 @Composable
 fun InfoScreenTopApoBar(modifier: Modifier = Modifier, onBackPressed: () -> Unit) {
     TopAppBar(
-        backgroundColor = Color(0xFF2E335A),
+        backgroundColor = Colors.TOP_APP_BAR_BACKGROUND,
         elevation = 16.dp,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
