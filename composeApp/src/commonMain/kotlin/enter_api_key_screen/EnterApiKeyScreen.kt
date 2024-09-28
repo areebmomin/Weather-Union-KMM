@@ -63,7 +63,7 @@ fun EnterApiKeyScreen(
     )
     LaunchedEffect(viewModel.event) {
         viewModel.event.collectLatest {
-            when(it) {
+            when (it) {
                 is ShowSnackBar -> {
                     coroutineScope.launch {
                         snackBarHostState.showSnackbar(it.message)

@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.areeb.weatherunion.logic.models.WeatherDataHumidity
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.humidity
 import weatherunionkmm.composeapp.generated.resources.ic_humidity
@@ -43,7 +44,7 @@ fun HumidityTile(modifier: Modifier = Modifier, humidityData: WeatherDataHumidit
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth()
                 .align(Alignment.Center),
-            backgroundColor = Color(0xFF2B2655),
+            backgroundColor = Colors.WEATHER_DATA_CARD_BACKGROUND,
             border = BorderStroke(width = 1.dp, color = Color(0xFF454887)),
             elevation = 0.2.dp,
             shape = RoundedCornerShape(16.dp),

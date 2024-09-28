@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.areeb.weatherunion.logic.models.WeatherDataRainIntensity
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.ic_rain_intensity
 import weatherunionkmm.composeapp.generated.resources.rain_intensity
@@ -43,7 +44,7 @@ fun RainIntensityTile(modifier: Modifier = Modifier, rainIntensityData: WeatherD
                 .padding(start = 16.dp, end = 8.dp)
                 .fillMaxWidth()
                 .align(Alignment.Center),
-            backgroundColor = Color(0xFF2B2655),
+            backgroundColor = Colors.WEATHER_DATA_CARD_BACKGROUND,
             border = BorderStroke(width = 1.dp, color = Color(0xFF454887)),
             elevation = 0.2.dp,
             shape = RoundedCornerShape(16.dp),
