@@ -9,7 +9,6 @@ import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
-import com.areeb.weatherunion.data.utils.DEFAULT_LOCALITY
 import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

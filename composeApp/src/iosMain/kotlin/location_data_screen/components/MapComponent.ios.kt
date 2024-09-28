@@ -18,7 +18,7 @@ actual fun MapComponent(
     selectedLocality: LocalityData,
     onItemClicked: (LocalityData) -> Unit,
 ) {
-    val percent70Height = getScreenHeight().value * 0.65
+    val percent70Height = getScreenHeight().value * 0.6
 
     if (localityList.isNotEmpty()) {
         UIKitViewController(

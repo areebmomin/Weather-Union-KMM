@@ -28,7 +28,7 @@ actual fun MapComponent(
     selectedLocality: LocalityData,
     onItemClicked: (LocalityData) -> Unit,
 ) {
-    val percent70Height = getScreenHeight().value * 0.7
+    val percent70Height = getScreenHeight().value * 0.6
     var isMapLoaded by remember { mutableStateOf(false) }
 
     Box(
