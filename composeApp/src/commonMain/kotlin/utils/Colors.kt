@@ -6,5 +6,7 @@ class Colors {
     companion object {
         val BASE_SCREEN_BACKGROUND = Color(0xFF1F1D47)
         val TOP_APP_BAR_BACKGROUND = Color(0xFF2E335A)
+        val BACKGROUND_GRADIENT_1 = Color(0xFF2E335A)
+        val BACKGROUND_GRADIENT_2 = Color(0xFF1C1B33)
     }
 }

@@ -61,8 +61,8 @@ fun InfoScreen(
                 .background(
                     Brush.linearGradient(
                         listOf(
-                            Color(0xFF2E335A),
-                            Color(0xFF1C1B33),
+                            Colors.BACKGROUND_GRADIENT_1,
+                            Colors.BACKGROUND_GRADIENT_2,
                         ),
                         tileMode = TileMode.Clamp,
                     ),

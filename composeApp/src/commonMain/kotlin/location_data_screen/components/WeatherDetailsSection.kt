@@ -40,6 +40,7 @@ import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.logic.models.WeatherData
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.humidity
 import weatherunionkmm.composeapp.generated.resources.ic_humidity
@@ -65,8 +66,8 @@ fun WeatherDetailsSection(
             .background(
                 Brush.linearGradient(
                     listOf(
-                        Color(0xFF2E335A),
-                        Color(0xFF1C1B33),
+                        Colors.BACKGROUND_GRADIENT_1,
+                        Colors.BACKGROUND_GRADIENT_2,
                     ),
                     tileMode = TileMode.Clamp,
                 ),
