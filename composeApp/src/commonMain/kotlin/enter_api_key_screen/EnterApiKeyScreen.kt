@@ -5,8 +5,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -75,6 +78,10 @@ fun EnterApiKeyScreen(
     var weatherUnionApiKeyVisibility by remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF1F1D47))
+            .windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = { EnterApiKeyScreenTopAppBar(onBackPressed = onBackPressed) },
         snackbarHost = {
             SnackbarHost(hostState = snackBarHostState)

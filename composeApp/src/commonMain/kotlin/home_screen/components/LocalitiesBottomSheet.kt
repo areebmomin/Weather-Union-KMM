@@ -37,7 +37,7 @@ fun showLocalitiesBottomSheet(
     itemDisplayName: LocalityData.() -> String,
     onItemClicked: (LocalityData) -> Unit,
 ) {
-    val maxHeight = getScreenHeight().value * 0.9
+    val maxHeight = getScreenHeight().value * 0.7
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
