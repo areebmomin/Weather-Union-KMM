@@ -45,7 +45,7 @@ fun HumidityTile(modifier: Modifier = Modifier, humidityData: WeatherDataHumidit
                 .fillMaxWidth()
                 .align(Alignment.Center),
             backgroundColor = Colors.WEATHER_DATA_CARD_BACKGROUND,
-            border = BorderStroke(width = 1.dp, color = Color(0xFF454887)),
+            border = BorderStroke(width = 1.dp, color = Colors.WEATHER_DATA_CARD_BORDER),
             elevation = 0.2.dp,
             shape = RoundedCornerShape(16.dp),
         ) {

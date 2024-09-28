@@ -139,7 +139,7 @@ fun WeatherDetailsSection(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .border(
-                            border = BorderStroke(2.dp, SolidColor(Color(0xFF454887))),
+                            border = BorderStroke(2.dp, SolidColor(Colors.WEATHER_DATA_CARD_BORDER)),
                             shape = RoundedCornerShape(8.dp),
                         )
                         .weight(2f),
@@ -187,7 +187,7 @@ fun WeatherDetailsSection(
                     modifier = Modifier
                         .padding(start = 16.dp, end = 8.dp)
                         .border(
-                            border = BorderStroke(2.dp, SolidColor(Color(0xFF454887))),
+                            border = BorderStroke(2.dp, SolidColor(Colors.WEATHER_DATA_CARD_BORDER)),
                             shape = RoundedCornerShape(8.dp),
                         )
                         .weight(1f),
@@ -229,7 +229,7 @@ fun WeatherDetailsSection(
                     modifier = Modifier
                         .padding(start = 8.dp, end = 16.dp)
                         .border(
-                            border = BorderStroke(2.dp, SolidColor(Color(0xFF454887))),
+                            border = BorderStroke(2.dp, SolidColor(Colors.WEATHER_DATA_CARD_BORDER)),
                             shape = RoundedCornerShape(8.dp),
                         )
                         .weight(1f),
@@ -293,7 +293,7 @@ fun WeatherDetailsSection(
                     modifier = Modifier
                         .padding(start = 16.dp, end = 8.dp)
                         .border(
-                            border = BorderStroke(2.dp, SolidColor(Color(0xFF454887))),
+                            border = BorderStroke(2.dp, SolidColor(Colors.WEATHER_DATA_CARD_BORDER)),
                             shape = RoundedCornerShape(8.dp),
                         )
                         .weight(1f),
@@ -335,7 +335,7 @@ fun WeatherDetailsSection(
                     modifier = Modifier
                         .padding(start = 8.dp, end = 16.dp)
                         .border(
-                            border = BorderStroke(2.dp, SolidColor(Color(0xFF454887))),
+                            border = BorderStroke(2.dp, SolidColor(Colors.WEATHER_DATA_CARD_BORDER)),
                             shape = RoundedCornerShape(8.dp),
                         )
                         .weight(1f),
