@@ -30,6 +30,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.areeb.weatherunion.logic.location_data_screen.Error
 import com.areeb.weatherunion.logic.location_data_screen.LocationDataScreenViewModel
 import com.areeb.weatherunion.logic.location_data_screen.OnLocalitySelected
+import dev.jordond.connectivity.Connectivity
+import dev.jordond.connectivity.compose.rememberConnectivityState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -49,9 +51,22 @@ fun LocationDataScreen(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
         context = Dispatchers.Main.immediate,
     )
-
+    val connectivityState = rememberConnectivityState { autoStart = true }
     val snackBarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
+
+    when (connectivityState.status) {
+        is Connectivity.Status.Disconnected -> {
+            coroutineScope.launch {
+                snackBarHostState.showSnackbar(
+                    message = "Network Disconnected",
+                    duration = SnackbarDuration.Short,
+                )
+            }
+        }
+
+        else -> {}
+    }
 
     LaunchedEffect(viewModel.event) {
         viewModel.event.collectLatest {

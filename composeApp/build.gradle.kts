@@ -50,6 +50,7 @@ kotlin {
             implementation(libs.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.compose.navigation)
+            implementation(libs.bundles.connectivity)
             api(projects.modules.shared)
         }
     }

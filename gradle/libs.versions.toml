@@ -27,6 +27,7 @@ viewmodel = "2.8.0"
 compose-navigation = "2.7.0-alpha07"
 reburger = "1.0.0-rc03"
 androidx-google-maps = "6.1.0"
+connectivity = "1.1.2"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -60,11 +61,15 @@ compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-co
 reburger = { module = "io.github.theapache64:rebugger", version.ref = "reburger" }
 androidx-google-maps = { module = "com.google.maps.android:maps-compose", version.ref = "androidx-google-maps" }
 maps-secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
+connectivity-core = { module = "dev.jordond.connectivity:connectivity-core", version.ref = "connectivity" }
+connectivity-device = { module = "dev.jordond.connectivity:connectivity-device", version.ref = "connectivity" }
+connectivity-compose-device = { module = "dev.jordond.connectivity:connectivity-compose-device", version.ref = "connectivity" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]
 ktor-android = ["ktor-client-okhttp"]
 ktor-ios = ["ktor-client-darwin"]
+connectivity = ["connectivity-core", "connectivity-device", "connectivity-compose-device"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

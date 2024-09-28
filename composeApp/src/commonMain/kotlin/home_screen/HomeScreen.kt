@@ -39,6 +39,8 @@ import com.areeb.weatherunion.logic.home_screen.viewmodel.Error
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import com.areeb.weatherunion.logic.home_screen.viewmodel.OnLocalitySelected
 import com.areeb.weatherunion.logic.home_screen.viewmodel.RefreshWeatherData
+import dev.jordond.connectivity.Connectivity
+import dev.jordond.connectivity.compose.rememberConnectivityState
 import home_screen.components.DeviceDescriptionText
 import home_screen.components.HomeScreenAppBar
 import home_screen.components.HumidityTile
@@ -73,7 +75,7 @@ fun HomeScreen(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
         context = Dispatchers.Main.immediate,
     )
-
+    val connectivityState = rememberConnectivityState { autoStart = true }
     val snackBarHostState = remember { SnackbarHostState() }
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
@@ -81,6 +83,19 @@ fun HomeScreen(
     val coroutineScope = rememberCoroutineScope()
     var showCityBottomSheet by remember { mutableStateOf(false) }
     var showAreaBottomSheet by remember { mutableStateOf(false) }
+
+    when (connectivityState.status) {
+        is Connectivity.Status.Disconnected -> {
+            coroutineScope.launch {
+                snackBarHostState.showSnackbar(
+                    message = "Network Disconnected",
+                    duration = SnackbarDuration.Short,
+                )
+            }
+        }
+
+        else -> {}
+    }
 
     LaunchedEffect(viewModel.event) {
         viewModel.event.collectLatest {
