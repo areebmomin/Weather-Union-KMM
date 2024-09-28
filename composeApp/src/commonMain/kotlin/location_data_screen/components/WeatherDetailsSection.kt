@@ -76,22 +76,22 @@ fun WeatherDetailsSection(
         Column(
             modifier = modifier.verticalScroll(rememberScrollState()),
         ) {
-            Row(
-                modifier = Modifier.padding(start = 8.dp, top = 12.dp, end = 8.dp),
-                verticalAlignment = Alignment.Bottom,
+            AnimatedContent(
+                targetState = locality.localityName,
+                transitionSpec = {
+                    fadeIn() togetherWith fadeOut() using SizeTransform()
+                }
             ) {
-                Icon(
-                    imageVector = Icons.Default.LocationOn,
-                    contentDescription = locality.localityName,
-                    tint = Color.White,
-                    modifier = Modifier.size(22.dp),
-                )
-                AnimatedContent(
-                    targetState = locality.localityName,
-                    transitionSpec = {
-                        fadeIn() togetherWith fadeOut() using SizeTransform()
-                    }
+                Row(
+                    modifier = Modifier.padding(start = 8.dp, top = 12.dp, end = 8.dp),
+                    verticalAlignment = Alignment.Bottom,
                 ) {
+                    Icon(
+                        imageVector = Icons.Default.LocationOn,
+                        contentDescription = locality.localityName,
+                        tint = Color.White,
+                        modifier = Modifier.size(22.dp),
+                    )
                     Text(
                         it,
                         modifier = Modifier.padding(start = 4.dp),
@@ -103,31 +103,31 @@ fun WeatherDetailsSection(
                 }
             }
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp, horizontal = 16.dp),
+            AnimatedContent(
+                targetState = weatherData.temperature,
+                transitionSpec = {
+                    fadeIn() togetherWith fadeOut() using SizeTransform()
+                }
             ) {
-                AnimatedContent(
-                    targetState = weatherData.temperature.temperature,
-                    transitionSpec = {
-                        fadeIn() togetherWith fadeOut() using SizeTransform()
-                    }
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp, horizontal = 16.dp),
                 ) {
                     Text(
-                        it,
+                        it.temperature,
                         modifier = Modifier.alignByBaseline(),
                         fontSize = 34.sp,
                         lineHeight = 34.sp,
                         color = Color.White,
                     )
+                    Text(
+                        it.unit,
+                        modifier = Modifier.alignByBaseline(),
+                        fontSize = 16.sp,
+                        lineHeight = 34.sp,
+                        color = Color.White,
+                    )
                 }
-                Text(
-                    weatherData.temperature.unit,
-                    modifier = Modifier.alignByBaseline(),
-                    fontSize = 16.sp,
-                    lineHeight = 34.sp,
-                    color = Color.White,
-                )
             }
 
             Row(
