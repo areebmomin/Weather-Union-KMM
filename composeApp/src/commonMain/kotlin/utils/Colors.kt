@@ -14,6 +14,7 @@ class Colors {
         val DROPDOWN_DISABLE_BORDER = Color(0x4DEBEBF5)
         val TEXT_FIELD_BACKGROUND = Color(0xFF1C1B33)
         val HOME_OPTION_ICON_COLOR = Color(0xFFEBEBF5)
+        val BOTTOM_SHEET_ITEM_TEXT_COLOR = Color(0xB3EBEBF5)
         val WHITE_30_ALPHA = Color(0x4DFFFFFF)
         val WHITE_40_ALPHA = Color(0x66FFFFFF)
         val WHITE_70_ALPHA = Color(0xB3FFFFFF)

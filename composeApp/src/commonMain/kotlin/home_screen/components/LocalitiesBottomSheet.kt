@@ -78,7 +78,7 @@ fun showLocalitiesBottomSheet(
                             text = locality.itemDisplayName(),
                             fontWeight = FontWeight.Normal,
                             fontSize = 17.sp,
-                            color = Color(0xB3EBEBF5),
+                            color = Colors.BOTTOM_SHEET_ITEM_TEXT_COLOR,
                         )
                         Spacer(modifier = Modifier.weight(1F))
                         if (locality.itemDisplayName() == selectedItemDisplayName) {
