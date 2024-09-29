@@ -15,10 +15,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.enter_api_key
 import weatherunionkmm.composeapp.generated.resources.ic_menu_option
@@ -48,7 +48,7 @@ fun HomeScreenAppBar(
                 Icon(
                     painter = painterResource(resource = Res.drawable.ic_menu_option),
                     contentDescription = stringResource(Res.string.menu),
-                    tint = Color(0xFFEBEBF5),
+                    tint = Colors.HOME_OPTION_ICON_COLOR,
                 )
             }
 
