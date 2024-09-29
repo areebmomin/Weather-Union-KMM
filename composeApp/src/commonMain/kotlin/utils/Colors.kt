@@ -12,5 +12,6 @@ class Colors {
         val WEATHER_DATA_CARD_BORDER = Color(0xFF454887)
         val WHITE_40_ALPHA = Color(0x66FFFFFF)
         val WHITE_70_ALPHA  = Color(0xB3FFFFFF)
+        val WHITE_80_ALPHA = Color(0xCCFFFFFF)
     }
 }
