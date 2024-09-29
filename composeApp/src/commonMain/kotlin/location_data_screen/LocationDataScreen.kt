@@ -115,7 +115,7 @@ fun LocationDataScreen(
                 onClick = onBackPressed,
                 modifier = Modifier
                     .padding(start = 12.dp, top = 12.dp)
-                    .background(Color(0xE6FFFFFF), CircleShape)
+                    .background(Colors.WHITE_90_ALPHA, CircleShape)
                     .size(40.dp),
             ) {
                 Icon(

@@ -81,7 +81,7 @@ fun InfoScreen(
                     )
                     Text(
                         stringResource(Res.string.app_name),
-                        color = Color(0xE6FFFFFF),
+                        color = Colors.WHITE_90_ALPHA,
                     )
                 }
                 Row(
@@ -93,7 +93,7 @@ fun InfoScreen(
                     )
                     Text(
                         stringResource(Res.string.version_string),
-                        color = Color(0xE6FFFFFF),
+                        color = Colors.WHITE_90_ALPHA,
                     )
                 }
                 Row(
@@ -105,7 +105,7 @@ fun InfoScreen(
                     )
                     Text(
                         stringResource(Res.string.about_value),
-                        color = Color(0xE6FFFFFF),
+                        color = Colors.WHITE_90_ALPHA,
                     )
                 }
                 Row(
