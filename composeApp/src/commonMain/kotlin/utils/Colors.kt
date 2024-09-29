@@ -16,5 +16,6 @@ class Colors {
         val WHITE_70_ALPHA = Color(0xB3FFFFFF)
         val WHITE_80_ALPHA = Color(0xCCFFFFFF)
         val WHITE_90_ALPHA = Color(0xE6FFFFFF)
+        val BLACK_40_ALPHA = Color(0x66000000)
     }
 }
