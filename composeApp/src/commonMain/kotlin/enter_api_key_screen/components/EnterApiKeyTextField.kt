@@ -51,7 +51,7 @@ fun EnterApiKeyTextField(
         ),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             textColor = Color.White,
-            backgroundColor = Color(0xFF1C1B33),
+            backgroundColor = Colors.TEXT_FIELD_BACKGROUND,
             cursorColor = Colors.WHITE_80_ALPHA,
             focusedBorderColor = Colors.WHITE_70_ALPHA,
             unfocusedBorderColor = Colors.WHITE_40_ALPHA,
