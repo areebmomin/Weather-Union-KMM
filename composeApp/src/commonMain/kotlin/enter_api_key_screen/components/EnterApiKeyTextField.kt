@@ -57,7 +57,7 @@ fun EnterApiKeyTextField(
             unfocusedBorderColor = Colors.WHITE_40_ALPHA,
             focusedLabelColor = Colors.WHITE_70_ALPHA,
             unfocusedLabelColor = Colors.WHITE_40_ALPHA,
-            placeholderColor = Color(0x4DFFFFFF),
+            placeholderColor = Colors.WHITE_30_ALPHA,
         ),
         visualTransformation = if (isContentVisible) {
             VisualTransformation.None
