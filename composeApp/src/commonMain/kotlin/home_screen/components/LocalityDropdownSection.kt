@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.area
 import weatherunionkmm.composeapp.generated.resources.city
@@ -57,7 +58,7 @@ fun LocalityDropdownSection(
                     Icon(
                         Icons.Filled.ArrowDropDown,
                         stringResource(Res.string.city),
-                        tint = Color(0xB3FFFFFF),
+                        tint = Colors.WHITE_70_ALPHA,
                     )
                 },
                 onValueChange = { },
@@ -94,7 +95,7 @@ fun LocalityDropdownSection(
                     Icon(
                         Icons.Filled.ArrowDropDown,
                         stringResource(Res.string.area),
-                        tint = Color(0xB3FFFFFF),
+                        tint = Colors.WHITE_70_ALPHA,
                     )
                 },
                 onValueChange = { },
