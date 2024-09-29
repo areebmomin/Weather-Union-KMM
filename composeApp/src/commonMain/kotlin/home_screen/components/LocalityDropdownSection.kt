@@ -66,7 +66,7 @@ fun LocalityDropdownSection(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     disabledTextColor = Color.White,
                     backgroundColor = Colors.BLACK_40_ALPHA,
-                    disabledBorderColor = Color(0x4DEBEBF5),
+                    disabledBorderColor = Colors.DROPDOWN_DISABLE_BORDER,
                     disabledLabelColor = Colors.WHITE_80_ALPHA,
                 ),
                 singleLine = true,
@@ -103,7 +103,7 @@ fun LocalityDropdownSection(
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     disabledTextColor = Color.White,
                     backgroundColor = Colors.BLACK_40_ALPHA,
-                    disabledBorderColor = Color(0x4DEBEBF5),
+                    disabledBorderColor = Colors.DROPDOWN_DISABLE_BORDER,
                     disabledLabelColor = Colors.WHITE_80_ALPHA,
                 ),
                 singleLine = true,
