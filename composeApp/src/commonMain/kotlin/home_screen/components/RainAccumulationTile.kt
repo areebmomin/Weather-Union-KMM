@@ -68,7 +68,7 @@ fun RainAccumulationTile(
                     Text(
                         stringResource(Res.string.total_rainfall),
                         fontSize = 13.sp,
-                        color = Color(0x99EBEBF5),
+                        color = Colors.WEATHER_DATA_TITLE_TEXT,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )

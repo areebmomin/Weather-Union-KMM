@@ -158,7 +158,7 @@ fun WeatherDetailsSection(
                         )
                         Text(
                             stringResource(Res.string.humidity),
-                            color = Color(0x99EBEBF5),
+                            color = Colors.WEATHER_DATA_TITLE_TEXT,
                             fontSize = 13.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -206,7 +206,7 @@ fun WeatherDetailsSection(
                         )
                         Text(
                             stringResource(Res.string.wind_speed),
-                            color = Color(0x99EBEBF5),
+                            color = Colors.WEATHER_DATA_TITLE_TEXT,
                             fontSize = 13.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -248,7 +248,7 @@ fun WeatherDetailsSection(
                         )
                         Text(
                             stringResource(Res.string.wind_direction),
-                            color = Color(0x99EBEBF5),
+                            color = Colors.WEATHER_DATA_TITLE_TEXT,
                             fontSize = 13.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -312,7 +312,7 @@ fun WeatherDetailsSection(
                         )
                         Text(
                             stringResource(Res.string.rain_intensity),
-                            color = Color(0x99EBEBF5),
+                            color = Colors.WEATHER_DATA_TITLE_TEXT,
                             fontSize = 13.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
@@ -354,7 +354,7 @@ fun WeatherDetailsSection(
                         )
                         Text(
                             stringResource(Res.string.total_rainfall),
-                            color = Color(0x99EBEBF5),
+                            color = Colors.WEATHER_DATA_TITLE_TEXT,
                             fontSize = 13.sp,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,

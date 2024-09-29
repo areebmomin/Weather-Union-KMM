@@ -65,7 +65,7 @@ fun HumidityTile(modifier: Modifier = Modifier, humidityData: WeatherDataHumidit
                     Text(
                         stringResource(Res.string.humidity),
                         fontSize = 13.sp,
-                        color = Color(0x99EBEBF5),
+                        color = Colors.WEATHER_DATA_TITLE_TEXT,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )

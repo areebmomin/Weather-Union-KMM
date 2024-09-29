@@ -77,7 +77,7 @@ fun InfoScreen(
                 ) {
                     Text(
                         stringResource(Res.string.project_name_colon),
-                        color = Color(0x99EBEBF5),
+                        color = Colors.WEATHER_DATA_TITLE_TEXT,
                     )
                     Text(
                         stringResource(Res.string.app_name),
@@ -89,7 +89,7 @@ fun InfoScreen(
                 ) {
                     Text(
                         stringResource(Res.string.version_colon),
-                        color = Color(0x99EBEBF5),
+                        color = Colors.WEATHER_DATA_TITLE_TEXT,
                     )
                     Text(
                         stringResource(Res.string.version_string),
@@ -101,7 +101,7 @@ fun InfoScreen(
                 ) {
                     Text(
                         stringResource(Res.string.about_colon),
-                        color = Color(0x99EBEBF5),
+                        color = Colors.WEATHER_DATA_TITLE_TEXT,
                     )
                     Text(
                         stringResource(Res.string.about_value),
