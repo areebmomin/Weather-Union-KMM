@@ -85,7 +85,7 @@ fun showLocalitiesBottomSheet(
                             Icon(
                                 imageVector = Icons.Filled.Done,
                                 contentDescription = null,
-                                tint = Color(0x66FFFFFF),
+                                tint = Colors.WHITE_40_ALPHA,
                             )
                         }
                     }

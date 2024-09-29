@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
+import utils.Colors
 import weatherunionkmm.composeapp.generated.resources.Res
 import weatherunionkmm.composeapp.generated.resources.hide_password
 import weatherunionkmm.composeapp.generated.resources.show_password
@@ -49,13 +50,13 @@ fun EnterApiKeyTextField(
             imeAction = ImeAction.Done,
         ),
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color(0xFFFFFFFF),
+            textColor = Color.White,
             backgroundColor = Color(0xFF1C1B33),
             cursorColor = Color(0xCCFFFFFF),
             focusedBorderColor = Color(0xB3FFFFFF),
-            unfocusedBorderColor = Color(0x66FFFFFF),
+            unfocusedBorderColor = Colors.WHITE_40_ALPHA,
             focusedLabelColor = Color(0xB3FFFFFF),
-            unfocusedLabelColor = Color(0x66FFFFFF),
+            unfocusedLabelColor = Colors.WHITE_40_ALPHA,
             placeholderColor = Color(0x4DFFFFFF),
         ),
         visualTransformation = if (isContentVisible) {
@@ -81,7 +82,7 @@ fun EnterApiKeyTextField(
                 Icon(
                     imageVector = icon,
                     contentDescription = description,
-                    tint = Color(0x66FFFFFF),
+                    tint = Colors.WHITE_40_ALPHA,
                 )
             }
         },
