@@ -1,7 +1,6 @@
-package com.areeb.weatherunion.data.fakes.api
+package com.areeb.weatherunion.data.api.lat_lon_weather_data
 
 import com.areeb.weatherunion.core.network.ApiResponse
-import com.areeb.weatherunion.data.api.lat_lon_weather_data.LatLonWeatherDataApi
 import com.areeb.weatherunion.data.api.lat_lon_weather_data.model.LatLonLocalityWeatherData
 import com.areeb.weatherunion.data.api.lat_lon_weather_data.model.LatLonWeatherDataApiResponse
 import me.tatarka.inject.annotations.Inject

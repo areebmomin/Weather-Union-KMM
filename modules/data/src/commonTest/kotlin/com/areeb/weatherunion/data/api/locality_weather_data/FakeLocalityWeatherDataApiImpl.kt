@@ -3,7 +3,9 @@ package com.areeb.weatherunion.data.api.locality_weather_data
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.data.api.locality_weather_data.model.LocalityLocalityWeatherData
 import com.areeb.weatherunion.data.api.locality_weather_data.model.LocalityWeatherDataApiResponse
+import me.tatarka.inject.annotations.Inject
 
+@Inject
 class FakeLocalityWeatherDataApiImpl : LocalityWeatherDataApi {
     override suspend fun getWeatherData(localityId: String): ApiResponse<LocalityWeatherDataApiResponse> {
         return ApiResponse.Success(

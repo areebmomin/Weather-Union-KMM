@@ -1,3 +1,7 @@
 package com.areeb.weatherunion.data.di
 
-interface DataComponent : ApiComponent, RepositoryComponent, DatabaseComponent, PreferenceComponent
+interface DataComponent :
+    ApiComponent,
+    RepositoryComponent,
+    DatabaseComponent,
+    PreferenceComponent
