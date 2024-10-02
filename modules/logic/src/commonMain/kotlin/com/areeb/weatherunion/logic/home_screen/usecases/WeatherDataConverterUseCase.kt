@@ -104,7 +104,7 @@ class WeatherDataConverterUseCase {
 
             2 -> "Data collected using Rain gauge system"
 
-            else -> "Data collected using unknown device"
+            else -> "NA"
         }
     }
 }
