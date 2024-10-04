@@ -28,6 +28,7 @@ compose-navigation = "2.7.0-alpha07"
 reburger = "1.0.0-rc03"
 androidx-google-maps = "6.1.0"
 connectivity = "1.1.2"
+turbine = "1.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -47,6 +48,7 @@ ktor-contentNegociation = { module = "io.ktor:ktor-client-content-negotiation", 
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 sqldelight_android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqldelight_native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
@@ -64,6 +66,7 @@ maps-secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatfo
 connectivity-core = { module = "dev.jordond.connectivity:connectivity-core", version.ref = "connectivity" }
 connectivity-device = { module = "dev.jordond.connectivity:connectivity-device", version.ref = "connectivity" }
 connectivity-compose-device = { module = "dev.jordond.connectivity:connectivity-compose-device", version.ref = "connectivity" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-contentNegociation", "ktor-serialization", "ktor-logging"]

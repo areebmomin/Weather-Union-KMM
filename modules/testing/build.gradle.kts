@@ -40,6 +40,8 @@ kotlin {
                 implementation(libs.kotlin.test)
                 implementation(libs.viewmodel)
                 implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.test)
+                implementation(libs.turbine)
                 implementation(libs.kotlin.inject.runtime)
             }
         }

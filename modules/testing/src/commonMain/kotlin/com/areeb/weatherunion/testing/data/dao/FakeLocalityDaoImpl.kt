@@ -7,7 +7,7 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class FakeLocalityDaoImpl : LocalityDao {
     companion object {
-        private val defaultLocalityList: List<LocalityData> = listOf(
+        val defaultLocalityList: List<LocalityData> = listOf(
             LocalityData(
                 localityId = "ZWL004494",
                 cityName = "Mumbai",

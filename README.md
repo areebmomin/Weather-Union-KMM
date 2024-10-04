@@ -29,6 +29,7 @@ graph LR
     :modules:core["core"]
     :modules:data["data"]
     :modules:logic["logic"]
+    :modules:testing["testing"]
   end
   :composeApp --> :modules:shared
   :modules:shared --> :modules:core
@@ -36,5 +37,8 @@ graph LR
   :modules:shared --> :modules:logic
   :modules:logic --> :modules:core
   :modules:logic --> :modules:data
+  :modules:testing --> :modules:core
+  :modules:testing --> :modules:data
+  :modules:testing --> :modules:logic
   :modules:data --> :modules:core
 ```
