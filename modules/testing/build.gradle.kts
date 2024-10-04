@@ -8,8 +8,6 @@ plugins {
 }
 
 kotlin {
-    tasks.create("testClasses")
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
@@ -23,21 +21,27 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "testing"
             isStatic = true
         }
     }
 
     sourceSets {
-        commonMain.dependencies {
-            api(projects.modules.core)
-            api(projects.modules.data)
-            api(projects.modules.logic)
+        sourceSets {
+            commonMain.dependencies {
+                api(projects.modules.core)
+                api(projects.modules.data)
+                api(projects.modules.logic)
 
-            implementation(libs.kotlin.inject.runtime)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlin.inject.runtime)
+            }
+            commonTest.dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.viewmodel)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlin.inject.runtime)
+            }
         }
     }
 }
@@ -55,7 +59,7 @@ ksp {
 }
 
 android {
-    namespace = "com.areeb.weatherunion.shared"
+    namespace = "com.areeb.weatherunion.testing"
     compileSdk = 34
     defaultConfig {
         minSdk = 24
