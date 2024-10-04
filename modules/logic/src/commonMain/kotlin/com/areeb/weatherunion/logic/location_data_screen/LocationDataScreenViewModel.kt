@@ -10,6 +10,7 @@ import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
 import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
+import com.areeb.weatherunion.logic.models.WeatherData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
@@ -94,14 +95,17 @@ class LocationDataScreenViewModel @Inject constructor(
                 }
 
                 is ApiResponse.Error.HttpError -> {
+                    updateState(latestState.copy(weatherData = WeatherData()))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.SerializationError -> {
+                    updateState(latestState.copy(weatherData = WeatherData()))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.GenericError -> {
+                    updateState(latestState.copy(weatherData = WeatherData()))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
             }

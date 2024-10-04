@@ -29,10 +29,6 @@ class HomeScreenViewModelTest {
     @Test
     fun `Ensure initial Locality and Weather data is fetched properly`() = runTest {
         val testApplicationComponent = createTestApplicationComponent()
-        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
-            ViewModelStore(),
-            testApplicationComponent.homeScreenViewModelFactory
-        )[HomeScreenViewModel::class]
         val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
         val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
         val weatherData = WeatherData(
@@ -63,6 +59,11 @@ class HomeScreenViewModelTest {
             ),
             deviceDescription = "Data collected using AWS (Automated Weather Station)",
         )
+
+        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
+            ViewModelStore(),
+            testApplicationComponent.homeScreenViewModelFactory
+        )[HomeScreenViewModel::class]
 
         viewModel.state.test {
             assertEquals(
@@ -106,10 +107,6 @@ class HomeScreenViewModelTest {
     @Test
     fun `Ensure Locality data is fetched properly when Locality is selected`() = runTest {
         val testApplicationComponent = createTestApplicationComponent()
-        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
-            ViewModelStore(),
-            testApplicationComponent.homeScreenViewModelFactory
-        )[HomeScreenViewModel::class]
         val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
         val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
         val weatherData = WeatherData(
@@ -149,7 +146,13 @@ class HomeScreenViewModelTest {
             deviceType = 1,
         )
 
+        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
+            ViewModelStore(),
+            testApplicationComponent.homeScreenViewModelFactory
+        )[HomeScreenViewModel::class]
+
         viewModel.state.test {
+            awaitItem()
             awaitItem()
             awaitItem()
             awaitItem()
@@ -197,10 +200,6 @@ class HomeScreenViewModelTest {
     @Test
     fun `Ensure Weather data is fetched properly when weather data is refreshed`() = runTest {
         val testApplicationComponent = createTestApplicationComponent()
-        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
-            ViewModelStore(),
-            testApplicationComponent.homeScreenViewModelFactory
-        )[HomeScreenViewModel::class]
         val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
         val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
         val weatherData = WeatherData(
@@ -232,7 +231,13 @@ class HomeScreenViewModelTest {
             deviceDescription = "Data collected using AWS (Automated Weather Station)",
         )
 
+        val viewModel: HomeScreenViewModel = ViewModelProvider.create(
+            ViewModelStore(),
+            testApplicationComponent.homeScreenViewModelFactory
+        )[HomeScreenViewModel::class]
+
         viewModel.state.test {
+            awaitItem()
             awaitItem()
             awaitItem()
             awaitItem()
@@ -269,10 +274,6 @@ class HomeScreenViewModelTest {
     fun `Ensure error is handled properly when Weather data is fetched for locality selected`() =
         runTest {
             val testApplicationComponent = createTestApplicationComponent()
-            val viewModel: HomeScreenViewModel = ViewModelProvider.create(
-                ViewModelStore(),
-                testApplicationComponent.homeScreenViewModelFactory
-            )[HomeScreenViewModel::class]
             val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
             val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
             val weatherData = WeatherData(
@@ -313,9 +314,15 @@ class HomeScreenViewModelTest {
             )
 
             turbineScope {
+                val viewModel: HomeScreenViewModel = ViewModelProvider.create(
+                    ViewModelStore(),
+                    testApplicationComponent.homeScreenViewModelFactory
+                )[HomeScreenViewModel::class]
+
                 val stateTurbine = viewModel.state.testIn(backgroundScope)
                 val eventTurbine = viewModel.event.testIn(backgroundScope)
 
+                stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
@@ -381,10 +388,6 @@ class HomeScreenViewModelTest {
     fun `Ensure error is handled properly when Weather data is fetched for weather data refresh`() =
         runTest {
             val testApplicationComponent = createTestApplicationComponent()
-            val viewModel: HomeScreenViewModel = ViewModelProvider.create(
-                ViewModelStore(),
-                testApplicationComponent.homeScreenViewModelFactory
-            )[HomeScreenViewModel::class]
             val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
             val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
             val weatherData = WeatherData(
@@ -417,9 +420,15 @@ class HomeScreenViewModelTest {
             )
 
             turbineScope {
+                val viewModel: HomeScreenViewModel = ViewModelProvider.create(
+                    ViewModelStore(),
+                    testApplicationComponent.homeScreenViewModelFactory
+                )[HomeScreenViewModel::class]
+
                 val stateTurbine = viewModel.state.testIn(backgroundScope)
                 val eventTurbine = viewModel.event.testIn(backgroundScope)
 
+                stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
                 stateTurbine.awaitItem()
