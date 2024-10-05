@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
+import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
 import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
@@ -27,28 +28,26 @@ class LocationDataScreenViewModel @Inject constructor(
     coreLogger = coreLogger,
 ) {
 
-    init {
+    override val TAG: String
+        get() = this::class.simpleName.toString()
+
+    override fun onInit() {
         loadLocalityData()
         getLastSelectedIdWeatherData()
     }
-
-    override val TAG: String
-        get() = this::class.simpleName.toString()
 
     override fun dispatch(action: LocationDataScreenAction) {
         coreLogger.debug(TAG, "dispatch $action")
         when (action) {
             is OnLocalitySelected -> {
-                updateState(latestState.copy(selectedLocality = action.locality))
-                fetchWeatherData(
-                    latitude = action.locality.latitude.toFloat(),
-                    longitude = action.locality.longitude.toFloat(),
-                )
+                updateLastSelectedLocalityAndFetchWeatherData(locality = action.locality)
             }
         }
     }
 
     private fun loadLocalityData() {
+        if (latestState.localityList.isNotEmpty()) return
+
         viewModelScope.launch(context = Dispatchers.IO) {
             updateState(latestState.copy(isLocalityDataLoading = true))
             var localityList = localitiesDataRepository.getLocalityList()
@@ -77,6 +76,18 @@ class LocationDataScreenViewModel @Inject constructor(
             fetchWeatherData(
                 latitude = latestState.selectedLocality.latitude.toFloat(),
                 longitude = latestState.selectedLocality.longitude.toFloat(),
+            )
+        }
+    }
+
+    private fun updateLastSelectedLocalityAndFetchWeatherData(locality: LocalityData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateState(latestState.copy(selectedLocality = locality))
+            localitiesDataRepository.setLastSelectedLocality(locality = locality)
+
+            fetchWeatherData(
+                latitude = locality.latitude.toFloat(),
+                longitude = locality.longitude.toFloat(),
             )
         }
     }

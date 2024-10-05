@@ -24,7 +24,7 @@ class ApiCredentialScreenViewModel(
     override val TAG: String
         get() = this::class.simpleName.toString()
 
-    init {
+    override fun onInit() {
         getApiKeys()
     }
 

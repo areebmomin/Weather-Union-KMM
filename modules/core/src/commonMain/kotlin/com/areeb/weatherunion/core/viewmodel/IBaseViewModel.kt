@@ -14,5 +14,7 @@ interface IBaseViewModel<State : Any, Event : Any, Action : Any> {
     val latestState: State
     val event: Flow<Event>
 
+    fun onInit()
+
     fun dispatch(action: Action)
 }

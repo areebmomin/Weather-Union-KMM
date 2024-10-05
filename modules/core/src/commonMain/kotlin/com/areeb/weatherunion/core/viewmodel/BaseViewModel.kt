@@ -1,12 +1,16 @@
 package com.areeb.weatherunion.core.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.areeb.weatherunion.core.logger.CoreLogger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import com.areeb.weatherunion.core.viewmodel.IBaseViewModel as WeatherUnionViewModel
 
@@ -19,7 +23,13 @@ abstract class BaseViewModel<State : Any, Event : Any, Action : Any>(
 
     private val _state = MutableStateFlow(initialState)
     override val state: StateFlow<State>
-        get() = _state
+        get() = _state.onStart {
+            onInit()
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = latestState,
+        )
 
     override val latestState: State
         get() = _state.value

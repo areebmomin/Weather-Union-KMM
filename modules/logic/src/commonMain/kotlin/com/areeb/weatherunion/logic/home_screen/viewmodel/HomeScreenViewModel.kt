@@ -28,13 +28,13 @@ class HomeScreenViewModel(
     coreLogger = coreLogger,
 ) {
 
-    init {
+    override val TAG: String
+        get() = this::class.simpleName.toString()
+
+    override fun onInit() {
         loadLocalityData()
         getLastSelectedIdWeatherData()
     }
-
-    override val TAG: String
-        get() = this::class.simpleName.toString()
 
     override fun dispatch(action: HomeScreenAction) {
         coreLogger.debug(TAG, "dispatch $action")
@@ -50,6 +50,8 @@ class HomeScreenViewModel(
     }
 
     private fun loadLocalityData() {
+        if (latestState.localitiesMap.isNotEmpty()) return
+
         viewModelScope.launch(context = Dispatchers.IO) {
             updateState(latestState.copy(isLocalityDataLoading = true))
             var localitiesMap = localitiesDataRepository.getLocalitiesMap()
