@@ -21,13 +21,19 @@ import com.areeb.weatherunion.logic.models.WeatherDataWindSpeed
 import com.areeb.weatherunion.testing.data.api.locality_weather_data.FakeLocalityWeatherDataApiImpl
 import com.areeb.weatherunion.testing.data.dao.FakeLocalityDaoImpl
 import com.areeb.weatherunion.testing.logic.di.createTestApplicationComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class HomeScreenViewModelTest {
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Ensure initial Locality and Weather data is fetched properly`() = runTest {
+        val testDispatcher = StandardTestDispatcher(testScheduler)
         val testApplicationComponent = createTestApplicationComponent()
         val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
         val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
@@ -60,12 +66,32 @@ class HomeScreenViewModelTest {
             deviceDescription = "Data collected using AWS (Automated Weather Station)",
         )
 
+        Dispatchers.setMain(testDispatcher)
+
         val viewModel: HomeScreenViewModel = ViewModelProvider.create(
             ViewModelStore(),
             testApplicationComponent.homeScreenViewModelFactory
         )[HomeScreenViewModel::class]
 
-        viewModel.state.test {
+        turbineScope {
+            val stateTurbine = viewModel.state.testIn(backgroundScope)
+
+            assertEquals(HomeScreenState(), stateTurbine.awaitItem())
+
+            assertEquals(HomeScreenState(isLocalityDataLoading = true), stateTurbine.awaitItem())
+
+            assertEquals(
+                HomeScreenState(
+                    isLoading = false,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = WeatherData(),
+                    localitiesMap = localitiesMap,
+                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
             assertEquals(
                 HomeScreenState(
                     isLoading = true,
@@ -75,19 +101,7 @@ class HomeScreenViewModelTest {
                     localitiesMap = localitiesMap,
                     uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
                 ),
-                awaitItem(),
-            )
-
-            assertEquals(
-                HomeScreenState(
-                    isLoading = true,
-                    isLocalityDataLoading = false,
-                    selectedLocality = DEFAULT_LOCALITY,
-                    weatherData = weatherData,
-                    localitiesMap = localitiesMap,
-                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
-                ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
 
             assertEquals(
@@ -99,13 +113,15 @@ class HomeScreenViewModelTest {
                     localitiesMap = localitiesMap,
                     uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Ensure Locality data is fetched properly when Locality is selected`() = runTest {
+        val testDispatcher = StandardTestDispatcher(testScheduler)
         val testApplicationComponent = createTestApplicationComponent()
         val localitiesMap = FakeLocalityDaoImpl.defaultLocalityList.groupBy { it.cityName }
         val uniqueCitiesFirstLocalityList = localitiesMap.values.map { list -> list.first() }
@@ -146,16 +162,58 @@ class HomeScreenViewModelTest {
             deviceType = 1,
         )
 
+        Dispatchers.setMain(testDispatcher)
+
         val viewModel: HomeScreenViewModel = ViewModelProvider.create(
             ViewModelStore(),
             testApplicationComponent.homeScreenViewModelFactory
         )[HomeScreenViewModel::class]
 
-        viewModel.state.test {
-            awaitItem()
-            awaitItem()
-            awaitItem()
-            awaitItem()
+        turbineScope {
+            val stateTurbine = viewModel.state.testIn(backgroundScope)
+
+            assertEquals(HomeScreenState(), stateTurbine.awaitItem())
+
+            assertEquals(HomeScreenState(isLocalityDataLoading = true), stateTurbine.awaitItem())
+
+            assertEquals(
+                HomeScreenState(
+                    isLoading = false,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = WeatherData(),
+                    localitiesMap = localitiesMap,
+                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
+            assertEquals(
+                HomeScreenState(
+                    isLoading = true,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = WeatherData(),
+                    localitiesMap = localitiesMap,
+                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
+            assertEquals(
+                HomeScreenState(
+                    isLoading = false,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = weatherData,
+                    localitiesMap = localitiesMap,
+                    uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
+            (testApplicationComponent.localityWeatherDataApi as FakeLocalityWeatherDataApiImpl)
+                .temperature = 20.5
 
             viewModel.dispatch(OnLocalitySelected(locality = selectedLocality))
 
@@ -168,7 +226,7 @@ class HomeScreenViewModelTest {
                     localitiesMap = localitiesMap,
                     uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
 
             assertEquals(
@@ -180,7 +238,7 @@ class HomeScreenViewModelTest {
                     localitiesMap = localitiesMap,
                     uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
 
             assertEquals(
@@ -188,11 +246,13 @@ class HomeScreenViewModelTest {
                     isLoading = false,
                     isLocalityDataLoading = false,
                     selectedLocality = selectedLocality,
-                    weatherData = weatherData,
+                    weatherData = weatherData.copy(
+                        temperature = weatherData.temperature.copy(temperature = "21"),
+                    ),
                     localitiesMap = localitiesMap,
                     uniqueCitiesFirstLocalityList = uniqueCitiesFirstLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
         }
     }

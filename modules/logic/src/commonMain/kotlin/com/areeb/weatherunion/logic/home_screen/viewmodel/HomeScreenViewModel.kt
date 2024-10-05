@@ -104,25 +104,24 @@ class HomeScreenViewModel(
             when (response) {
                 is ApiResponse.Success -> {
                     val weatherData = weatherDataConverterUseCase.invoke(response.body)
-                    updateState(latestState.copy(weatherData = weatherData))
+                    updateState(latestState.copy(weatherData = weatherData, isLoading = false))
                 }
 
                 is ApiResponse.Error.HttpError -> {
-                    updateState(latestState.copy(weatherData = WeatherData()))
+                    updateState(latestState.copy(weatherData = WeatherData(), isLoading = false))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.SerializationError -> {
-                    updateState(latestState.copy(weatherData = WeatherData()))
+                    updateState(latestState.copy(weatherData = WeatherData(), isLoading = false))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
 
                 is ApiResponse.Error.GenericError -> {
-                    updateState(latestState.copy(weatherData = WeatherData()))
+                    updateState(latestState.copy(weatherData = WeatherData(), isLoading = false))
                     triggerEvent(Error(message = response.errorMessage ?: "Something went wrong"))
                 }
             }
-            updateState(latestState.copy(isLoading = false))
         }
     }
 
