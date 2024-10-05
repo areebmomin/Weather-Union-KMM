@@ -8,7 +8,7 @@ CREATE TABLE Locality (
 );
 
 insertLocality:
-INSERT INTO Locality (locality_id, city_name, locality_name, latitude, longitude, device_type)
+INSERT OR REPLACE INTO Locality (locality_id, city_name, locality_name, latitude, longitude, device_type)
 VALUES (:locality_id, :city_name, :locality_name, :latitude, :longitude, :device_type);
 
 getAllLocalities:
