@@ -2,7 +2,6 @@ package com.areeb.weatherunion.testing.logic.location_data_screen
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
-import app.cash.turbine.test
 import app.cash.turbine.turbineScope
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.utils.DEFAULT_LOCALITY
@@ -21,12 +20,16 @@ import com.areeb.weatherunion.testing.core.coroutines.createTestDispatchers
 import com.areeb.weatherunion.testing.data.api.lat_lon_weather_data.FakeLatLonWeatherDataApiImpl
 import com.areeb.weatherunion.testing.data.dao.FakeLocalityDaoImpl
 import com.areeb.weatherunion.testing.logic.di.createTestApplicationComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LocationDataScreenViewModelTest {
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Ensure initial Locality and Weather data is fetched properly`() = runTest {
         val testDispatcher = StandardTestDispatcher(testScheduler)
@@ -62,32 +65,30 @@ class LocationDataScreenViewModelTest {
             deviceDescription = "Data collected using AWS (Automated Weather Station)",
         )
 
+        Dispatchers.setMain(testDispatcher)
+
         val viewModel: LocationDataScreenViewModel = ViewModelProvider.create(
             ViewModelStore(),
             testApplicationComponent.locationDataScreenViewModelFactory,
         )[LocationDataScreenViewModel::class]
 
-        viewModel.state.test {
+        turbineScope {
+            val stateTurbine = viewModel.state.testIn(backgroundScope)
+
+            assertEquals(
+                LocationDataScreenState(isLoading = false),
+                stateTurbine.awaitItem(),
+            )
+
             assertEquals(
                 LocationDataScreenState(
-                    isLoading = true,
+                    isLoading = false,
                     isLocalityDataLoading = false,
                     selectedLocality = DEFAULT_LOCALITY,
                     weatherData = WeatherData(),
                     localityList = FakeLocalityDaoImpl.defaultLocalityList,
                 ),
-                awaitItem(),
-            )
-
-            assertEquals(
-                LocationDataScreenState(
-                    isLoading = true,
-                    isLocalityDataLoading = false,
-                    selectedLocality = DEFAULT_LOCALITY,
-                    weatherData = weatherData,
-                    localityList = FakeLocalityDaoImpl.defaultLocalityList,
-                ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
 
             assertEquals(
@@ -98,11 +99,12 @@ class LocationDataScreenViewModelTest {
                     weatherData = weatherData,
                     localityList = FakeLocalityDaoImpl.defaultLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Ensure Locality data is fetched properly when Locality is selected`() = runTest {
         val testDispatcher = StandardTestDispatcher(testScheduler)
@@ -146,16 +148,45 @@ class LocationDataScreenViewModelTest {
             deviceType = 1,
         )
 
+        Dispatchers.setMain(testDispatcher)
+
         val viewModel: LocationDataScreenViewModel = ViewModelProvider.create(
             ViewModelStore(),
             testApplicationComponent.locationDataScreenViewModelFactory,
         )[LocationDataScreenViewModel::class]
 
-        viewModel.state.test {
-            awaitItem()
-            awaitItem()
-            awaitItem()
-            awaitItem()
+        turbineScope {
+            val stateTurbine = viewModel.state.testIn(backgroundScope)
+
+            assertEquals(
+                LocationDataScreenState(isLoading = false),
+                stateTurbine.awaitItem(),
+            )
+
+            assertEquals(
+                LocationDataScreenState(
+                    isLoading = false,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = WeatherData(),
+                    localityList = FakeLocalityDaoImpl.defaultLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
+            assertEquals(
+                LocationDataScreenState(
+                    isLoading = false,
+                    isLocalityDataLoading = false,
+                    selectedLocality = DEFAULT_LOCALITY,
+                    weatherData = weatherData,
+                    localityList = FakeLocalityDaoImpl.defaultLocalityList,
+                ),
+                stateTurbine.awaitItem(),
+            )
+
+            (testApplicationComponent.latLonWeatherDataApi as FakeLatLonWeatherDataApiImpl)
+                .temperature = 20.5
 
             viewModel.dispatch(OnLocalitySelected(locality = selectedLocality))
 
@@ -167,18 +198,7 @@ class LocationDataScreenViewModelTest {
                     weatherData = weatherData,
                     localityList = FakeLocalityDaoImpl.defaultLocalityList,
                 ),
-                awaitItem(),
-            )
-
-            assertEquals(
-                LocationDataScreenState(
-                    isLoading = true,
-                    isLocalityDataLoading = false,
-                    selectedLocality = selectedLocality,
-                    weatherData = weatherData,
-                    localityList = FakeLocalityDaoImpl.defaultLocalityList,
-                ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
 
             assertEquals(
@@ -186,14 +206,17 @@ class LocationDataScreenViewModelTest {
                     isLoading = false,
                     isLocalityDataLoading = false,
                     selectedLocality = selectedLocality,
-                    weatherData = weatherData,
+                    weatherData = weatherData.copy(
+                        temperature = weatherData.temperature.copy(temperature = "21"),
+                    ),
                     localityList = FakeLocalityDaoImpl.defaultLocalityList,
                 ),
-                awaitItem(),
+                stateTurbine.awaitItem(),
             )
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `Ensure error is handled properly when Weather data is fetched for locality selected`() =
         runTest {
@@ -238,19 +261,43 @@ class LocationDataScreenViewModelTest {
                 deviceType = 1,
             )
 
-            turbineScope {
-                val viewModel: LocationDataScreenViewModel = ViewModelProvider.create(
-                    ViewModelStore(),
-                    testApplicationComponent.locationDataScreenViewModelFactory,
-                )[LocationDataScreenViewModel::class]
+            Dispatchers.setMain(testDispatcher)
 
+            val viewModel: LocationDataScreenViewModel = ViewModelProvider.create(
+                ViewModelStore(),
+                testApplicationComponent.locationDataScreenViewModelFactory,
+            )[LocationDataScreenViewModel::class]
+
+            turbineScope {
                 val stateTurbine = viewModel.state.testIn(backgroundScope)
                 val eventTurbine = viewModel.event.testIn(backgroundScope)
 
-                stateTurbine.awaitItem()
-                stateTurbine.awaitItem()
-                stateTurbine.awaitItem()
-                stateTurbine.awaitItem()
+                assertEquals(
+                    LocationDataScreenState(isLoading = false),
+                    stateTurbine.awaitItem(),
+                )
+
+                assertEquals(
+                    LocationDataScreenState(
+                        isLoading = false,
+                        isLocalityDataLoading = false,
+                        selectedLocality = DEFAULT_LOCALITY,
+                        weatherData = WeatherData(),
+                        localityList = FakeLocalityDaoImpl.defaultLocalityList,
+                    ),
+                    stateTurbine.awaitItem(),
+                )
+
+                assertEquals(
+                    LocationDataScreenState(
+                        isLoading = false,
+                        isLocalityDataLoading = false,
+                        selectedLocality = DEFAULT_LOCALITY,
+                        weatherData = weatherData,
+                        localityList = FakeLocalityDaoImpl.defaultLocalityList,
+                    ),
+                    stateTurbine.awaitItem(),
+                )
 
                 (testApplicationComponent.latLonWeatherDataApi as FakeLatLonWeatherDataApiImpl)
                     .returnSuccess = false
@@ -268,29 +315,7 @@ class LocationDataScreenViewModelTest {
                     stateTurbine.awaitItem(),
                 )
 
-                assertEquals(
-                    LocationDataScreenState(
-                        isLoading = true,
-                        isLocalityDataLoading = false,
-                        selectedLocality = selectedLocality,
-                        weatherData = weatherData,
-                        localityList = FakeLocalityDaoImpl.defaultLocalityList,
-                    ),
-                    stateTurbine.awaitItem(),
-                )
-
                 assertEquals(Error(message = "Something went wrong"), eventTurbine.awaitItem())
-
-                assertEquals(
-                    LocationDataScreenState(
-                        isLoading = true,
-                        isLocalityDataLoading = false,
-                        selectedLocality = selectedLocality,
-                        weatherData = WeatherData(),
-                        localityList = FakeLocalityDaoImpl.defaultLocalityList,
-                    ),
-                    stateTurbine.awaitItem(),
-                )
 
                 assertEquals(
                     LocationDataScreenState(

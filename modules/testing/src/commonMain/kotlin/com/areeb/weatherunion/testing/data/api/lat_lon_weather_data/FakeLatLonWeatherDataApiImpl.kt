@@ -9,6 +9,7 @@ import me.tatarka.inject.annotations.Inject
 @Inject
 class FakeLatLonWeatherDataApiImpl : LatLonWeatherDataApi {
     var returnSuccess = true
+    var temperature = 19.5
 
     override suspend fun getWeatherData(
         latitude: Float,
@@ -21,7 +22,7 @@ class FakeLatLonWeatherDataApiImpl : LatLonWeatherDataApi {
                     message = "Success",
                     deviceType = 1,
                     localityWeatherData = LatLonLocalityWeatherData(
-                        temperature = 19.5,
+                        temperature = temperature,
                         humidity = 12.4,
                         windSpeed = 1.5,
                         windDirection = 34.0,
