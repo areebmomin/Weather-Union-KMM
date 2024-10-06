@@ -17,9 +17,11 @@ import com.areeb.weatherunion.logic.models.WeatherDataRainIntensity
 import com.areeb.weatherunion.logic.models.WeatherDataTemperature
 import com.areeb.weatherunion.logic.models.WeatherDataWindDirection
 import com.areeb.weatherunion.logic.models.WeatherDataWindSpeed
+import com.areeb.weatherunion.testing.core.coroutines.createTestDispatchers
 import com.areeb.weatherunion.testing.data.api.lat_lon_weather_data.FakeLatLonWeatherDataApiImpl
 import com.areeb.weatherunion.testing.data.dao.FakeLocalityDaoImpl
 import com.areeb.weatherunion.testing.logic.di.createTestApplicationComponent
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -27,7 +29,10 @@ import kotlin.test.assertEquals
 class LocationDataScreenViewModelTest {
     @Test
     fun `Ensure initial Locality and Weather data is fetched properly`() = runTest {
-        val testApplicationComponent = createTestApplicationComponent()
+        val testDispatcher = StandardTestDispatcher(testScheduler)
+        val testApplicationComponent = createTestApplicationComponent(
+            coroutineDispatchers = createTestDispatchers(testDispatcher = testDispatcher)
+        )
         val weatherData = WeatherData(
             temperature = WeatherDataTemperature(
                 temperature = "20",
@@ -100,7 +105,10 @@ class LocationDataScreenViewModelTest {
 
     @Test
     fun `Ensure Locality data is fetched properly when Locality is selected`() = runTest {
-        val testApplicationComponent = createTestApplicationComponent()
+        val testDispatcher = StandardTestDispatcher(testScheduler)
+        val testApplicationComponent = createTestApplicationComponent(
+            coroutineDispatchers = createTestDispatchers(testDispatcher = testDispatcher)
+        )
         val weatherData = WeatherData(
             temperature = WeatherDataTemperature(
                 temperature = "20",
@@ -189,7 +197,10 @@ class LocationDataScreenViewModelTest {
     @Test
     fun `Ensure error is handled properly when Weather data is fetched for locality selected`() =
         runTest {
-            val testApplicationComponent = createTestApplicationComponent()
+            val testDispatcher = StandardTestDispatcher(testScheduler)
+            val testApplicationComponent = createTestApplicationComponent(
+                coroutineDispatchers = createTestDispatchers(testDispatcher = testDispatcher)
+            )
             val weatherData = WeatherData(
                 temperature = WeatherDataTemperature(
                     temperature = "20",
