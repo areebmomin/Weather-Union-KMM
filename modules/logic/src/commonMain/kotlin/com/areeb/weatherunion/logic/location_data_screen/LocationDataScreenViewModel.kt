@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.network.ApiResponse
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
@@ -12,14 +13,13 @@ import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepo
 import com.areeb.weatherunion.data.repository.weather_data.WeatherDataRepository
 import com.areeb.weatherunion.logic.home_screen.usecases.WeatherDataConverterUseCase
 import com.areeb.weatherunion.logic.models.WeatherData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 import kotlin.reflect.KClass
 
 class LocationDataScreenViewModel @Inject constructor(
     private val coreLogger: CoreLogger,
+    private val coroutineDispatchers: CoroutineDispatchers,
     private val localitiesDataRepository: LocalitiesDataRepository,
     private val weatherDataRepository: WeatherDataRepository,
     private val weatherDataConverterUseCase: WeatherDataConverterUseCase,
@@ -48,7 +48,7 @@ class LocationDataScreenViewModel @Inject constructor(
     private fun loadLocalityData() {
         if (latestState.localityList.isNotEmpty()) return
 
-        viewModelScope.launch(context = Dispatchers.IO) {
+        viewModelScope.launch(context = coroutineDispatchers.io) {
             updateState(latestState.copy(isLocalityDataLoading = true))
             var localityList = localitiesDataRepository.getLocalityList()
 
@@ -67,7 +67,7 @@ class LocationDataScreenViewModel @Inject constructor(
     }
 
     private fun getLastSelectedIdWeatherData() {
-        viewModelScope.launch(context = Dispatchers.IO) {
+        viewModelScope.launch(context = coroutineDispatchers.io) {
             val lastSelectedLocality = localitiesDataRepository.getLastSelectedLocality()
             if (lastSelectedLocality.localityId.isNotEmpty()) {
                 updateState(latestState.copy(selectedLocality = lastSelectedLocality))
@@ -81,7 +81,7 @@ class LocationDataScreenViewModel @Inject constructor(
     }
 
     private fun updateLastSelectedLocalityAndFetchWeatherData(locality: LocalityData) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(coroutineDispatchers.io) {
             updateState(latestState.copy(selectedLocality = locality))
             localitiesDataRepository.setLastSelectedLocality(locality = locality)
 
@@ -93,7 +93,7 @@ class LocationDataScreenViewModel @Inject constructor(
     }
 
     private fun fetchWeatherData(latitude: Float, longitude: Float) {
-        viewModelScope.launch(context = Dispatchers.IO) {
+        viewModelScope.launch(context = coroutineDispatchers.io) {
             updateState(latestState.copy(isLoading = true))
             val response = weatherDataRepository.getWeatherData(
                 latitude = latitude,
@@ -126,6 +126,7 @@ class LocationDataScreenViewModel @Inject constructor(
     companion object {
         class Factory @Inject constructor(
             private val coreLogger: CoreLogger,
+            private val coroutineDispatchers: CoroutineDispatchers,
             private val localitiesDataRepository: LocalitiesDataRepository,
             private val weatherDataRepository: WeatherDataRepository,
             private val weatherDataConverterUseCase: WeatherDataConverterUseCase,
@@ -134,6 +135,7 @@ class LocationDataScreenViewModel @Inject constructor(
             override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
                 return LocationDataScreenViewModel(
                     coreLogger = coreLogger,
+                    coroutineDispatchers = coroutineDispatchers,
                     localitiesDataRepository = localitiesDataRepository,
                     weatherDataRepository = weatherDataRepository,
                     weatherDataConverterUseCase = weatherDataConverterUseCase,

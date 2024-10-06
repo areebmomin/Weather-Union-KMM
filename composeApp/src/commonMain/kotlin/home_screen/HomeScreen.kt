@@ -31,10 +31,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.logic.home_screen.viewmodel.Error
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
 import com.areeb.weatherunion.logic.home_screen.viewmodel.OnLocalitySelected
@@ -51,7 +51,6 @@ import home_screen.components.TemperatureText
 import home_screen.components.WindDirectionTile
 import home_screen.components.WindSpeedTile
 import home_screen.components.showLocalitiesBottomSheet
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
@@ -67,6 +66,7 @@ import weatherunionkmm.composeapp.generated.resources.select_city
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel,
+    coroutineDispatchers: CoroutineDispatchers,
     onLocationDataMenuClicked: () -> Unit,
     onEnterApiKeyMenuClicked: () -> Unit,
     onInfoMenuClicked: () -> Unit,
@@ -74,7 +74,7 @@ fun HomeScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
-        context = Dispatchers.Main.immediate,
+        context = coroutineDispatchers.mainImmediate,
     )
     val connectivityState = rememberConnectivityState { autoStart = true }
     val snackBarHostState = remember { SnackbarHostState() }

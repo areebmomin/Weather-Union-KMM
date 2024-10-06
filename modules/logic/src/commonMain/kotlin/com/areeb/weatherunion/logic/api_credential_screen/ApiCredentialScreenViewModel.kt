@@ -4,18 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.core.logger.CoreLogger
 import com.areeb.weatherunion.core.viewmodel.BaseViewModel
 import com.areeb.weatherunion.data.repository.api_credential.ApiCredentialRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 import kotlin.reflect.KClass
 
 class ApiCredentialScreenViewModel(
-    private val apiCredentialRepository: ApiCredentialRepository,
     private val coreLogger: CoreLogger,
+    private val coroutineDispatchers: CoroutineDispatchers,
+    private val apiCredentialRepository: ApiCredentialRepository,
 ) : BaseViewModel<ApiCredentialScreenState, ApiCredentialScreenEvent, ApiCredentialScreenAction>(
     initialState = ApiCredentialScreenState(),
     coreLogger = coreLogger,
@@ -36,7 +36,7 @@ class ApiCredentialScreenViewModel(
             }
 
             SaveWeatherUnionApiKey -> {
-                viewModelScope.launch(context = Dispatchers.IO) {
+                viewModelScope.launch(context = coroutineDispatchers.io) {
                     apiCredentialRepository.updateWeatherUnionApiKey(
                         apiKey = latestState.weatherUnionApiKey,
                     )
@@ -47,7 +47,7 @@ class ApiCredentialScreenViewModel(
     }
 
     private fun getApiKeys() {
-        viewModelScope.launch(context = Dispatchers.IO) {
+        viewModelScope.launch(context = coroutineDispatchers.io) {
             val weatherUnionApiKey = apiCredentialRepository.getWeatherUnionApiKey()
             updateState(
                 latestState.copy(
@@ -59,14 +59,16 @@ class ApiCredentialScreenViewModel(
 
     companion object {
         class Factory @Inject constructor(
-            private val apiCredentialRepository: ApiCredentialRepository,
             private val coreLogger: CoreLogger,
+            private val coroutineDispatchers: CoroutineDispatchers,
+            private val apiCredentialRepository: ApiCredentialRepository,
         ) : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
                 return ApiCredentialScreenViewModel(
-                    apiCredentialRepository = apiCredentialRepository,
                     coreLogger = coreLogger,
+                    coroutineDispatchers = coroutineDispatchers,
+                    apiCredentialRepository = apiCredentialRepository,
                 ) as T
             }
         }

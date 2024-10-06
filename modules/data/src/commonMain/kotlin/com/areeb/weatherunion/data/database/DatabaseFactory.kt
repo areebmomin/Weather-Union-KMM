@@ -10,8 +10,6 @@ class DatabaseFactory(private val databaseDriverFactory: DatabaseDriverFactory) 
         val driver = databaseDriverFactory.createDriver()
         val database = WeatherUnionDatabase(driver)
 
-        // Do more work with the database (see below).
-
         return database
     }
 }

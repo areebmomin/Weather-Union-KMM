@@ -18,6 +18,8 @@ annotation class ApplicationScope
 
 interface CoreComponent {
 
+    val coroutineDispatchers: CoroutineDispatchers
+
     @ApplicationScope
     @Provides
     fun applicationCoroutineScope(): ApplicationCoroutineScope =

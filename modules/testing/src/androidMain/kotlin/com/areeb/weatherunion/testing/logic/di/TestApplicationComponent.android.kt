@@ -1,4 +1,6 @@
 package com.areeb.weatherunion.testing.logic.di
 
-actual fun createTestApplicationComponent(): TestApplicationComponent =
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
+
+actual fun createTestApplicationComponent(coroutineDispatchers: CoroutineDispatchers): TestApplicationComponent =
     TestApplicationComponent.create()

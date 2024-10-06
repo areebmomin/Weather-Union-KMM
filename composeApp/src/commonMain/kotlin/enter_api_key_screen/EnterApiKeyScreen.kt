@@ -32,13 +32,13 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
 import com.areeb.weatherunion.logic.api_credential_screen.SaveWeatherUnionApiKey
 import com.areeb.weatherunion.logic.api_credential_screen.ShowSnackBar
 import com.areeb.weatherunion.logic.api_credential_screen.UpdateWeatherUnionApiKey
 import enter_api_key_screen.components.EnterApiKeyScreenTopAppBar
 import enter_api_key_screen.components.EnterApiKeyTextField
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -51,6 +51,7 @@ import weatherunionkmm.composeapp.generated.resources.weather_union_api_key
 @Composable
 fun EnterApiKeyScreen(
     viewModel: ApiCredentialScreenViewModel,
+    coroutineDispatchers: CoroutineDispatchers,
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit,
 ) {
@@ -59,7 +60,7 @@ fun EnterApiKeyScreen(
 
     val state by viewModel.state.collectAsStateWithLifecycle(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
-        context = Dispatchers.Main.immediate,
+        context = coroutineDispatchers.mainImmediate,
     )
     LaunchedEffect(viewModel.event) {
         viewModel.event.collectLatest {

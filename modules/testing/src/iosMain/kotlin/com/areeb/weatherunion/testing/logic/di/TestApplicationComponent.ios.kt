@@ -1,6 +1,9 @@
 package com.areeb.weatherunion.testing.logic.di
 
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.core.logger.CoreLogger
+import com.areeb.weatherunion.data.api.lat_lon_weather_data.LatLonWeatherDataApi
+import com.areeb.weatherunion.data.api.locality_weather_data.LocalityWeatherDataApi
 import com.areeb.weatherunion.data.repository.api_credential.ApiCredentialRepositoryImpl
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepository
 import com.areeb.weatherunion.data.repository.localities_data.LocalitiesDataRepositoryImpl
@@ -19,11 +22,30 @@ import com.areeb.weatherunion.testing.data.preference.FakeWeatherUnionPreference
 import me.tatarka.inject.internal.LazyMap
 import me.tatarka.inject.internal.ScopedComponent
 
-actual fun createTestApplicationComponent(): TestApplicationComponent =
-    TestApplicationComponentImpl()
+actual fun createTestApplicationComponent(coroutineDispatchers: CoroutineDispatchers): TestApplicationComponent =
+    TestApplicationComponentImpl(coroutineDispatchers = coroutineDispatchers)
 
-class TestApplicationComponentImpl : TestApplicationComponent(), ScopedComponent {
+class TestApplicationComponentImpl(
+    coroutineDispatchers: CoroutineDispatchers,
+) : TestApplicationComponent(coroutineDispatchers = coroutineDispatchers), ScopedComponent {
+
     override val _scoped: LazyMap = LazyMap()
+
+    override val latLonWeatherDataApi: LatLonWeatherDataApi
+        get() =
+            _scoped.get("com.areeb.weatherunion.`data`.api.lat_lon_weather_data.LatLonWeatherDataApi") {
+                latLonWeatherDataApi(
+                    impl = FakeLatLonWeatherDataApiImpl()
+                )
+            }
+
+    override val localityWeatherDataApi: LocalityWeatherDataApi
+        get() =
+            _scoped.get("com.areeb.weatherunion.`data`.api.locality_weather_data.LocalityWeatherDataApi") {
+                localityWeatherDataApi(
+                    impl = FakeLocalityWeatherDataApiImpl()
+                )
+            }
 
     private val coreLogger: CoreLogger
         get() = _scoped.get("com.areeb.weatherunion.core.logger.CoreLogger") {
@@ -54,7 +76,8 @@ class TestApplicationComponentImpl : TestApplicationComponent(), ScopedComponent
             apiCredentialRepository = ApiCredentialRepositoryImpl(
                 apiKeyDao = FakeApiKeyDaoImpl().binds
             ).binds,
-            coreLogger = coreLogger
+            coreLogger = coreLogger,
+            coroutineDispatchers = coroutineDispatchers,
         )
 
     override val homeScreenViewModelFactory: HomeScreenViewModel.Companion.Factory
@@ -62,7 +85,8 @@ class TestApplicationComponentImpl : TestApplicationComponent(), ScopedComponent
             coreLogger = coreLogger,
             localitiesDataRepository = localitiesDataRepository,
             weatherDataRepository = weatherDataRepository,
-            weatherDataConverterUseCase = WeatherDataConverterUseCase()
+            weatherDataConverterUseCase = WeatherDataConverterUseCase(),
+            coroutineDispatchers = coroutineDispatchers,
         )
 
     override val locationDataScreenViewModelFactory: LocationDataScreenViewModel.Companion.Factory
@@ -70,6 +94,7 @@ class TestApplicationComponentImpl : TestApplicationComponent(), ScopedComponent
             coreLogger = coreLogger,
             localitiesDataRepository = localitiesDataRepository,
             weatherDataRepository = weatherDataRepository,
-            weatherDataConverterUseCase = WeatherDataConverterUseCase()
+            weatherDataConverterUseCase = WeatherDataConverterUseCase(),
+            coroutineDispatchers = coroutineDispatchers,
         )
 }

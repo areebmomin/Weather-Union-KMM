@@ -71,7 +71,7 @@ struct ComposeView: UIViewControllerRepresentable {
     private let applicationComponent = ApplicationComponent.companion.create()
     
     func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.MainViewController(logicComponent: applicationComponent, mapUIViewController: { selectedLocality, localityList, onItemClick in {
+        MainViewControllerKt.MainViewController(logicComponent: applicationComponent, coroutineDispatchers: applicationComponent.coroutineDispatchers, mapUIViewController: { selectedLocality, localityList, onItemClick in {
             UIHostingController(rootView: GoogleMapView(selectedLocality: selectedLocality, localityList: localityList, onItemClick: onItemClick))
             }
         })

@@ -16,9 +16,13 @@ class MainActivity : ComponentActivity() {
             navigationBarStyle = SystemBarStyle.dark(Color.TRANSPARENT)
         )
 
+        val applicationComponent = (application as WeatherUnionApplication).applicationComponent
+        val coroutineDispatchers = applicationComponent.coroutineDispatchers
+
         setContent {
             App(
-                logicComponent = (application as WeatherUnionApplication).applicationComponent
+                logicComponent = applicationComponent,
+                coroutineDispatchers = coroutineDispatchers,
             )
         }
     }

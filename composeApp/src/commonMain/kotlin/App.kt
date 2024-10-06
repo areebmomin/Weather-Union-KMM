@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.logic.api_credential_screen.ApiCredentialScreenViewModel
 import com.areeb.weatherunion.logic.di.LogicComponent
 import com.areeb.weatherunion.logic.home_screen.viewmodel.HomeScreenViewModel
@@ -23,6 +24,7 @@ import location_data_screen.LocationDataScreen
 @Composable
 fun App(
     logicComponent: LogicComponent,
+    coroutineDispatchers: CoroutineDispatchers,
     navController: NavHostController = rememberNavController(),
 ) {
     val viewModelStore = remember { ViewModelStore() }
@@ -52,6 +54,7 @@ fun App(
 
                 HomeScreen(
                     viewModel = viewModel,
+                    coroutineDispatchers = coroutineDispatchers,
                     onLocationDataMenuClicked = {
                         navController.navigate(Screen.LocationData.name)
                     },
@@ -85,6 +88,7 @@ fun App(
 
                 LocationDataScreen(
                     viewModel = viewModel,
+                    coroutineDispatchers = coroutineDispatchers,
                     onBackPressed = {
                         navController.popBackStack()
                     },
@@ -112,6 +116,7 @@ fun App(
 
                 EnterApiKeyScreen(
                     viewModel = viewModel,
+                    coroutineDispatchers = coroutineDispatchers,
                     onBackPressed = {
                         navController.popBackStack()
                     }

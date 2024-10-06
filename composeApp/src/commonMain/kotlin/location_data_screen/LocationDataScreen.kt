@@ -27,12 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.areeb.weatherunion.core.coroutines.CoroutineDispatchers
 import com.areeb.weatherunion.logic.location_data_screen.Error
 import com.areeb.weatherunion.logic.location_data_screen.LocationDataScreenViewModel
 import com.areeb.weatherunion.logic.location_data_screen.OnLocalitySelected
 import dev.jordond.connectivity.Connectivity
 import dev.jordond.connectivity.compose.rememberConnectivityState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import location_data_screen.components.MapComponent
@@ -45,12 +45,13 @@ import weatherunionkmm.composeapp.generated.resources.navigate_to_home_page
 @Composable
 fun LocationDataScreen(
     viewModel: LocationDataScreenViewModel,
+    coroutineDispatchers: CoroutineDispatchers,
     modifier: Modifier = Modifier,
     onBackPressed: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle(
         lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current,
-        context = Dispatchers.Main.immediate,
+        context = coroutineDispatchers.mainImmediate,
     )
     val connectivityState = rememberConnectivityState { autoStart = true }
     val snackBarHostState = remember { SnackbarHostState() }
