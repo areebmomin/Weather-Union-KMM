@@ -44,6 +44,13 @@ kotlin {
                 implementation(libs.turbine)
                 implementation(libs.kotlin.inject.runtime)
             }
+            androidMain.dependencies {
+                implementation(libs.datastore)
+                implementation(libs.androidx.junit.ktx)
+                implementation(libs.androidx.espresso.core)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.test)
+            }
         }
     }
 }
@@ -65,6 +72,7 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
