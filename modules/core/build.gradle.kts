@@ -35,12 +35,12 @@ kotlin {
         }
 
         commonMain.dependencies {
-            //put your multiplatform dependencies here
             implementation(libs.bundles.ktor.common)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.kermit)
             implementation(libs.viewmodel)
+            implementation(libs.inspektify.ktor2)
         }
 
         commonTest.dependencies {
@@ -69,6 +69,9 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 24
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
