@@ -26,6 +26,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class LocalityWeatherDataApiTest {
+
     private val testApiKey = "dbkcgm1m5biz59c6"
 
     @Test
