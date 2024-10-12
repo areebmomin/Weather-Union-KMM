@@ -1,3 +1,5 @@
+package data.preference
+
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
 import com.areeb.weatherunion.data.preference.DataStorePlatformValuesGetter
 import com.areeb.weatherunion.data.preference.ProtoDataStoreFactory

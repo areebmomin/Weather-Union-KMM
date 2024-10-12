@@ -1,3 +1,5 @@
+package data.preference
+
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.test.core.app.ApplicationProvider
