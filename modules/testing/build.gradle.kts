@@ -43,6 +43,8 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.test)
                 implementation(libs.turbine)
                 implementation(libs.kotlin.inject.runtime)
+                implementation(libs.bundles.ktor.common)
+                implementation(libs.ktor.client.mock)
             }
             androidMain.dependencies {
                 implementation(libs.datastore)
