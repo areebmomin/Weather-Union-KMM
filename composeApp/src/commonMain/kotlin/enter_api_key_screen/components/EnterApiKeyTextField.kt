@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -29,6 +30,7 @@ import weatherunionkmm.composeapp.generated.resources.show_password
 fun EnterApiKeyTextField(
     modifier: Modifier = Modifier,
     value: String,
+    testTag: String = "",
     onValueChange: (String) -> Unit,
     label: @Composable () -> Unit,
     placeholder: @Composable () -> Unit,
@@ -42,7 +44,8 @@ fun EnterApiKeyTextField(
         label = label,
         modifier = Modifier
             .padding(16.dp)
-            .width(TextFieldDefaults.MinWidth),
+            .width(TextFieldDefaults.MinWidth)
+            .testTag(testTag),
         placeholder = placeholder,
         singleLine = true,
         keyboardOptions = KeyboardOptions(

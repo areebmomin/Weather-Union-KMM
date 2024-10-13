@@ -117,6 +117,7 @@ fun EnterApiKeyScreen(
             ) {
                 EnterApiKeyTextField(
                     value = state.weatherUnionApiKey,
+                    testTag = "weather_union_api_key_text_field",
                     onValueChange = {
                         viewModel.dispatch(UpdateWeatherUnionApiKey(apiKey = it))
                     },
