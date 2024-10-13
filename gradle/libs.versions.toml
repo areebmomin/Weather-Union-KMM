@@ -21,6 +21,7 @@ sqlDelight = "2.0.1"
 ksp = "2.0.10-1.0.24"
 kotlin-inject = "0.7.2"
 datastore = "1.1.1"
+uiTestJunit4Android = "1.7.3"
 wire = "5.0.0-alpha03"
 module-graph = "0.10.0"
 kermit = "2.0.4"
@@ -33,6 +34,8 @@ turbine = "1.1.0"
 junitKtx = "1.2.1"
 
 [libraries]
+androidx-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "uiTestJunit4Android" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestJunit4Android" }
 inspektify-ktor2 = { module = "io.github.bvantur:inspektify-ktor2", version.ref = "inspektifyKtor2" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
