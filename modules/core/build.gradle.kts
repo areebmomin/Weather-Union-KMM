@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.kotlin.inject.runtime)
             implementation(libs.kermit)
             implementation(libs.viewmodel)
-            implementation(libs.inspektify.ktor2)
+            // implementation(libs.inspektify.ktor2)
         }
 
         commonTest.dependencies {

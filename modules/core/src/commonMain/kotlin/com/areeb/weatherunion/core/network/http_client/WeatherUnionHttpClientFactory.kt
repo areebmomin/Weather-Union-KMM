@@ -18,7 +18,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import me.tatarka.inject.annotations.Inject
-import sp.bvantur.inspektify.ktor.InspektifyKtor
+// import sp.bvantur.inspektify.ktor.InspektifyKtor
 
 @Inject
 class WeatherUnionHttpClientFactory(
@@ -57,7 +57,7 @@ class WeatherUnionHttpClientFactory(
                 level = LogLevel.ALL
             }
 
-            install(InspektifyKtor)
+            // install(InspektifyKtor)
 
             HttpResponseValidator {
 //            TODO: validate 200 response when 'validateResponse{}' issue is fixed
