@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.areeb.weatherunion.data.locality_data.model.LocalityData
@@ -40,6 +41,7 @@ fun LocalityDropdownSection(
                 .weight(1f)
                 .padding(start = 16.dp, end = 8.dp, top = 40.dp, bottom = 40.dp)
                 .background(Color.Transparent)
+                .testTag("city_text_field")
                 .clickable {
                     onCityTextFieldClicked()
                 }
@@ -77,6 +79,7 @@ fun LocalityDropdownSection(
                 .weight(1f)
                 .padding(start = 16.dp, end = 8.dp, top = 40.dp, bottom = 40.dp)
                 .background(Color.Transparent)
+                .testTag("locality_text_field")
                 .clickable {
                     onAreaTextFieldClicked()
                 }

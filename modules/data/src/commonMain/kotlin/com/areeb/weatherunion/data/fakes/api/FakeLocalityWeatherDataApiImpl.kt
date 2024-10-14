@@ -15,10 +15,10 @@ class FakeLocalityWeatherDataApiImpl : LocalityWeatherDataApi {
                 message = "Success",
                 deviceType = 1,
                 localityWeatherData = LocalityLocalityWeatherData(
-                    temperature = 21.3,
+                    temperature = 19.5,
                     humidity = 12.4,
                     windSpeed = 1.5,
-                    windDirection = 212.9,
+                    windDirection = 34.0,
                     rainIntensity = 12.4,
                     rainAccumulation = 5.5,
                 ),
