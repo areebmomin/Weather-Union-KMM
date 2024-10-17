@@ -50,10 +50,6 @@ kotlin {
             }
             androidMain.dependencies {
                 implementation(libs.datastore)
-                implementation(libs.androidx.junit.ktx)
-                implementation(libs.androidx.espresso.core)
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kotlinx.coroutines.test)
             }
         }
     }
@@ -64,6 +60,11 @@ dependencies {
     add("kspIosX64", libs.kotlin.inject.ksp)
     add("kspIosArm64", libs.kotlin.inject.ksp)
     add("kspIosSimulatorArm64", libs.kotlin.inject.ksp)
+
+    androidTestImplementation(libs.androidx.junit.ktx)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.kotlinx.coroutines.core)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 }
 
 ksp {
