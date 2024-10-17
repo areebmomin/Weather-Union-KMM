@@ -1,8 +1,6 @@
 import dev.iurysouza.modulegraph.Theme
 
 plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.jetbrainsCompose) apply false
@@ -12,7 +10,8 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.wire) apply false
-    id("org.jetbrains.dokka") version "1.9.20"
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.detekt)
     id(libs.plugins.module.graph.get().pluginId) version libs.versions.module.graph
 }
 
