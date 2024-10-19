@@ -1,4 +1,4 @@
-# Weather Union KMM
+# <img src="https://github.com/areebmomin/Weather-Union-KMM/blob/main/iosApp/iosApp/Assets.xcassets/AppIcon.appiconset/app_logo.png" width="32" height="32" alt="App Logo"> Weather Union KMM
 
 ## Concept:
 - Multiplatform mobile app that displays live weather data using [Zomato](https://www.zomato.com/)'s free [Weather Union](https://www.weatherunion.com/) API. Which also has map to show weather updates of all supported locations.
