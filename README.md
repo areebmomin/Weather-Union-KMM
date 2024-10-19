@@ -17,7 +17,7 @@
 - **Logic Test** - [Kotlin Test](https://kotlinlang.org/api/latest/kotlin.test/)
 - **UI Test** - [Compose Multiplatform Test](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html)
 
-## Module Graph
+## Module Graph:
 
 ```mermaid
 %%{
@@ -45,3 +45,14 @@ graph LR
   :modules:testing --> :modules:logic
   :modules:data --> :modules:core
 ```
+## Add Your API Key:
+
+### For Google Maps:
+1) Generate Google Maps API key - [Doc](https://developers.google.com/maps/get-started#api-key)
+2) For Android, put your API key in the [***secrets.properties***](https://github.com/areebmomin/Weather-Union-KMM/blob/main/secrets.properties) file.
+3) For iOS, put your API key in the [***iOSApp.swift***](https://github.com/areebmomin/Weather-Union-KMM/blob/main/iosApp/iosApp/iOSApp.swift) file.
+
+### For Weather Union:
+1) Login to [Weather Union](https://www.weatherunion.com/) and generate an API Key.
+2) After launching the app, goto Menu icon (Top Right corner) -> 'Enter API Key' menu -> Put your API Key in TextField -> Click 'Done' on the Keyboard.
+ 
