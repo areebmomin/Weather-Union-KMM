@@ -4,6 +4,7 @@
 - Multiplatform mobile app that displays live weather data using [Zomato](https://www.zomato.com/)'s free [Weather Union](https://www.weatherunion.com/) API. Which also has map to show weather updates of all supported locations.
 
 ## UI:
+![Weather Union KMM UI Recording](https://github.com/areebmomin/Weather-Union-KMM/blob/main/assets/Weather%20Union%20Recording.gif)
 
 ## Tech:
 - 
